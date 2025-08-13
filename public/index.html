@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visualiseur de Données JSON</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        font-size: 1.1em;
+        opacity: 0.9;
+      }
+
+      .controls {
+        padding: 20px;
+        background: #f8f9fa;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .file-input {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .file-input input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 2px dashed #4facfe;
+        border-radius: 8px;
+        background: white;
+        cursor: pointer;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-primary {
+        background: #4facfe;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #3a8bfe;
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background: #6c757d;
+        color: white;
+      }
+
+      .btn-secondary:hover {
+        background: #5a6268;
+      }
+
+      .btn-success {
+        background: #28a745;
+        color: white;
+      }
+
+      .btn-success:hover {
+        background: #218838;
+      }
+
+      .stats {
+        padding: 15px 20px;
+        background: #e3f2fd;
+        border-bottom: 1px solid #e9ecef;
+        display: none;
+      }
+
+      .stats.show {
+        display: block;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+      }
+
+      .stat-item {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .stat-number {
+        font-size: 2em;
+        font-weight: bold;
+        color: #4facfe;
+      }
+
+      .stat-label {
+        color: #6c757d;
+        font-size: 0.9em;
+        margin-top: 5px;
+      }
+
+      .content {
+        padding: 20px;
+        max-height: 600px;
+        overflow-y: auto;
+      }
+
+      .json-viewer {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        max-height: 500px;
+        overflow-y: auto;
+        border: 1px solid #e9ecef;
+      }
+
+      .table-view {
+        display: none;
+      }
+
+      .table-view.show {
+        display: block;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      th {
+        background: #4facfe;
+        color: white;
+        font-weight: 600;
+      }
+
+      tr:hover {
+        background: #f8f9fa;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 40px;
+        color: #6c757d;
+      }
+
+      .spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #4facfe;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .error {
+        background: #f8d7da;
+        color: #721c24;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+        border: 1px solid #f5c6cb;
+      }
+
+      .success {
+        background: #d4edda;
+        color: #155724;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+        border: 1px solid #c3e6cb;
+      }
+
+      .view-toggle {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .search-box {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+        align-items: center;
+      }
+
+      .pagination button {
+        padding: 8px 12px;
+        border: 1px solid #e9ecef;
+        background: white;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      .pagination button:hover {
+        background: #f8f9fa;
+      }
+
+      .pagination button.active {
+        background: #4facfe;
+        color: white;
+        border-color: #4facfe;
+      }
+
+      .pagination button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .data-source-toggle {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      .data-source-toggle button {
+        flex: 1;
+      }
+
+      .data-source-toggle button.active {
+        background: #28a745;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🔍 Visualiseur de Données JSON</h1>
+        <p>Chargez et explorez vos fichiers JSON de manière interactive</p>
+      </div>
+
+      <div class="controls">
+        <div class="file-input">
+          <input type="file" id="jsonFile" accept=".json" multiple />
+        </div>
+        <button class="btn btn-primary" onclick="loadFromAPI()">
+          Charger depuis l'API
+        </button>
+        <button class="btn btn-success" onclick="loadDefaultFiles()">
+          Charger les fichiers par défaut
+        </button>
+        <button class="btn btn-secondary" onclick="clearData()">Effacer</button>
+      </div>
+
+      <div class="stats" id="stats">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number" id="totalItems">0</div>
+            <div class="stat-label">Éléments totaux</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" id="fileCount">0</div>
+            <div class="stat-label">Fichiers chargés</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" id="dataSize">0 KB</div>
+            <div class="stat-label">Taille des données</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="data-source-toggle">
+          <button class="btn btn-primary" onclick="switchDataSource('weapons')">
+            Armes
+          </button>
+          <button class="btn btn-primary" onclick="switchDataSource('skills')">
+            Compétences
+          </button>
+        </div>
+
+        <div class="view-toggle">
+          <button class="btn btn-primary" onclick="switchView('table')">
+            Vue Tableau
+          </button>
+          <button class="btn btn-secondary" onclick="switchView('json')">
+            Vue JSON
+          </button>
+          <input
+            type="text"
+            class="search-box"
+            id="searchBox"
+            placeholder="Rechercher..."
+            onkeyup="filterData()"
+          />
+        </div>
+
+        <div id="loading" class="loading" style="display: none">
+          <div class="spinner"></div>
+          <p>Chargement en cours...</p>
+        </div>
+
+        <div id="error" class="error" style="display: none"></div>
+        <div id="success" class="success" style="display: none"></div>
+
+        <div id="tableView" class="table-view">
+          <div class="pagination">
+            <button onclick="previousPage()" id="prevBtn">Précédent</button>
+            <span id="pageInfo">Page 1 de 1</span>
+            <button onclick="nextPage()" id="nextBtn">Suivant</button>
+          </div>
+          <div id="tableContainer"></div>
+        </div>
+
+        <div id="jsonView" class="json-viewer"></div>
+      </div>
+    </div>
+
+    <script>
+      let allData = [];
+      let filteredData = [];
+      let currentView = "table";
+      let currentPage = 1;
+      let currentDataSource = "weapons";
+      const itemsPerPage = 50;
+      const API_BASE_URL = window.location.origin + "/api";
+
+      // Écouteur d'événement pour le chargement de fichiers
+      document
+        .getElementById("jsonFile")
+        .addEventListener("change", handleFileSelect);
+
+      function switchDataSource(source) {
+        currentDataSource = source;
+        currentPage = 1;
+
+        // Mettre à jour les boutons
+        document
+          .querySelectorAll(".data-source-toggle button")
+          .forEach((btn) => {
+            btn.classList.remove("active");
+          });
+        event.target.classList.add("active");
+
+        // Charger les données depuis l'API
+        loadFromAPI();
+      }
+
+      async function loadFromAPI() {
+        showLoading(true);
+        try {
+          const response = await fetch(
+            `${API_BASE_URL}/${currentDataSource}?limit=1000`
+          );
+          if (!response.ok) {
+            throw new Error(`Erreur HTTP: ${response.status}`);
+          }
+
+          const data = await response.json();
+          allData = data[currentDataSource] || [];
+
+          showLoading(false);
+          updateStats();
+          filteredData = [...allData];
+          displayData();
+          showSuccess(`Données ${currentDataSource} chargées depuis l'API`);
+        } catch (error) {
+          showError(`Erreur lors du chargement depuis l'API: ${error.message}`);
+          showLoading(false);
+        }
+      }
+
+      function handleFileSelect(event) {
+        const files = event.target.files;
+        if (files.length === 0) return;
+
+        showLoading(true);
+        allData = [];
+
+        let filesProcessed = 0;
+
+        Array.from(files).forEach((file, index) => {
+          const reader = new FileReader();
+
+          reader.onload = function (e) {
+            try {
+              const jsonData = JSON.parse(e.target.result);
+              const fileName = file.name;
+
+              // Filtrer les champs indésirables pour les armes
+              const processedData = filterWeaponFields(jsonData, fileName);
+
+              // Ajouter le nom du fichier aux données
+              if (Array.isArray(processedData)) {
+                processedData.forEach((item) => {
+                  if (typeof item === "object") {
+                    item._sourceFile = fileName;
+                  }
+                });
+                allData.push(...processedData);
+              } else if (typeof processedData === "object") {
+                processedData._sourceFile = fileName;
+                allData.push(processedData);
+              }
+
+              filesProcessed++;
+
+              if (filesProcessed === files.length) {
+                showLoading(false);
+                updateStats();
+                filteredData = [...allData];
+                displayData();
+              }
+            } catch (error) {
+              showError(
+                `Erreur lors du parsing du fichier ${file.name}: ${error.message}`
+              );
+              showLoading(false);
+            }
+          };
+
+          reader.readAsText(file);
+        });
+      }
+
+      function filterWeaponFields(data, fileName) {
+        // Champs à supprimer pour les armes
+        const fieldsToRemove = [
+          "obtain_text",
+          "obtain",
+          "character unlock",
+          "release date",
+          "4star date",
+          "5star date",
+          "jpname",
+          "jptitle",
+        ];
+
+        if (fileName === "weapons.json" || fileName.includes("weapon")) {
+          if (Array.isArray(data)) {
+            return data.map((item) => {
+              if (typeof item === "object") {
+                const filteredItem = {};
+                Object.keys(item).forEach((key) => {
+                  if (!fieldsToRemove.includes(key)) {
+                    filteredItem[key] = item[key];
+                  }
+                });
+                return filteredItem;
+              }
+              return item;
+            });
+          } else if (typeof data === "object") {
+            const filteredData = {};
+            Object.keys(data).forEach((key) => {
+              if (!fieldsToRemove.includes(key)) {
+                filteredData[key] = data[key];
+              }
+            });
+            return filteredData;
+          }
+        }
+
+        return data;
+      }
+
+      function loadDefaultFiles() {
+        // Simuler le chargement des fichiers par défaut
+        showLoading(true);
+
+        // Créer des données d'exemple basées sur les noms de fichiers
+        const sampleWeapons = [
+          {
+            id: 1,
+            name: "Épée de feu",
+            damage: 150,
+            type: "Épée",
+            rarity: "Rare",
+            _sourceFile: "weapons.json",
+          },
+          {
+            id: 2,
+            name: "Arc de glace",
+            damage: 120,
+            type: "Arc",
+            rarity: "Commun",
+            _sourceFile: "weapons.json",
+          },
+          {
+            id: 3,
+            name: "Marteau de foudre",
+            damage: 200,
+            type: "Marteau",
+            rarity: "Épique",
+            _sourceFile: "weapons.json",
+          },
+        ];
+
+        const sampleSkills = [
+          {
+            id: 1,
+            name: "Coup de feu",
+            damage: 80,
+            cooldown: 5,
+            type: "Attaque",
+            _sourceFile: "weapon_skills.json",
+          },
+          {
+            id: 2,
+            name: "Bouclier magique",
+            defense: 50,
+            duration: 10,
+            type: "Défense",
+            _sourceFile: "weapon_skills.json",
+          },
+          {
+            id: 3,
+            name: "Soin rapide",
+            healing: 100,
+            mana: 30,
+            type: "Soin",
+            _sourceFile: "weapon_skills.json",
+          },
+        ];
+
+        allData =
+          currentDataSource === "weapons" ? sampleWeapons : sampleSkills;
+        showLoading(false);
+        updateStats();
+        filteredData = [...allData];
+        displayData();
+      }
+
+      function updateStats() {
+        const totalItems = allData.length;
+        const fileCount = new Set(allData.map((item) => item._sourceFile)).size;
+        const dataSize = JSON.stringify(allData).length;
+
+        document.getElementById("totalItems").textContent =
+          totalItems.toLocaleString();
+        document.getElementById("fileCount").textContent = fileCount;
+        document.getElementById("dataSize").textContent = formatBytes(dataSize);
+
+        document.getElementById("stats").classList.add("show");
+      }
+
+      function formatBytes(bytes) {
+        if (bytes === 0) return "0 Bytes";
+        const k = 1024;
+        const sizes = ["Bytes", "KB", "MB", "GB"];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+      }
+
+      function switchView(view) {
+        currentView = view;
+        currentPage = 1;
+
+        if (view === "table") {
+          document.getElementById("tableView").classList.add("show");
+          document.getElementById("jsonView").style.display = "none";
+          displayTable();
+        } else {
+          document.getElementById("tableView").classList.remove("show");
+          document.getElementById("jsonView").style.display = "block";
+          displayJSON();
+        }
+      }
+
+      function displayData() {
+        if (currentView === "table") {
+          displayTable();
+        } else {
+          displayJSON();
+        }
+      }
+
+      function displayTable() {
+        if (filteredData.length === 0) {
+          document.getElementById("tableContainer").innerHTML =
+            "<p>Aucune donnée à afficher</p>";
+          return;
+        }
+
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const pageData = filteredData.slice(startIndex, endIndex);
+
+        // Créer les en-têtes de colonnes
+        const headers = Object.keys(pageData[0]).filter(
+          (key) => key !== "_sourceFile"
+        );
+        headers.unshift("Fichier source");
+
+        let tableHTML = "<table><thead><tr>";
+        headers.forEach((header) => {
+          tableHTML += `<th>${header}</th>`;
+        });
+        tableHTML += "</tr></thead><tbody>";
+
+        // Ajouter les données
+        pageData.forEach((item) => {
+          tableHTML += "<tr>";
+          tableHTML += `<td>${item._sourceFile || "N/A"}</td>`;
+          headers.slice(1).forEach((header) => {
+            const value = item[header];
+            tableHTML += `<td>${formatCellValue(value)}</td>`;
+          });
+          tableHTML += "</tr>";
+        });
+
+        tableHTML += "</tbody></table>";
+        document.getElementById("tableContainer").innerHTML = tableHTML;
+
+        updatePagination();
+      }
+
+      function formatCellValue(value) {
+        if (value === null || value === undefined) return "N/A";
+        if (typeof value === "object") return JSON.stringify(value);
+        if (typeof value === "boolean") return value ? "Oui" : "Non";
+
+        // Nettoyer le HTML si présent
+        const stringValue = String(value);
+        if (stringValue.includes("<") && stringValue.includes(">")) {
+          return cleanHtmlContent(stringValue);
+        }
+
+        return stringValue;
+      }
+
+      function cleanHtmlContent(htmlString) {
+        // Créer un élément temporaire pour parser le HTML
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = htmlString;
+
+        // Extraire le texte sans les balises HTML
+        let cleanText = tempDiv.textContent || tempDiv.innerText || "";
+
+        // Nettoyer les espaces multiples et les retours à la ligne
+        cleanText = cleanText.replace(/\s+/g, " ").trim();
+
+        // Remplacer les caractères spéciaux courants
+        cleanText = cleanText
+          .replace(/\[\[/g, "[")
+          .replace(/\]\]/g, "]")
+          .replace(/\|\|/g, "|");
+
+        return cleanText;
+      }
+
+      function displayJSON() {
+        const jsonString = JSON.stringify(filteredData, null, 2);
+        document.getElementById("jsonView").textContent = jsonString;
+      }
+
+      function filterData() {
+        const searchTerm = document
+          .getElementById("searchBox")
+          .value.toLowerCase();
+
+        if (searchTerm === "") {
+          filteredData = [...allData];
+        } else {
+          filteredData = allData.filter((item) => {
+            return Object.values(item).some((value) =>
+              String(value).toLowerCase().includes(searchTerm)
+            );
+          });
+        }
+
+        currentPage = 1;
+        displayData();
+      }
+
+      function updatePagination() {
+        const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+        const pageInfo = document.getElementById("pageInfo");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+
+        pageInfo.textContent = `Page ${currentPage} de ${totalPages}`;
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = currentPage === totalPages;
+      }
+
+      function previousPage() {
+        if (currentPage > 1) {
+          currentPage--;
+          displayData();
+        }
+      }
+
+      function nextPage() {
+        const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+        if (currentPage < totalPages) {
+          currentPage++;
+          displayData();
+        }
+      }
+
+      function showLoading(show) {
+        document.getElementById("loading").style.display = show
+          ? "block"
+          : "none";
+      }
+
+      function showError(message) {
+        const errorDiv = document.getElementById("error");
+        errorDiv.textContent = message;
+        errorDiv.style.display = "block";
+        document.getElementById("success").style.display = "none";
+      }
+
+      function showSuccess(message) {
+        const successDiv = document.getElementById("success");
+        successDiv.textContent = message;
+        successDiv.style.display = "block";
+        document.getElementById("error").style.display = "none";
+      }
+
+      function clearData() {
+        allData = [];
+        filteredData = [];
+        currentPage = 1;
+        document.getElementById("jsonFile").value = "";
+        document.getElementById("searchBox").value = "";
+        document.getElementById("stats").classList.remove("show");
+        document.getElementById("tableContainer").innerHTML = "";
+        document.getElementById("jsonView").textContent = "";
+        document.getElementById("error").style.display = "none";
+        document.getElementById("success").style.display = "none";
+      }
+
+      // Initialisation
+      switchView("table");
+      switchDataSource("weapons");
+    </script>
+  </body>
+</html>
