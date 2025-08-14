@@ -1,16 +1,20 @@
+require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
-const { connectMongo, initializeDatabase } = require("../config/database");
+const { MongoClient } = require("mongodb");
 
 async function importData() {
   try {
     console.log("🚀 Début de l'import des données...");
+    console.log("URI:", process.env.MONGODB_URI);
 
-    // Initialiser les bases de données
-    await initializeDatabase();
+    // Connexion directe avec l'URI
+    const client = new MongoClient(process.env.MONGODB_URI);
+    await client.connect();
+    console.log("✅ Connexion MongoDB établie");
 
-    // Connexion MongoDB
-    const db = await connectMongo();
+    const db = client.db("gb_project");
+    console.log("📊 Base de données:", db.databaseName);
 
     // Importer les armes
     console.log("📦 Import des armes...");
@@ -21,6 +25,7 @@ async function importData() {
 
       // Vider la collection existante
       await weaponsCollection.deleteMany({});
+      console.log("🗑️  Collection weapons vidée");
 
       // Ajouter des timestamps
       const weaponsWithTimestamps = weaponsData.map((weapon) => ({
@@ -46,6 +51,7 @@ async function importData() {
 
       // Vider la collection existante
       await skillsCollection.deleteMany({});
+      console.log("🗑️  Collection weapon_skills vidée");
 
       // Ajouter des timestamps
       const skillsWithTimestamps = skillsData.map((skill) => ({
@@ -62,6 +68,14 @@ async function importData() {
       console.log("⚠️  Fichier weapon_skills.json non trouvé");
     }
 
+    // Vérifier les collections
+    const collections = await db.listCollections().toArray();
+    console.log(
+      "📦 Collections créées:",
+      collections.map((c) => c.name)
+    );
+
+    await client.close();
     console.log("🎉 Import terminé avec succès !");
   } catch (error) {
     console.error("❌ Erreur lors de l'import:", error);
@@ -69,9 +83,4 @@ async function importData() {
   }
 }
 
-// Exécuter l'import si le script est appelé directement
-if (require.main === module) {
-  importData();
-}
-
-module.exports = { importData };
+importData();

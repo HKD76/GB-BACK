@@ -1,28 +1,40 @@
-# GB Project - Visualiseur de Données d'Armes et Compétences
+# GB Project - API Node.js avec MongoDB
 
-Une application web moderne pour visualiser et gérer des données d'armes et de compétences avec une architecture backend robuste utilisant MongoDB et PostgreSQL.
+Une API REST complète pour gérer des utilisateurs, des armes et des compétences avec MongoDB. Inclut un système d'authentification JWT robuste et des opérations CRUD complètes.
 
 ## 🚀 Fonctionnalités
 
-- **Visualisation interactive** des données JSON d'armes et compétences
 - **API REST complète** avec authentification JWT
-- **Base de données hybride** : MongoDB pour les données de jeu, PostgreSQL pour les utilisateurs
-- **Interface moderne** avec recherche, pagination et filtres
-- **Sécurité renforcée** avec rate limiting et validation
-- **Import automatique** des données JSON existantes
+- **Base de données MongoDB** pour toutes les données
+- **Système d'authentification** complet (inscription, connexion, gestion de profil)
+- **Gestion des armes** avec validation et statistiques
+- **Gestion des compétences** (structure prête)
+- **Sécurité renforcée** avec rate limiting, validation et headers de sécurité
+- **Documentation complète** de l'API
+- **Tests automatisés** pour vérifier le bon fonctionnement
 
 ## 🏗️ Architecture
 
 ```
 GB_PROJECT/
 ├── config/
-│   └── database.js          # Configuration des bases de données
+│   └── database.js          # Configuration MongoDB
+├── models/
+│   ├── User.js              # Modèle utilisateur
+│   └── Weapon.js            # Modèle arme
+├── services/
+│   ├── userService.js       # Service utilisateur
+│   └── weaponService.js     # Service arme
+├── middleware/
+│   └── auth.js              # Middleware d'authentification
 ├── routes/
-│   ├── weapons.js           # API pour les armes (MongoDB)
-│   ├── skills.js            # API pour les compétences (MongoDB)
-│   └── users.js             # API pour les utilisateurs (PostgreSQL)
+│   ├── weapons.js           # API pour les armes
+│   ├── skills.js            # API pour les compétences
+│   └── users.js             # API pour les utilisateurs
 ├── scripts/
-│   └── import-data.js       # Script d'import des données JSON
+│   ├── import-mongo.js      # Import des données MongoDB
+│   ├── test-mongo.js        # Test de connexion MongoDB
+│   └── test-api.js          # Tests de l'API
 ├── public/
 │   └── index.html           # Interface utilisateur
 ├── json/
@@ -30,14 +42,15 @@ GB_PROJECT/
 │   └── weapon_skills.json   # Données de compétences
 ├── server.js                # Serveur Express principal
 ├── package.json             # Dépendances Node.js
-└── env.example              # Variables d'environnement
+├── .env.example             # Variables d'environnement
+├── API_DOCUMENTATION.md     # Documentation complète de l'API
+└── README.md                # Ce fichier
 ```
 
 ## 📋 Prérequis
 
 - **Node.js** (version 18 ou supérieure)
 - **MongoDB** (local ou MongoDB Atlas)
-- **PostgreSQL** (local ou service cloud)
 - **npm** ou **yarn**
 
 ## 🛠️ Installation
@@ -58,7 +71,7 @@ npm install
 ### 3. Configuration des variables d'environnement
 
 ```bash
-cp env.example .env
+cp .env.example .env
 ```
 
 Éditez le fichier `.env` avec vos configurations :
@@ -72,13 +85,6 @@ NODE_ENV=development
 MONGODB_URI=mongodb://localhost:27017
 MONGODB_DB=gb_project
 
-# Configuration PostgreSQL
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5432
-POSTGRES_DB=gb_project
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=password
-
 # Configuration JWT
 JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
 
@@ -86,97 +92,96 @@ JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
 FRONTEND_URL=http://localhost:3000
 ```
 
-### 4. Importer les données
+### 4. Démarrer MongoDB
+
+**Local :**
 
 ```bash
-node scripts/import-data.js
+# Sur macOS avec Homebrew
+brew services start mongodb-community
+
+# Sur Ubuntu/Debian
+sudo systemctl start mongod
+
+# Sur Windows
+net start MongoDB
 ```
+
+**MongoDB Atlas :**
+
+- Créez un cluster gratuit sur [MongoDB Atlas](https://www.mongodb.com/atlas)
+- Obtenez l'URI de connexion et mettez-la dans `MONGODB_URI`
 
 ### 5. Démarrer l'application
 
 ```bash
+# Mode développement avec nodemon
+npm run dev
+
+# Mode production
 npm start
 ```
 
-L'application sera accessible sur `http://localhost:3000`
+L'API sera accessible sur `http://localhost:3000/api`
 
-## 🌐 Déploiement
+## 🧪 Tests
 
-### Option 1 : Vercel + MongoDB Atlas + Supabase (Recommandé)
+### Tester l'API
 
-#### MongoDB Atlas (Base NoSQL)
+```bash
+# Assurez-vous que le serveur est démarré
+npm start
 
-1. Créer un compte sur [MongoDB Atlas](https://www.mongodb.com/atlas)
-2. Créer un cluster gratuit (512MB)
-3. Créer un utilisateur de base de données
-4. Obtenir l'URI de connexion
+# Dans un autre terminal, lancez les tests
+npm run test-api
+```
 
-#### Supabase (Base SQL)
+### Tester la connexion MongoDB
 
-1. Créer un compte sur [Supabase](https://supabase.com)
-2. Créer un nouveau projet
-3. Obtenir les informations de connexion PostgreSQL
-
-#### Vercel (Hébergement)
-
-1. Créer un compte sur [Vercel](https://vercel.com)
-2. Connecter votre repository GitHub
-3. Configurer les variables d'environnement :
-   ```
-   MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/gb_project
-   POSTGRES_HOST=db.supabase.co
-   POSTGRES_DB=postgres
-   POSTGRES_USER=postgres
-   POSTGRES_PASSWORD=votre-password
-   JWT_SECRET=votre-secret-jwt
-   ```
-
-### Option 2 : Railway (Tout-en-un)
-
-1. Créer un compte sur [Railway](https://railway.app)
-2. Créer un nouveau projet
-3. Ajouter les services :
-   - **MongoDB** pour les données de jeu
-   - **PostgreSQL** pour les utilisateurs
-   - **Node.js** pour l'application
-4. Configurer les variables d'environnement
-
-### Option 3 : Render (Alternative)
-
-1. Créer un compte sur [Render](https://render.com)
-2. Créer un service web Node.js
-3. Ajouter des bases de données MongoDB et PostgreSQL
-4. Configurer les variables d'environnement
+```bash
+npm run test-mongo
+```
 
 ## 📊 API Endpoints
 
-### Armes (MongoDB)
+### 🔐 Authentification
 
-- `GET /api/weapons` - Liste des armes avec pagination
-- `GET /api/weapons/:id` - Détails d'une arme
-- `POST /api/weapons` - Créer une arme
-- `PUT /api/weapons/:id` - Modifier une arme
-- `DELETE /api/weapons/:id` - Supprimer une arme
-- `POST /api/weapons/import` - Importer des armes
-- `GET /api/weapons/stats/overview` - Statistiques
+- `POST /api/users/register` - Inscription d'un utilisateur
+- `POST /api/users/login` - Connexion utilisateur
+- `GET /api/users/verify-token` - Vérifier la validité du token
 
-### Compétences (MongoDB)
+### 👤 Gestion du Profil
 
-- `GET /api/skills` - Liste des compétences
-- `GET /api/skills/:id` - Détails d'une compétence
-- `POST /api/skills` - Créer une compétence
-- `PUT /api/skills/:id` - Modifier une compétence
-- `DELETE /api/skills/:id` - Supprimer une compétence
-- `POST /api/skills/import` - Importer des compétences
-- `GET /api/skills/stats/overview` - Statistiques
+- `GET /api/users/profile` - Obtenir le profil (authentification requise)
+- `PUT /api/users/profile` - Mettre à jour le profil (authentification requise)
+- `POST /api/users/change-password` - Changer le mot de passe (authentification requise)
 
-### Utilisateurs (PostgreSQL)
+### 👥 Gestion des Utilisateurs
 
-- `POST /api/users/register` - Inscription
-- `POST /api/users/login` - Connexion
-- `GET /api/users/profile` - Profil utilisateur
-- `PUT /api/users/profile` - Modifier le profil
-- `POST /api/users/change-password` - Changer le mot de passe
+- `GET /api/users` - Liste des utilisateurs avec pagination (authentification requise)
+- `GET /api/users/:id` - Obtenir un utilisateur par ID (authentification requise)
+- `DELETE /api/users/:id` - Supprimer un utilisateur (authentification requise)
+
+### ⚔️ Gestion des Armes
+
+- `GET /api/weapons` - Liste des armes avec filtres et pagination
+- `GET /api/weapons/search` - Rechercher des armes par nom
+- `GET /api/weapons/stats` - Statistiques des armes
+- `GET /api/weapons/:id` - Obtenir une arme par ID
+- `POST /api/weapons` - Créer une arme (authentification requise)
+- `PUT /api/weapons/:id` - Mettre à jour une arme (authentification requise)
+- `DELETE /api/weapons/:id` - Supprimer une arme (authentification requise)
+- `POST /api/weapons/:id/skills` - Ajouter une compétence à une arme (authentification requise)
+- `DELETE /api/weapons/:id/skills/:skillId` - Retirer une compétence d'une arme (authentification requise)
+- `POST /api/weapons/import` - Importer des armes depuis JSON (authentification requise)
+
+### 🎯 Gestion des Compétences
+
+Les endpoints pour les compétences suivent le même pattern que les armes.
+
+### 🏥 Santé de l'API
+
+- `GET /api/health` - Vérifier l'état de l'API
 
 ## 🔧 Scripts disponibles
 
@@ -187,51 +192,127 @@ npm run dev
 # Démarrage en production
 npm start
 
-# Import des données
-node scripts/import-data.js
+# Import des données MongoDB
+npm run import-mongo
+
+# Test de connexion MongoDB
+npm run test-mongo
+
+# Test complet de l'API
+npm run test-api
 
 # Build pour production
 npm run build
 ```
+
+## 📖 Documentation
+
+Consultez le fichier `API_DOCUMENTATION.md` pour une documentation complète de l'API avec des exemples d'utilisation.
 
 ## 🛡️ Sécurité
 
 - **Rate limiting** : 100 requêtes par 15 minutes par IP
 - **Helmet.js** : Headers de sécurité
 - **CORS** : Configuration sécurisée
-- **JWT** : Authentification par token
-- **Validation** : Validation des données d'entrée
-- **Hachage** : Mots de passe hachés avec bcrypt
+- **JWT** : Authentification par token avec expiration (24h)
+- **Validation** : Validation complète des données d'entrée
+- **Hachage** : Mots de passe hachés avec bcrypt (10 rounds)
+- **Middleware d'authentification** : Protection des routes sensibles
 
-## 📈 Coûts estimés
+## 🌐 Déploiement
 
-### Solution recommandée (Vercel + MongoDB Atlas + Supabase)
+### Option 1 : Vercel + MongoDB Atlas (Recommandé)
 
-- **Vercel** : Gratuit (limite 100GB/mois)
-- **MongoDB Atlas** : Gratuit (512MB)
-- **Supabase** : Gratuit (500MB)
-- **Total** : 0€/mois pour commencer
+1. **MongoDB Atlas** :
 
-### Alternative Railway
+   - Créez un cluster M0 (gratuit)
+   - Obtenez l'URI de connexion
 
-- **Railway** : ~5-10€/mois pour un usage modéré
+2. **Vercel** :
+   - Connectez votre repository GitHub
+   - Configurez les variables d'environnement :
+     ```
+     MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/gb_project
+     JWT_SECRET=votre-secret-jwt-super-securise
+     NODE_ENV=production
+     ```
+
+### Option 2 : Railway
+
+1. Créez un compte sur [Railway](https://railway.app)
+2. Ajoutez un service MongoDB
+3. Déployez votre application Node.js
+4. Configurez les variables d'environnement
+
+### Option 3 : Render
+
+1. Créez un compte sur [Render](https://render.com)
+2. Créez un service web Node.js
+3. Ajoutez une base de données MongoDB
+4. Configurez les variables d'environnement
+
+## 📈 Exemples d'utilisation
+
+### Inscription et Connexion
+
+```bash
+# 1. Inscription
+curl -X POST http://localhost:3000/api/users/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "test_user",
+    "email": "test@example.com",
+    "password": "password123"
+  }'
+
+# 2. Connexion
+curl -X POST http://localhost:3000/api/users/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "test_user",
+    "password": "password123"
+  }'
+```
+
+### Utilisation avec Token
+
+```bash
+# Récupérer le profil utilisateur
+curl -X GET http://localhost:3000/api/users/profile \
+  -H "Authorization: Bearer <votre_token>"
+
+# Créer une arme
+curl -X POST http://localhost:3000/api/weapons \
+  -H "Authorization: Bearer <votre_token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Arc magique",
+    "type": "arc",
+    "damage": 20,
+    "range": 10,
+    "weight": 2.0,
+    "description": "Un arc enchanté",
+    "rarity": "uncommon"
+  }'
+```
 
 ## 🚀 Prochaines étapes
 
 1. **Déployer** l'application selon vos préférences
 2. **Configurer** les variables d'environnement en production
 3. **Importer** vos données JSON existantes
-4. **Tester** toutes les fonctionnalités
-5. **Ajouter** des fonctionnalités supplémentaires si nécessaire
+4. **Tester** toutes les fonctionnalités avec les scripts fournis
+5. **Étendre** l'API selon vos besoins spécifiques
 
 ## 📞 Support
 
 Pour toute question ou problème :
 
 1. Vérifiez les logs de l'application
-2. Consultez la documentation des services utilisés
-3. Créez une issue sur GitHub
+2. Consultez la documentation de l'API (`API_DOCUMENTATION.md`)
+3. Lancez les tests pour diagnostiquer les problèmes
+4. Créez une issue sur GitHub
 
 ---
 
-**Note** : N'oubliez pas de changer les clés secrètes en production et de configurer correctement les variables d'environnement selon votre plateforme d'hébergement.
+**Note** : N'oubliez pas de changer la clé JWT_SECRET en production et de configurer correctement les variables d'environnement selon votre plateforme d'hébergement.

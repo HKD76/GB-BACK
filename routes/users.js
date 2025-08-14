@@ -1,74 +1,30 @@
 const express = require("express");
-const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { connectPostgres } = require("../config/database");
+const User = require("../models/User");
+const userService = require("../services/userService");
+const { authenticateToken, requireOwnership } = require("../middleware/auth");
 const router = express.Router();
-
-// Middleware d'authentification
-const authenticateToken = async (req, res, next) => {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
-
-  if (!token) {
-    return res.status(401).json({ error: "Token d'accès requis" });
-  }
-
-  try {
-    const decoded = jwt.verify(
-      token,
-      process.env.JWT_SECRET || "your-secret-key"
-    );
-    req.user = decoded;
-    next();
-  } catch (error) {
-    return res.status(403).json({ error: "Token invalide" });
-  }
-};
 
 // POST /api/users/register - Inscription d'un utilisateur
 router.post("/register", async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    const postgresClient = await connectPostgres();
 
-    // Validation
-    if (!username || !email || !password) {
-      return res.status(400).json({ error: "Tous les champs sont requis" });
+    // Validation des données
+    const validationErrors = User.validate({ username, email, password });
+    if (validationErrors.length > 0) {
+      return res.status(400).json({
+        error: "Données invalides",
+        details: validationErrors,
+      });
     }
-
-    if (password.length < 6) {
-      return res
-        .status(400)
-        .json({ error: "Le mot de passe doit contenir au moins 6 caractères" });
-    }
-
-    // Vérifier si l'utilisateur existe déjà
-    const existingUser = await postgresClient.query(
-      "SELECT * FROM users WHERE username = $1 OR email = $2",
-      [username, email]
-    );
-
-    if (existingUser.rows.length > 0) {
-      return res
-        .status(400)
-        .json({ error: "Nom d'utilisateur ou email déjà utilisé" });
-    }
-
-    // Hasher le mot de passe
-    const saltRounds = 10;
-    const passwordHash = await bcrypt.hash(password, saltRounds);
 
     // Créer l'utilisateur
-    const result = await postgresClient.query(
-      "INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING id, username, email, created_at",
-      [username, email, passwordHash]
-    );
-
-    const user = result.rows[0];
+    const user = await userService.createUser({ username, email, password });
 
     // Générer le token JWT
     const token = jwt.sign(
-      { userId: user.id, username: user.username },
+      { userId: user._id, username: user.username },
       process.env.JWT_SECRET || "your-secret-key",
       { expiresIn: "24h" }
     );
@@ -76,16 +32,27 @@ router.post("/register", async (req, res) => {
     res.status(201).json({
       message: "Utilisateur créé avec succès",
       user: {
-        id: user.id,
+        _id: user._id,
         username: user.username,
         email: user.email,
-        created_at: user.created_at,
+        createdAt: user.createdAt,
       },
       token,
     });
   } catch (error) {
     console.error("Erreur lors de l'inscription:", error);
-    res.status(500).json({ error: "Erreur serveur" });
+
+    if (error.message.includes("déjà utilisé")) {
+      return res.status(400).json({
+        error: "Erreur de validation",
+        message: error.message,
+      });
+    }
+
+    res.status(500).json({
+      error: "Erreur serveur",
+      message: "Une erreur est survenue lors de l'inscription",
+    });
   }
 });
 
@@ -93,41 +60,28 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
-    const postgresClient = await connectPostgres();
 
     // Validation
     if (!username || !password) {
-      return res
-        .status(400)
-        .json({ error: "Nom d'utilisateur et mot de passe requis" });
+      return res.status(400).json({
+        error: "Données manquantes",
+        message: "Nom d'utilisateur et mot de passe requis",
+      });
     }
 
-    // Trouver l'utilisateur
-    const result = await postgresClient.query(
-      "SELECT * FROM users WHERE username = $1 OR email = $1",
-      [username]
-    );
+    // Vérifier les identifiants
+    const user = await userService.verifyCredentials(username, password);
 
-    if (result.rows.length === 0) {
-      return res
-        .status(401)
-        .json({ error: "Nom d'utilisateur ou mot de passe incorrect" });
-    }
-
-    const user = result.rows[0];
-
-    // Vérifier le mot de passe
-    const isValidPassword = await bcrypt.compare(password, user.password_hash);
-
-    if (!isValidPassword) {
-      return res
-        .status(401)
-        .json({ error: "Nom d'utilisateur ou mot de passe incorrect" });
+    if (!user) {
+      return res.status(401).json({
+        error: "Identifiants invalides",
+        message: "Nom d'utilisateur ou mot de passe incorrect",
+      });
     }
 
     // Générer le token JWT
     const token = jwt.sign(
-      { userId: user.id, username: user.username },
+      { userId: user._id, username: user.username },
       process.env.JWT_SECRET || "your-secret-key",
       { expiresIn: "24h" }
     );
@@ -135,39 +89,49 @@ router.post("/login", async (req, res) => {
     res.json({
       message: "Connexion réussie",
       user: {
-        id: user.id,
+        _id: user._id,
         username: user.username,
         email: user.email,
-        created_at: user.created_at,
+        createdAt: user.createdAt,
       },
       token,
     });
   } catch (error) {
     console.error("Erreur lors de la connexion:", error);
-    res.status(500).json({ error: "Erreur serveur" });
+    res.status(500).json({
+      error: "Erreur serveur",
+      message: "Une erreur est survenue lors de la connexion",
+    });
   }
 });
 
 // GET /api/users/profile - Profil de l'utilisateur connecté
 router.get("/profile", authenticateToken, async (req, res) => {
   try {
-    const postgresClient = await connectPostgres();
+    const user = await userService.findById(req.user.userId);
 
-    const result = await postgresClient.query(
-      "SELECT id, username, email, created_at, updated_at FROM users WHERE id = $1",
-      [req.user.userId]
-    );
-
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: "Utilisateur non trouvé" });
+    if (!user) {
+      return res.status(404).json({
+        error: "Utilisateur non trouvé",
+        message: "L'utilisateur n'existe plus",
+      });
     }
 
     res.json({
-      user: result.rows[0],
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      },
     });
   } catch (error) {
     console.error("Erreur lors de la récupération du profil:", error);
-    res.status(500).json({ error: "Erreur serveur" });
+    res.status(500).json({
+      error: "Erreur serveur",
+      message: "Une erreur est survenue lors de la récupération du profil",
+    });
   }
 });
 
@@ -175,59 +139,67 @@ router.get("/profile", authenticateToken, async (req, res) => {
 router.put("/profile", authenticateToken, async (req, res) => {
   try {
     const { username, email } = req.body;
-    const postgresClient = await connectPostgres();
 
     // Validation
     if (!username && !email) {
-      return res
-        .status(400)
-        .json({ error: "Au moins un champ à mettre à jour est requis" });
+      return res.status(400).json({
+        error: "Données manquantes",
+        message: "Au moins un champ à mettre à jour est requis",
+      });
     }
 
-    // Vérifier si le nouveau nom d'utilisateur ou email existe déjà
-    if (username || email) {
-      const existingUser = await postgresClient.query(
-        "SELECT * FROM users WHERE (username = $1 OR email = $2) AND id != $3",
-        [username || "", email || "", req.user.userId]
-      );
-
-      if (existingUser.rows.length > 0) {
-        return res
-          .status(400)
-          .json({ error: "Nom d'utilisateur ou email déjà utilisé" });
-      }
-    }
-
-    // Construire la requête de mise à jour
-    let updateQuery = "UPDATE users SET updated_at = CURRENT_TIMESTAMP";
-    let params = [];
-    let paramCount = 0;
-
+    // Validation des champs individuels
+    const updateData = {};
     if (username) {
-      paramCount++;
-      updateQuery += `, username = $${paramCount}`;
-      params.push(username);
+      if (username.length < 3) {
+        return res.status(400).json({
+          error: "Nom d'utilisateur invalide",
+          message: "Le nom d'utilisateur doit contenir au moins 3 caractères",
+        });
+      }
+      updateData.username = username;
     }
 
     if (email) {
-      paramCount++;
-      updateQuery += `, email = $${paramCount}`;
-      params.push(email);
+      if (!User.isValidEmail(email)) {
+        return res.status(400).json({
+          error: "Email invalide",
+          message: "Format d'email invalide",
+        });
+      }
+      updateData.email = email;
     }
 
-    paramCount++;
-    updateQuery += ` WHERE id = $${paramCount} RETURNING id, username, email, created_at, updated_at`;
-    params.push(req.user.userId);
-
-    const result = await postgresClient.query(updateQuery, params);
+    // Mettre à jour l'utilisateur
+    const updatedUser = await userService.updateUser(
+      req.user.userId,
+      updateData
+    );
 
     res.json({
       message: "Profil mis à jour avec succès",
-      user: result.rows[0],
+      user: {
+        _id: updatedUser._id,
+        username: updatedUser.username,
+        email: updatedUser.email,
+        createdAt: updatedUser.createdAt,
+        updatedAt: updatedUser.updatedAt,
+      },
     });
   } catch (error) {
     console.error("Erreur lors de la mise à jour du profil:", error);
-    res.status(500).json({ error: "Erreur serveur" });
+
+    if (error.message.includes("déjà utilisé")) {
+      return res.status(400).json({
+        error: "Erreur de validation",
+        message: error.message,
+      });
+    }
+
+    res.status(500).json({
+      error: "Erreur serveur",
+      message: "Une erreur est survenue lors de la mise à jour du profil",
+    });
   }
 });
 
@@ -235,55 +207,49 @@ router.put("/profile", authenticateToken, async (req, res) => {
 router.post("/change-password", authenticateToken, async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
-    const postgresClient = await connectPostgres();
 
     // Validation
     if (!currentPassword || !newPassword) {
-      return res
-        .status(400)
-        .json({ error: "Ancien et nouveau mot de passe requis" });
+      return res.status(400).json({
+        error: "Données manquantes",
+        message: "Ancien et nouveau mot de passe requis",
+      });
     }
 
     if (newPassword.length < 6) {
       return res.status(400).json({
-        error: "Le nouveau mot de passe doit contenir au moins 6 caractères",
+        error: "Mot de passe invalide",
+        message: "Le nouveau mot de passe doit contenir au moins 6 caractères",
       });
     }
 
-    // Récupérer l'utilisateur
-    const userResult = await postgresClient.query(
-      "SELECT password_hash FROM users WHERE id = $1",
-      [req.user.userId]
-    );
-
-    if (userResult.rows.length === 0) {
-      return res.status(404).json({ error: "Utilisateur non trouvé" });
-    }
-
-    // Vérifier l'ancien mot de passe
-    const isValidPassword = await bcrypt.compare(
+    // Changer le mot de passe
+    await userService.changePassword(
+      req.user.userId,
       currentPassword,
-      userResult.rows[0].password_hash
+      newPassword
     );
 
-    if (!isValidPassword) {
-      return res.status(401).json({ error: "Ancien mot de passe incorrect" });
-    }
-
-    // Hasher le nouveau mot de passe
-    const saltRounds = 10;
-    const newPasswordHash = await bcrypt.hash(newPassword, saltRounds);
-
-    // Mettre à jour le mot de passe
-    await postgresClient.query(
-      "UPDATE users SET password_hash = $1, updated_at = CURRENT_TIMESTAMP WHERE id = $2",
-      [newPasswordHash, req.user.userId]
-    );
-
-    res.json({ message: "Mot de passe modifié avec succès" });
+    res.json({
+      message: "Mot de passe modifié avec succès",
+    });
   } catch (error) {
     console.error("Erreur lors du changement de mot de passe:", error);
-    res.status(500).json({ error: "Erreur serveur" });
+
+    if (
+      error.message.includes("incorrect") ||
+      error.message.includes("non trouvé")
+    ) {
+      return res.status(400).json({
+        error: "Erreur de validation",
+        message: error.message,
+      });
+    }
+
+    res.status(500).json({
+      error: "Erreur serveur",
+      message: "Une erreur est survenue lors du changement de mot de passe",
+    });
   }
 });
 
@@ -294,8 +260,93 @@ router.get("/verify-token", authenticateToken, (req, res) => {
     user: {
       userId: req.user.userId,
       username: req.user.username,
+      email: req.user.email,
     },
   });
 });
+
+// GET /api/users - Obtenir tous les utilisateurs (avec pagination)
+router.get("/", authenticateToken, async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    const result = await userService.getAllUsers(page, limit);
+
+    res.json({
+      users: result.users,
+      pagination: result.pagination,
+    });
+  } catch (error) {
+    console.error("Erreur lors de la récupération des utilisateurs:", error);
+    res.status(500).json({
+      error: "Erreur serveur",
+      message:
+        "Une erreur est survenue lors de la récupération des utilisateurs",
+    });
+  }
+});
+
+// GET /api/users/:id - Obtenir un utilisateur par ID
+router.get("/:id", authenticateToken, async (req, res) => {
+  try {
+    const user = await userService.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({
+        error: "Utilisateur non trouvé",
+        message: "L'utilisateur demandé n'existe pas",
+      });
+    }
+
+    res.json({
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      },
+    });
+  } catch (error) {
+    console.error("Erreur lors de la récupération de l'utilisateur:", error);
+    res.status(500).json({
+      error: "Erreur serveur",
+      message:
+        "Une erreur est survenue lors de la récupération de l'utilisateur",
+    });
+  }
+});
+
+// DELETE /api/users/:id - Supprimer un utilisateur
+router.delete(
+  "/:id",
+  authenticateToken,
+  requireOwnership("id"),
+  async (req, res) => {
+    try {
+      await userService.deleteUser(req.params.id);
+
+      res.json({
+        message: "Utilisateur supprimé avec succès",
+      });
+    } catch (error) {
+      console.error("Erreur lors de la suppression de l'utilisateur:", error);
+
+      if (error.message.includes("non trouvé")) {
+        return res.status(404).json({
+          error: "Utilisateur non trouvé",
+          message: error.message,
+        });
+      }
+
+      res.status(500).json({
+        error: "Erreur serveur",
+        message:
+          "Une erreur est survenue lors de la suppression de l'utilisateur",
+      });
+    }
+  }
+);
 
 module.exports = router;

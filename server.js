@@ -7,6 +7,7 @@ require("dotenv").config();
 const weaponsRoutes = require("./routes/weapons");
 const skillsRoutes = require("./routes/skills");
 const usersRoutes = require("./routes/users");
+const { initializeDatabase } = require("./config/database");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -70,8 +71,24 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Serveur démarré sur le port ${PORT}`);
-  console.log(`📊 Environnement: ${process.env.NODE_ENV || "development"}`);
-  console.log(`🌐 URL: http://localhost:${PORT}`);
-});
+// Initialiser la base de données et démarrer le serveur
+async function startServer() {
+  try {
+    // Initialiser la base de données
+    await initializeDatabase();
+    console.log("✅ Base de données initialisée");
+
+    // Démarrer le serveur
+    app.listen(PORT, () => {
+      console.log(`🚀 Serveur démarré sur le port ${PORT}`);
+      console.log(`📊 Environnement: ${process.env.NODE_ENV || "development"}`);
+      console.log(`🌐 URL: http://localhost:${PORT}`);
+      console.log(`🔐 API Documentation: http://localhost:${PORT}/api/health`);
+    });
+  } catch (error) {
+    console.error("❌ Erreur lors du démarrage du serveur:", error);
+    process.exit(1);
+  }
+}
+
+startServer();
