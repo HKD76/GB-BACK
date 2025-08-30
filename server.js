@@ -48,6 +48,20 @@ app.get("/api/health", (req, res) => {
     status: "OK",
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV || "development",
+    mongodb: process.env.MONGODB_URI ? "Configured" : "Not configured",
+    dbName: process.env.DB_NAME || "Not configured",
+  });
+});
+
+app.get("/api/test", (req, res) => {
+  res.json({
+    message: "API fonctionne correctement",
+    env: {
+      NODE_ENV: process.env.NODE_ENV,
+      MONGODB_URI: process.env.MONGODB_URI ? "Present" : "Missing",
+      DB_NAME: process.env.DB_NAME || "Missing",
+      JWT_SECRET: process.env.JWT_SECRET ? "Present" : "Missing",
+    },
   });
 });
 
