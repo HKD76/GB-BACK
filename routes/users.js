@@ -5,12 +5,13 @@ const userService = require("../services/userService");
 const { authenticateToken, requireOwnership } = require("../middleware/auth");
 const router = express.Router();
 
-// POST /api/users/register - Inscription d'un utilisateur
+/**
+ * POST /api/users/register - Inscription d'un utilisateur
+ */
 router.post("/register", async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    // Validation des données
     const validationErrors = User.validate({ username, email, password });
     if (validationErrors.length > 0) {
       return res.status(400).json({
@@ -19,10 +20,8 @@ router.post("/register", async (req, res) => {
       });
     }
 
-    // Créer l'utilisateur
     const user = await userService.createUser({ username, email, password });
 
-    // Générer le token JWT
     const token = jwt.sign(
       { userId: user._id, username: user.username },
       process.env.JWT_SECRET || "your-secret-key",
@@ -56,12 +55,13 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// POST /api/users/login - Connexion d'un utilisateur
+/**
+ * POST /api/users/login - Connexion d'un utilisateur
+ */
 router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // Validation
     if (!username || !password) {
       return res.status(400).json({
         error: "Données manquantes",
@@ -69,7 +69,6 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    // Vérifier les identifiants
     const user = await userService.verifyCredentials(username, password);
 
     if (!user) {
@@ -79,7 +78,6 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    // Générer le token JWT
     const token = jwt.sign(
       { userId: user._id, username: user.username },
       process.env.JWT_SECRET || "your-secret-key",
@@ -105,7 +103,9 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// GET /api/users/profile - Profil de l'utilisateur connecté
+/**
+ * GET /api/users/profile - Profil de l'utilisateur connecté
+ */
 router.get("/profile", authenticateToken, async (req, res) => {
   try {
     const user = await userService.findById(req.user.userId);
@@ -135,12 +135,13 @@ router.get("/profile", authenticateToken, async (req, res) => {
   }
 });
 
-// PUT /api/users/profile - Mettre à jour le profil
+/**
+ * PUT /api/users/profile - Mettre à jour le profil
+ */
 router.put("/profile", authenticateToken, async (req, res) => {
   try {
     const { username, email } = req.body;
 
-    // Validation
     if (!username && !email) {
       return res.status(400).json({
         error: "Données manquantes",
@@ -148,7 +149,6 @@ router.put("/profile", authenticateToken, async (req, res) => {
       });
     }
 
-    // Validation des champs individuels
     const updateData = {};
     if (username) {
       if (username.length < 3) {
@@ -170,7 +170,6 @@ router.put("/profile", authenticateToken, async (req, res) => {
       updateData.email = email;
     }
 
-    // Mettre à jour l'utilisateur
     const updatedUser = await userService.updateUser(
       req.user.userId,
       updateData
@@ -203,12 +202,13 @@ router.put("/profile", authenticateToken, async (req, res) => {
   }
 });
 
-// POST /api/users/change-password - Changer le mot de passe
+/**
+ * POST /api/users/change-password - Changer le mot de passe
+ */
 router.post("/change-password", authenticateToken, async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
 
-    // Validation
     if (!currentPassword || !newPassword) {
       return res.status(400).json({
         error: "Données manquantes",
@@ -223,7 +223,6 @@ router.post("/change-password", authenticateToken, async (req, res) => {
       });
     }
 
-    // Changer le mot de passe
     await userService.changePassword(
       req.user.userId,
       currentPassword,
@@ -253,7 +252,9 @@ router.post("/change-password", authenticateToken, async (req, res) => {
   }
 });
 
-// GET /api/users/verify-token - Vérifier la validité du token
+/**
+ * GET /api/users/verify-token - Vérifier la validité du token
+ */
 router.get("/verify-token", authenticateToken, (req, res) => {
   res.json({
     valid: true,
@@ -265,7 +266,9 @@ router.get("/verify-token", authenticateToken, (req, res) => {
   });
 });
 
-// GET /api/users - Obtenir tous les utilisateurs (avec pagination)
+/**
+ * GET /api/users - Obtenir tous les utilisateurs avec pagination
+ */
 router.get("/", authenticateToken, async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -287,7 +290,9 @@ router.get("/", authenticateToken, async (req, res) => {
   }
 });
 
-// GET /api/users/:id - Obtenir un utilisateur par ID
+/**
+ * GET /api/users/:id - Obtenir un utilisateur par ID
+ */
 router.get("/:id", authenticateToken, async (req, res) => {
   try {
     const user = await userService.findById(req.params.id);
@@ -318,7 +323,9 @@ router.get("/:id", authenticateToken, async (req, res) => {
   }
 });
 
-// DELETE /api/users/:id - Supprimer un utilisateur
+/**
+ * DELETE /api/users/:id - Supprimer un utilisateur
+ */
 router.delete(
   "/:id",
   authenticateToken,

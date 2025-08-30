@@ -9,7 +9,9 @@ class User {
     this.updatedAt = data.updatedAt || new Date();
   }
 
-  // Validation des données utilisateur
+  /**
+   * Valide les données utilisateur
+   */
   static validate(data) {
     const errors = [];
 
@@ -28,13 +30,17 @@ class User {
     return errors;
   }
 
-  // Validation d'email
+  /**
+   * Valide le format d'email
+   */
   static isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
-  // Convertir en objet pour MongoDB
+  /**
+   * Convertit l'objet pour MongoDB
+   */
   toMongo() {
     return {
       username: this.username,
@@ -45,7 +51,9 @@ class User {
     };
   }
 
-  // Créer un utilisateur à partir d'un document MongoDB
+  /**
+   * Crée un utilisateur depuis un document MongoDB
+   */
   static fromMongo(doc) {
     if (!doc) return null;
 

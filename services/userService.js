@@ -8,18 +8,21 @@ class UserService {
     this.collectionName = "users";
   }
 
-  // Obtenir la collection utilisateurs
+  /**
+   * Obtient la collection utilisateurs
+   */
   async getCollection() {
     const db = await connectMongo();
     return db.collection(this.collectionName);
   }
 
-  // Créer un nouvel utilisateur
+  /**
+   * Crée un nouvel utilisateur
+   */
   async createUser(userData) {
     try {
       const collection = await this.getCollection();
 
-      // Vérifier si l'utilisateur existe déjà
       const existingUser = await collection.findOne({
         $or: [{ username: userData.username }, { email: userData.email }],
       });
@@ -28,11 +31,9 @@ class UserService {
         throw new Error("Nom d'utilisateur ou email déjà utilisé");
       }
 
-      // Hasher le mot de passe
       const saltRounds = 10;
       const passwordHash = await bcrypt.hash(userData.password, saltRounds);
 
-      // Créer l'utilisateur
       const user = new User({
         ...userData,
         passwordHash,
@@ -49,7 +50,9 @@ class UserService {
     }
   }
 
-  // Trouver un utilisateur par ID
+  /**
+   * Trouve un utilisateur par ID
+   */
   async findById(userId) {
     try {
       const collection = await this.getCollection();
@@ -60,7 +63,9 @@ class UserService {
     }
   }
 
-  // Trouver un utilisateur par nom d'utilisateur ou email
+  /**
+   * Trouve un utilisateur par nom d'utilisateur ou email
+   */
   async findByUsernameOrEmail(identifier) {
     try {
       const collection = await this.getCollection();
@@ -73,7 +78,9 @@ class UserService {
     }
   }
 
-  // Obtenir tous les utilisateurs (avec pagination)
+  /**
+   * Obtient tous les utilisateurs avec pagination
+   */
   async getAllUsers(page = 1, limit = 10) {
     try {
       const collection = await this.getCollection();
@@ -101,12 +108,13 @@ class UserService {
     }
   }
 
-  // Mettre à jour un utilisateur
+  /**
+   * Met à jour un utilisateur
+   */
   async updateUser(userId, updateData) {
     try {
       const collection = await this.getCollection();
 
-      // Vérifier si le nouvel email ou nom d'utilisateur existe déjà
       if (updateData.email || updateData.username) {
         const existingUser = await collection.findOne({
           $and: [
@@ -145,19 +153,19 @@ class UserService {
     }
   }
 
-  // Changer le mot de passe
+  /**
+   * Change le mot de passe d'un utilisateur
+   */
   async changePassword(userId, currentPassword, newPassword) {
     try {
       const collection = await this.getCollection();
 
-      // Récupérer l'utilisateur avec le hash du mot de passe
       const user = await collection.findOne({ _id: new ObjectId(userId) });
 
       if (!user) {
         throw new Error("Utilisateur non trouvé");
       }
 
-      // Vérifier l'ancien mot de passe
       const isValidPassword = await bcrypt.compare(
         currentPassword,
         user.passwordHash
@@ -167,11 +175,9 @@ class UserService {
         throw new Error("Ancien mot de passe incorrect");
       }
 
-      // Hasher le nouveau mot de passe
       const saltRounds = 10;
       const newPasswordHash = await bcrypt.hash(newPassword, saltRounds);
 
-      // Mettre à jour le mot de passe
       await collection.updateOne(
         { _id: new ObjectId(userId) },
         {
@@ -188,7 +194,9 @@ class UserService {
     }
   }
 
-  // Supprimer un utilisateur
+  /**
+   * Supprime un utilisateur
+   */
   async deleteUser(userId) {
     try {
       const collection = await this.getCollection();
@@ -205,7 +213,9 @@ class UserService {
     }
   }
 
-  // Vérifier les identifiants de connexion
+  /**
+   * Vérifie les identifiants de connexion
+   */
   async verifyCredentials(identifier, password) {
     try {
       const user = await this.findByUsernameOrEmail(identifier);

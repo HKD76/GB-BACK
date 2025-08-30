@@ -1,16 +1,16 @@
 const { MongoClient } = require("mongodb");
 
-// Configuration MongoDB
 const mongoConfig = {
   url: process.env.MONGODB_URI || "mongodb://localhost:27017",
   dbName: process.env.MONGODB_DB || "gb_project",
   options: {},
 };
 
-// Client de base de données
 let mongoClient = null;
 
-// Connexion MongoDB
+/**
+ * Établit la connexion MongoDB
+ */
 async function connectMongo() {
   try {
     if (!mongoClient) {
@@ -25,7 +25,9 @@ async function connectMongo() {
   }
 }
 
-// Fermeture des connexions
+/**
+ * Ferme les connexions MongoDB
+ */
 async function closeConnections() {
   try {
     if (mongoClient) {
@@ -37,13 +39,13 @@ async function closeConnections() {
   }
 }
 
-// Initialisation des collections/tableaux
+/**
+ * Initialise les collections de la base de données
+ */
 async function initializeDatabase() {
   try {
-    // MongoDB - Créer les collections
     const mongoDb = await connectMongo();
 
-    // Créer les collections si elles n'existent pas
     const collections = await mongoDb.listCollections().toArray();
     const collectionNames = collections.map((col) => col.name);
 
@@ -55,6 +57,21 @@ async function initializeDatabase() {
     if (!collectionNames.includes("weapon_skills")) {
       await mongoDb.createCollection("weapon_skills");
       console.log('📦 Collection "weapon_skills" créée');
+    }
+
+    if (!collectionNames.includes("skills_stats")) {
+      await mongoDb.createCollection("skills_stats");
+      console.log('📦 Collection "skills_stats" créée');
+    }
+
+    if (!collectionNames.includes("summons")) {
+      await mongoDb.createCollection("summons");
+      console.log('📦 Collection "summons" créée');
+    }
+
+    if (!collectionNames.includes("weapon_grids")) {
+      await mongoDb.createCollection("weapon_grids");
+      console.log('📦 Collection "weapon_grids" créée');
     }
 
     if (!collectionNames.includes("users")) {

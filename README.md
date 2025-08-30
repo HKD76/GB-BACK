@@ -1,318 +1,168 @@
-# GB Project - API Node.js avec MongoDB
+# GB Project API
 
-Une API REST complète pour gérer des utilisateurs, des armes et des compétences avec MongoDB. Inclut un système d'authentification JWT robuste et des opérations CRUD complètes.
+API REST pour la gestion d'armes, compétences et invocations dans un jeu.
 
-## 🚀 Fonctionnalités
+## 🚀 Déploiement sur Vercel
 
-- **API REST complète** avec authentification JWT
-- **Base de données MongoDB** pour toutes les données
-- **Système d'authentification** complet (inscription, connexion, gestion de profil)
-- **Gestion des armes** avec validation et statistiques
-- **Gestion des compétences** (structure prête)
-- **Sécurité renforcée** avec rate limiting, validation et headers de sécurité
-- **Documentation complète** de l'API
-- **Tests automatisés** pour vérifier le bon fonctionnement
+### Prérequis
 
-## 🏗️ Architecture
+- Compte GitHub
+- Compte Vercel
+- Base de données MongoDB (MongoDB Atlas recommandé)
+
+### Étapes de déploiement
+
+1. **Préparer la base de données**
+
+   - Créer un cluster MongoDB Atlas
+   - Obtenir l'URI de connexion
+   - Configurer les variables d'environnement
+
+2. **Déployer sur Vercel**
+
+   ```bash
+   # Installer Vercel CLI
+   npm i -g vercel
+
+   # Se connecter à Vercel
+   vercel login
+
+   # Déployer
+   vercel
+   ```
+
+3. **Configurer les variables d'environnement**
+   - Aller sur le dashboard Vercel
+   - Projet → Settings → Environment Variables
+   - Ajouter :
+     - `MONGODB_URI` : URI de votre base MongoDB
+     - `DB_NAME` : Nom de votre base de données
+     - `JWT_SECRET` : Clé secrète pour JWT
+     - `NODE_ENV` : production
+
+## 📁 Architecture
 
 ```
-GB_PROJECT/
 ├── config/
 │   └── database.js          # Configuration MongoDB
+├── middleware/
+│   └── auth.js              # Authentification JWT
 ├── models/
 │   ├── User.js              # Modèle utilisateur
-│   └── Weapon.js            # Modèle arme
-├── services/
-│   ├── userService.js       # Service utilisateur
-│   └── weaponService.js     # Service arme
-├── middleware/
-│   └── auth.js              # Middleware d'authentification
+│   ├── Weapon.js            # Modèle arme
+│   ├── Summon.js            # Modèle invocation
+│   └── WeaponGrid.js        # Modèle grille d'armes
 ├── routes/
-│   ├── weapons.js           # API pour les armes
-│   ├── skills.js            # API pour les compétences
-│   └── users.js             # API pour les utilisateurs
+│   ├── users.js             # Routes utilisateurs
+│   ├── weapons.js           # Routes armes
+│   ├── weapons-enriched.js  # Routes armes enrichies
+│   ├── summons.js           # Routes invocations
+│   ├── skills.js            # Routes compétences
+│   ├── skills-stats.js      # Routes statistiques
+│   └── weapon-grids.js      # Routes grilles d'armes
+├── services/
+│   ├── userService.js       # Logique utilisateurs
+│   ├── weaponService.js     # Logique armes
+│   ├── summonService.js     # Logique invocations
+│   ├── weaponGridService.js # Logique grilles
+│   └── skillEnrichmentService.js # Enrichissement skills
 ├── scripts/
-│   ├── import-mongo.js      # Import des données MongoDB
-│   ├── test-mongo.js        # Test de connexion MongoDB
-│   └── test-api.js          # Tests de l'API
-├── public/
-│   └── index.html           # Interface utilisateur
+│   ├── import-mongo.js      # Import données MongoDB
+│   ├── test-mongo.js        # Test connexion
+│   └── test-api.js          # Tests API
 ├── json/
 │   ├── weapons.json         # Données d'armes
-│   └── weapon_skills.json   # Données de compétences
-├── server.js                # Serveur Express principal
-├── package.json             # Dépendances Node.js
-├── .env.example             # Variables d'environnement
-├── API_DOCUMENTATION.md     # Documentation complète de l'API
-└── README.md                # Ce fichier
+│   ├── summons.json         # Données d'invocations
+│   ├── skills_stats.json    # Statistiques compétences
+│   └── weapon_skills.json   # Compétences d'armes
+├── server.js                # Point d'entrée
+├── vercel.json              # Configuration Vercel
+└── package.json             # Dépendances
 ```
 
-## 📋 Prérequis
+## 🔧 Configuration
 
-- **Node.js** (version 18 ou supérieure)
-- **MongoDB** (local ou MongoDB Atlas)
-- **npm** ou **yarn**
-
-## 🛠️ Installation
-
-### 1. Cloner le projet
-
-```bash
-git clone <votre-repo>
-cd GB_PROJECT
-```
-
-### 2. Installer les dépendances
-
-```bash
-npm install
-```
-
-### 3. Configuration des variables d'environnement
-
-```bash
-cp .env.example .env
-```
-
-Éditez le fichier `.env` avec vos configurations :
+### Variables d'environnement requises
 
 ```env
-# Configuration du serveur
-PORT=3000
-NODE_ENV=development
-
-# Configuration MongoDB
-MONGODB_URI=mongodb://localhost:27017
-MONGODB_DB=gb_project
-
-# Configuration JWT
-JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
-
-# Configuration CORS
-FRONTEND_URL=http://localhost:3000
+MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/database
+DB_NAME=gb_project
+JWT_SECRET=votre_secret_jwt_super_securise
+NODE_ENV=production
+FRONTEND_URL=https://votre-frontend.vercel.app
 ```
 
-### 4. Démarrer MongoDB
-
-**Local :**
+### Scripts disponibles
 
 ```bash
-# Sur macOS avec Homebrew
-brew services start mongodb-community
-
-# Sur Ubuntu/Debian
-sudo systemctl start mongod
-
-# Sur Windows
-net start MongoDB
+npm start          # Démarre le serveur
+npm run dev        # Mode développement avec nodemon
+npm run build      # Build pour production
+npm run test-api   # Test de l'API
 ```
 
-**MongoDB Atlas :**
+## 📚 API Endpoints
 
-- Créez un cluster gratuit sur [MongoDB Atlas](https://www.mongodb.com/atlas)
-- Obtenez l'URI de connexion et mettez-la dans `MONGODB_URI`
+### Santé
 
-### 5. Démarrer l'application
+- `GET /api/health` - Statut de l'API
 
-```bash
-# Mode développement avec nodemon
-npm run dev
+### Utilisateurs
 
-# Mode production
-npm start
-```
+- `POST /api/users/register` - Inscription
+- `POST /api/users/login` - Connexion
+- `GET /api/users/profile` - Profil utilisateur
 
-L'API sera accessible sur `http://localhost:3000/api`
+### Armes
 
-## 🧪 Tests
+- `GET /api/weapons` - Liste des armes
+- `GET /api/weapons/:id` - Détail d'une arme
+- `GET /api/weapons/search` - Recherche d'armes
+- `GET /api/weapons-enriched` - Armes avec skills enrichis
 
-### Tester l'API
+### Invocations
 
-```bash
-# Assurez-vous que le serveur est démarré
-npm start
+- `GET /api/summons` - Liste des invocations
+- `GET /api/summons/:id` - Détail d'une invocation
 
-# Dans un autre terminal, lancez les tests
-npm run test-api
-```
+### Compétences
 
-### Tester la connexion MongoDB
+- `GET /api/skills` - Liste des compétences
+- `GET /api/skills-stats` - Statistiques des compétences
 
-```bash
-npm run test-mongo
-```
+### Grilles d'armes
 
-## 📊 API Endpoints
+- `GET /api/weapon-grids` - Liste des grilles
+- `POST /api/weapon-grids` - Créer une grille
+- `GET /api/weapon-grids/:id` - Détail d'une grille
 
-### 🔐 Authentification
+## 🔒 Sécurité
 
-- `POST /api/users/register` - Inscription d'un utilisateur
-- `POST /api/users/login` - Connexion utilisateur
-- `GET /api/users/verify-token` - Vérifier la validité du token
+- **Helmet** : Headers de sécurité
+- **CORS** : Configuration cross-origin
+- **Rate Limiting** : Limitation des requêtes
+- **JWT** : Authentification sécurisée
+- **Validation** : Validation des données
 
-### 👤 Gestion du Profil
+## 🚀 Déploiement
 
-- `GET /api/users/profile` - Obtenir le profil (authentification requise)
-- `PUT /api/users/profile` - Mettre à jour le profil (authentification requise)
-- `POST /api/users/change-password` - Changer le mot de passe (authentification requise)
+L'API est configurée pour être déployée sur Vercel avec :
 
-### 👥 Gestion des Utilisateurs
+- Configuration automatique des routes
+- Variables d'environnement sécurisées
+- Build optimisé pour Node.js
+- Monitoring et logs automatiques
 
-- `GET /api/users` - Liste des utilisateurs avec pagination (authentification requise)
-- `GET /api/users/:id` - Obtenir un utilisateur par ID (authentification requise)
-- `DELETE /api/users/:id` - Supprimer un utilisateur (authentification requise)
+## 📊 Monitoring
 
-### ⚔️ Gestion des Armes
+- **Vercel Analytics** : Métriques de performance
+- **Logs** : Logs d'erreurs et d'accès
+- **Health Check** : Endpoint `/api/health`
 
-- `GET /api/weapons` - Liste des armes avec filtres et pagination
-- `GET /api/weapons/search` - Rechercher des armes par nom
-- `GET /api/weapons/stats` - Statistiques des armes
-- `GET /api/weapons/:id` - Obtenir une arme par ID
-- `POST /api/weapons` - Créer une arme (authentification requise)
-- `PUT /api/weapons/:id` - Mettre à jour une arme (authentification requise)
-- `DELETE /api/weapons/:id` - Supprimer une arme (authentification requise)
-- `POST /api/weapons/:id/skills` - Ajouter une compétence à une arme (authentification requise)
-- `DELETE /api/weapons/:id/skills/:skillId` - Retirer une compétence d'une arme (authentification requise)
-- `POST /api/weapons/import` - Importer des armes depuis JSON (authentification requise)
+## 🤝 Contribution
 
-### 🎯 Gestion des Compétences
-
-Les endpoints pour les compétences suivent le même pattern que les armes.
-
-### 🏥 Santé de l'API
-
-- `GET /api/health` - Vérifier l'état de l'API
-
-## 🔧 Scripts disponibles
-
-```bash
-# Démarrage en développement
-npm run dev
-
-# Démarrage en production
-npm start
-
-# Import des données MongoDB
-npm run import-mongo
-
-# Test de connexion MongoDB
-npm run test-mongo
-
-# Test complet de l'API
-npm run test-api
-
-# Build pour production
-npm run build
-```
-
-## 📖 Documentation
-
-Consultez le fichier `API_DOCUMENTATION.md` pour une documentation complète de l'API avec des exemples d'utilisation.
-
-## 🛡️ Sécurité
-
-- **Rate limiting** : 100 requêtes par 15 minutes par IP
-- **Helmet.js** : Headers de sécurité
-- **CORS** : Configuration sécurisée
-- **JWT** : Authentification par token avec expiration (24h)
-- **Validation** : Validation complète des données d'entrée
-- **Hachage** : Mots de passe hachés avec bcrypt (10 rounds)
-- **Middleware d'authentification** : Protection des routes sensibles
-
-## 🌐 Déploiement
-
-### Option 1 : Vercel + MongoDB Atlas (Recommandé)
-
-1. **MongoDB Atlas** :
-
-   - Créez un cluster M0 (gratuit)
-   - Obtenez l'URI de connexion
-
-2. **Vercel** :
-   - Connectez votre repository GitHub
-   - Configurez les variables d'environnement :
-     ```
-     MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/gb_project
-     JWT_SECRET=votre-secret-jwt-super-securise
-     NODE_ENV=production
-     ```
-
-### Option 2 : Railway
-
-1. Créez un compte sur [Railway](https://railway.app)
-2. Ajoutez un service MongoDB
-3. Déployez votre application Node.js
-4. Configurez les variables d'environnement
-
-### Option 3 : Render
-
-1. Créez un compte sur [Render](https://render.com)
-2. Créez un service web Node.js
-3. Ajoutez une base de données MongoDB
-4. Configurez les variables d'environnement
-
-## 📈 Exemples d'utilisation
-
-### Inscription et Connexion
-
-```bash
-# 1. Inscription
-curl -X POST http://localhost:3000/api/users/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "test_user",
-    "email": "test@example.com",
-    "password": "password123"
-  }'
-
-# 2. Connexion
-curl -X POST http://localhost:3000/api/users/login \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "test_user",
-    "password": "password123"
-  }'
-```
-
-### Utilisation avec Token
-
-```bash
-# Récupérer le profil utilisateur
-curl -X GET http://localhost:3000/api/users/profile \
-  -H "Authorization: Bearer <votre_token>"
-
-# Créer une arme
-curl -X POST http://localhost:3000/api/weapons \
-  -H "Authorization: Bearer <votre_token>" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Arc magique",
-    "type": "arc",
-    "damage": 20,
-    "range": 10,
-    "weight": 2.0,
-    "description": "Un arc enchanté",
-    "rarity": "uncommon"
-  }'
-```
-
-## 🚀 Prochaines étapes
-
-1. **Déployer** l'application selon vos préférences
-2. **Configurer** les variables d'environnement en production
-3. **Importer** vos données JSON existantes
-4. **Tester** toutes les fonctionnalités avec les scripts fournis
-5. **Étendre** l'API selon vos besoins spécifiques
-
-## 📞 Support
-
-Pour toute question ou problème :
-
-1. Vérifiez les logs de l'application
-2. Consultez la documentation de l'API (`API_DOCUMENTATION.md`)
-3. Lancez les tests pour diagnostiquer les problèmes
-4. Créez une issue sur GitHub
-
----
-
-**Note** : N'oubliez pas de changer la clé JWT_SECRET en production et de configurer correctement les variables d'environnement selon votre plateforme d'hébergement.
+1. Fork le projet
+2. Créer une branche feature
+3. Commit les changements
+4. Push vers la branche
+5. Ouvrir une Pull Request

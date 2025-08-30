@@ -1,0 +1,4175 @@
+[
+  {
+    "name": "Overskill Caps",
+    "description": "",
+    "notes": [],
+    "tables": []
+  },
+  {
+    "name": "Abandon",
+    "description": "Boost to [element] allies' multiattack rate based on turns passed",
+    "notes": ["Boostable by auras.", "Reaches maximum effect after 10 turns."],
+    "tables": [
+      {
+        "headers": ["Skill Level", "per Turn", "After 10 Turns"],
+        "rows": [
+          {
+            "Skill Level": "1",
+            "per Turn": "0.04%",
+            "After 10 Turns": "0.4%"
+          },
+          {
+            "Skill Level": "10",
+            "per Turn": "0.175%",
+            "After 10 Turns": "1.75%"
+          },
+          {
+            "Skill Level": "15",
+            "per Turn": "0.25%",
+            "After 10 Turns": "2.5%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Aegis",
+    "description": "[Size] boost to [element] allies' HP",
+    "notes": [
+      "HP boosts are additive between Normal, Omega, and EX.",
+      "Total HP boosts from weapon skills is capped at 400%",
+      "Broadsword of Earth's \"Titan's Aegis\" weapon skill is not a standard \"Aegis\" skill and is not boostable by auras. Instead, it is a flat +50 per skill level (+500 HP at skill level 10)."
+    ],
+    "tables": [
+      {
+        "title": "Normal",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.0%",
+            "modifier": "Small",
+            "stat": "HP"
+          },
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "17.0%",
+            "modifier": "Medium",
+            "stat": "HP"
+          },
+          {
+            "1": "9.0%",
+            "10": "18.0%",
+            "15": "21.0%",
+            "modifier": "Big",
+            "stat": "HP"
+          },
+          {
+            "1": "10.0%",
+            "10": "19.0%",
+            "15": "24.0%",
+            "modifier": "Big II",
+            "stat": "HP"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big", "Big II"],
+        "stats": ["HP"]
+      },
+      {
+        "title": "Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "1.0%",
+            "10": "10.0%",
+            "15": "12.0%",
+            "20": "13.0%",
+            "modifier": "Small Yggdrasil Dewbranch Omega",
+            "stat": "HP"
+          },
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.5%",
+            "20": "",
+            "modifier": "Small",
+            "stat": "HP"
+          },
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "18.0%",
+            "20": "20.0%",
+            "modifier": "Medium",
+            "stat": "HP"
+          }
+        ],
+        "modifiers": ["Small Yggdrasil Dewbranch Omega", "Small", "Medium"],
+        "stats": ["HP"]
+      },
+      {
+        "title": "EX",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "1.0%",
+            "10": "10.0%",
+            "15": "",
+            "20": "13.0%",
+            "modifier": "Small",
+            "stat": "HP"
+          },
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.5%",
+            "20": "",
+            "modifier": "Medium",
+            "stat": "HP"
+          },
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "",
+            "20": "",
+            "modifier": "Big",
+            "stat": "HP"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big"],
+        "stats": ["HP"]
+      }
+    ]
+  },
+  {
+    "name": "Apotheosis",
+    "description": "[Size] boost to [element] allies' ATK and max HP / [Size] amplifying boost to DMG",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20", "25"],
+        "rows": [
+          {
+            "1": "8.0%",
+            "10": "17.0%",
+            "15": "20.0%",
+            "20": "22.0%",
+            "25": "24.0%",
+            "modifier": "Big",
+            "stat": "ATK"
+          },
+          {
+            "1": "8.0%",
+            "10": "17.0%",
+            "15": "20.0%",
+            "20": "22.0%",
+            "25": "24.0%",
+            "modifier": "Big",
+            "stat": "HP"
+          },
+          {
+            "1": "0.1%",
+            "10": "1.0%",
+            "15": "1.5%",
+            "20": "1.75%",
+            "25": "2.0%",
+            "modifier": "Big",
+            "stat": "DMG Amp."
+          }
+        ],
+        "modifiers": ["Big"],
+        "stats": ["ATK", "HP", "DMG Amp."]
+      }
+    ]
+  },
+  {
+    "name": "Arts",
+    "description": "Boost to [element] allies' skill damage cap",
+    "notes": [
+      "Boosts skill damage cap of [element] allies' skills.\nStacks additively with other weapon skills that boost skill damage cap, up to a maximum of 100%.\nStacks additively with Skill DMG Cap UpMaximum amount of skill DMG that can be dealt per hit is boosted.",
+      "Stacks additively with other weapon skills that boost skill damage cap, up to a maximum of 100%.",
+      "Stacks additively with Skill DMG Cap UpMaximum amount of skill DMG that can be dealt per hit is boosted."
+    ],
+    "tables": [
+      {
+        "title": "Skill DMG Cap",
+        "headers": ["Skill Level", "Skill DMG Cap"],
+        "rows": [
+          {
+            "Skill Level": "1",
+            "Skill DMG Cap": "5.5%"
+          },
+          {
+            "Skill Level": "10",
+            "Skill DMG Cap": "10%"
+          },
+          {
+            "Skill Level": "15",
+            "Skill DMG Cap": "15%"
+          },
+          {
+            "Skill Level": "20",
+            "Skill DMG Cap": "20%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ascendancy",
+    "description": "Boost to [element] allies' special C.A. DMG cap",
+    "notes": [
+      "10% boost to Special C.A. DMG Cap.",
+      "Special C.A. DMG Cap Up stacks up to 30% when equipping multiple copies."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Athos",
+    "description": "Boost to [element] allies' multiattack rate / Amplify normal attack DMG (Boost to specs when either [element] Omega or [element] Optimus weapon skills have a boost of 280% or above)",
+    "notes": [
+      "Boost to Athos' specs when either Elemental Omega or Elemental Optimus weapon skills have a boost of 280% or above."
+    ],
+    "tables": [
+      {
+        "headers": ["Total Boost", "DA Rate", "TA Rate", "N.A. Amp. (Sp.)"],
+        "rows": [
+          {
+            "Total Boost": "< 280% Boost",
+            "DA Rate": "6.25%",
+            "TA Rate": "6.25%",
+            "N.A. Amp. (Sp.)": "5%"
+          },
+          {
+            "Total Boost": "≥ 280% Boost",
+            "DA Rate": "12.5%",
+            "TA Rate": "12.5%",
+            "N.A. Amp. (Sp.)": "10%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Auspice",
+    "description": "[Size] boost to [element] allies' max HP and healing cap",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.0%",
+            "modifier": "Small",
+            "stat": "HP"
+          },
+          {
+            "1": "1.0%",
+            "10": "5.0%",
+            "15": "7.5%",
+            "modifier": "Small",
+            "stat": "Heal Cap"
+          },
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "17.0%",
+            "modifier": "Medium",
+            "stat": "HP"
+          },
+          {
+            "1": "3.0%",
+            "10": "7.5%",
+            "15": "10.0%",
+            "modifier": "Medium",
+            "stat": "Heal Cap"
+          }
+        ],
+        "modifiers": ["Small", "Medium"],
+        "stats": ["HP", "Heal Cap"]
+      }
+    ]
+  },
+  {
+    "name": "Beast Essence",
+    "description": "Boost to [element] allies' DMG cap",
+    "notes": [
+      "10% boost to [element] allies' general damage cap at skill level 20.\nBoost to damage cap stacks additively with weapon skill sources up to a maximum of 20%.\nStacks additively with damage cap boosts such as DMG Cap UpMaximum amount of DMG that can be dealt per hit is boosted, Extended Mastery Perks, character Support Skills, and Archangel's sub aura.",
+      "Boost to damage cap stacks additively with weapon skill sources up to a maximum of 20%.",
+      "Stacks additively with damage cap boosts such as DMG Cap UpMaximum amount of DMG that can be dealt per hit is boosted, Extended Mastery Perks, character Support Skills, and Archangel's sub aura."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Betrayal",
+    "description": "Boost to [element] allies' ATK for first 8 turns of battle",
+    "notes": [
+      "Shows up in battle as a dispellable, 8-turn ATK UpATK is boostedDuration: 8 turns buff.",
+      "This skill does not stack with itself, but will stack with a different name, i.e. 2 instances of Whirlwind's Betrayal will not stack, but Whirlwind's Betrayal and Stormwyrm's Betrayal will."
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icon", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "3.0%",
+            "10": "8.0%",
+            "15": "10.0%",
+            "modifier": "ATK",
+            "stat": "ATK"
+          }
+        ],
+        "modifiers": ["ATK"],
+        "stats": ["ATK"]
+      }
+    ]
+  },
+  {
+    "name": "Bladeshield",
+    "description": "[Size] boost to [element] allies' max HP and critical hit rate",
+    "notes": ["Boostable"],
+    "tables": [
+      {
+        "title": "Normal",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.0%",
+            "modifier": "Small",
+            "stat": "HP"
+          },
+          {
+            "1": "1.1%",
+            "10": "2.0%",
+            "15": "3.0%",
+            "modifier": "Small",
+            "stat": "Critical"
+          }
+        ],
+        "modifiers": ["Small"],
+        "stats": ["HP", "Critical"]
+      }
+    ]
+  },
+  {
+    "name": "Blessing",
+    "description": "Amplify [element] allies' DMG against [inferior element] foes",
+    "notes": [
+      "Affects all elemental damage dealt by [element] allies against [inferior element] foes. This includes elemental damage that differs from the ally's element.",
+      "Does not stack with an Ultima Weapon's  Fulgor ImpetusAmplifySeraphic modifier superior elemental DMG by 25%. from  Gauph Key Tria. Only the highest value takes effect."
+    ],
+    "tables": [
+      {
+        "title": "Normal",
+        "headers": ["Icons", "Skill Level", "Elem. Amplify"],
+        "rows": [
+          {
+            "Elem. Amplify": "10.0%",
+            "modifier": "Blessing",
+            "stat": "Elem. Amplify"
+          },
+          {
+            "Elem. Amplify": "20.0%",
+            "modifier": "Blessing II",
+            "stat": "Elem. Amplify"
+          },
+          {
+            "Elem. Amplify": "23.0%",
+            "modifier": "Blessing III",
+            "stat": "Elem. Amplify"
+          }
+        ],
+        "modifiers": ["Blessing", "Blessing II", "Blessing III"],
+        "stats": ["Elem. Amplify"]
+      }
+    ]
+  },
+  {
+    "name": "Bloodrage",
+    "description": "[Size] boost to [element] allies' ATK and critical hit rate / -10% DEF",
+    "notes": [
+      "Bloodrage has identical skill level modifiers as Celere, but with a DEF penalty.",
+      "-10% DEF is static and unaffected by skill level and auras.\nIt is applied multiplicatively to your final defense, after other positive defense multipliers are calculated.",
+      "It is applied multiplicatively to your final defense, after other positive defense multipliers are calculated."
+    ],
+    "tables": [
+      {
+        "title": "Normal",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.5%",
+            "modifier": "Medium ",
+            "stat": "ATK"
+          },
+          {
+            "1": "3.2%",
+            "10": "5.0%",
+            "15": "6.5%",
+            "modifier": "Medium",
+            "stat": "Critical"
+          },
+          {
+            "10": "-10%",
+            "modifier": "Medium",
+            "stat": "DEF"
+          }
+        ],
+        "modifiers": ["Medium", "Medium", "Medium"],
+        "stats": ["ATK", "Critical", "DEF"]
+      }
+    ]
+  },
+  {
+    "name": "Bloodshed",
+    "description": "[Size] boost to [element] allies' ATK / Take DMG worth 20% of max HP at Battle start",
+    "notes": [
+      "All [element] allies take damage at the start of battle, including sub allies.\nThis damage can't be prevented or reduced.",
+      "This damage can't be prevented or reduced.",
+      "Bloodshed HP DMG stacks additively up to 40% when equipping multiple copies.",
+      "Raising skill level only affects the ATK boost. It does not affect the damage taken by [element] allies."
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "18.0%",
+            "modifier": "Big"
+          }
+        ],
+        "modifiers": ["Big"],
+        "stats": []
+      }
+    ]
+  },
+  {
+    "name": "Blow",
+    "description": "Bonus [element] DMG effect to the third hit of [element] allies' triple attacks",
+    "notes": [
+      "Amount of Bonus DMG effect can vary based on source.",
+      "Does not stack with similar passive A-sided Bonus Damage effects. Only the highest effect takes priority."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Celere",
+    "description": "[Size] boost to [element] allies' ATK and critical hit rate",
+    "notes": [
+      "Celere has identical skill level modifiers as Might and Verity."
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20", "25"],
+        "rows": [
+          {
+            "1": "1.0%",
+            "10": "10.0%",
+            "15": "12.0%",
+            "20": "13.0%",
+            "modifier": "Small",
+            "stat": "ATK"
+          },
+          {
+            "1": "1.1%",
+            "10": "2.0%",
+            "15": "3.0%",
+            "20": "4.0%",
+            "modifier": "Small",
+            "stat": "Critical"
+          },
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.5%",
+            "20": "16.0%",
+            "25": "17.5%",
+            "modifier": "Medium",
+            "stat": "ATK"
+          },
+          {
+            "1": "3.2%",
+            "10": "5.0%",
+            "15": "6.5%",
+            "20": "7.5%",
+            "25": "8.5%",
+            "modifier": "Medium",
+            "stat": "Critical"
+          },
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "18.0%",
+            "20": "20.0%",
+            "modifier": "Big",
+            "stat": "ATK"
+          },
+          {
+            "1": "4.4%",
+            "10": "8.0%",
+            "15": "10.0%",
+            "20": "11.0%",
+            "modifier": "Big",
+            "stat": "Critical"
+          },
+          {
+            "1": "7.0%",
+            "10": "16.0%",
+            "15": "20.0%",
+            "modifier": "Big II",
+            "stat": "ATK"
+          },
+          {
+            "1": "5.5%",
+            "10": "10.0%",
+            "15": "12.0%",
+            "modifier": "Big II",
+            "stat": "Critical"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big", "Big II"],
+        "stats": ["ATK", "Critical"]
+      }
+    ]
+  },
+  {
+    "name": "Chain Force",
+    "description": "Boost to chain burst DMG and chain burst DMG cap",
+    "notes": [
+      "Chain Force grants the following based on skill level:",
+      "Chain Burst DMG Up caps at 120%.",
+      "Chain Burst DMG Cap Up caps at 100%.",
+      "Affects chain bursts of any element."
+    ],
+    "tables": [
+      {
+        "headers": ["Skill Level", "CB C.B. DMG", "C.B. DMG Cap"],
+        "rows": [
+          {
+            "Skill Level": "1",
+            "CB C.B. DMG": "4%",
+            "C.B. DMG Cap": "2%"
+          },
+          {
+            "Skill Level": "10",
+            "CB C.B. DMG": "40%",
+            "C.B. DMG Cap": "20%"
+          },
+          {
+            "Skill Level": "15",
+            "CB C.B. DMG": "50%",
+            "C.B. DMG Cap": "30%"
+          },
+          {
+            "Skill Level": "20",
+            "CB C.B. DMG": "60%",
+            "C.B. DMG Cap": "40%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Charge",
+    "description": "Boost to C.A. DMG, C.A. DMG cap, and special C.A. DMG cap based on how many [weapon group] are equipped",
+    "notes": [
+      "5% boost to C.A. DMG, 3% boost to C.A. DMG Cap, and 1% boost to Special C.A. Cap for all allies per [weapon group] in the grid.\nOnly up to 5  weapons are counted for this skill. Additional  weapons will not increase the boost provided.\nMultiple copies of this skill stack additively.\n[weapon group] weapons of any element contribute to the boost.\nAffects allies of any element.",
+      "Only up to 5  weapons are counted for this skill. Additional  weapons will not increase the boost provided.",
+      "Multiple copies of this skill stack additively.",
+      "[weapon group] weapons of any element contribute to the boost.",
+      "Affects allies of any element."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Clarity",
+    "description": "Slight chance to dodge and counter ([Size] DMG) for [element] allies",
+    "notes": [
+      "Multiple weapons stack additively for both dodge and damage.",
+      "3% chance to dodge and counter whether it is small, medium, or big.\nSkill level does not raise the chance to dodge.\nChance to dodge caps at 20% total.",
+      "Skill level does not raise the chance to dodge.",
+      "Chance to dodge caps at 20% total.",
+      "Auras do not boost the chance to dodge, but does boost the counterattack damage.\nThe following table only shows counterattack damage.",
+      "The following table only shows counterattack damage."
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icon", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "modifier": "Small",
+            "1": "",
+            "10": "",
+            "15": "20%",
+            "stat": "Counter DMG"
+          },
+          {
+            "modifier": "Medium",
+            "1": "3.2%",
+            "10": "16%",
+            "15": "23.5%",
+            "stat": "Counter DMG"
+          },
+          {
+            "modifier": "Big",
+            "1": "",
+            "10": "",
+            "15": "",
+            "stat": "Counter DMG"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big"],
+        "stats": ["Counter DMG"]
+      }
+    ]
+  },
+  {
+    "name": "Convergence",
+    "description": "When at least 4 weapons of the same weapon group are equipped: Boost to [element] allies' ATK, DEF, and DMG cap",
+    "notes": [
+      "When 4 or more weapons of the same weapon group are equipped (e.g., Swords, Axes, Spears, etc.), grant all [element] allies the following effects:\n40% ATKMultiplier: EX Up\n25% DEF Up\n7% Special DMG Cap Up",
+      "40% ATKMultiplier: EX Up",
+      "25% DEF Up",
+      "7% Special DMG Cap Up",
+      "Weapons of any element are applicable.",
+      "Special damage cap stacks up to 20% when equipping multiple copies."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Craft",
+    "description": "Supplement [element] allies' critical hit DMG",
+    "notes": [
+      "Supplemental damage for [element] allies' critical hits is equal to 1% of a foe's max HP (Damage cap: 20,000):\n caps at 100,000 and shares its cap with Hollowsky Weapons, Fortitude, Frailty, Pact, and Persistence.\nAffected by Seraphic boost where applicable.",
+      "caps at 100,000 and shares its cap with Hollowsky Weapons, Fortitude, Frailty, Pact, and Persistence.",
+      "Affected by Seraphic boost where applicable.",
+      "Craft's effect only appears in the Estimated Damage window when the MC has 100% critical hit rate."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Crux",
+    "description": "[Size] supplemental boost to [element] allies' C.A. DMG",
+    "notes": [
+      "+5000 boost to supplemental C.A. DMG per skill level.",
+      "Supplemental boost to C.A. DMG weapon skills stack additively up to a combined cap of 1,000,000.\nSee Shared Caps for more stacking information.",
+      "See Shared Caps for more stacking information.",
+      "Supplemental damage for Elemental allies' charge attacks.\nStrength is 5% of a foe's max HP (Damage cap: 400,000).\nDamage cap stacks up to 1,000,000 when equipping multiple copies.\nDamage and cap are unaffected by skill lvl and summon aura.\nDamage and cap are affected by Seraphic boost where applicable.",
+      "Strength is 5% of a foe's max HP (Damage cap: 400,000).\nDamage cap stacks up to 1,000,000 when equipping multiple copies.\nDamage and cap are unaffected by skill lvl and summon aura.\nDamage and cap are affected by Seraphic boost where applicable.",
+      "Damage cap stacks up to 1,000,000 when equipping multiple copies.",
+      "Damage and cap are unaffected by skill lvl and summon aura.",
+      "Damage and cap are affected by Seraphic boost where applicable."
+    ],
+    "tables": [
+      {
+        "title": "Boostable Crux",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "modifier": "Big",
+            "1": "35,000",
+            "10": "80,000",
+            "15": "105,000",
+            "stat": "C.A. Supp."
+          }
+        ],
+        "modifiers": ["Big"],
+        "stats": ["C.A. Supp."]
+      }
+    ]
+  },
+  {
+    "name": "Deathstrike",
+    "description": "[Size] Bonus [element] DMG effect to [element] allies",
+    "notes": [
+      "Boost stacks up to 50% when equipping multiple copies.",
+      "Deathstrike's stacking property is Passive A-side and does not stack with other Passive A-side effects. Only the highest strength takes effect."
+    ],
+    "tables": [
+      {
+        "title": "Normal",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "1.0%",
+            "10": "2.35%",
+            "15": "3.0%",
+            "modifier": "Medium",
+            "stat": "Bonus DMG"
+          },
+          {
+            "1": "1.25%",
+            "10": "3.5%",
+            "15": "4.5%",
+            "modifier": "Big",
+            "stat": "Bonus DMG"
+          }
+        ],
+        "modifiers": ["Medium", "Big"],
+        "stats": ["Bonus DMG"]
+      }
+    ]
+  },
+  {
+    "name": "Demolishment",
+    "description": "[Size] amplifying boost to [element] allies' normal attack DMG",
+    "notes": ["Boost stacks up to 30% when equipping multiple copies."],
+    "tables": [
+      {
+        "title": "Normal",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "1.6%",
+            "10": "2.5%",
+            "15": "3.0%",
+            "modifier": "Big",
+            "stat": "N.A. Amplify"
+          }
+        ],
+        "modifiers": ["Big"],
+        "stats": ["N.A. Amplify"]
+      }
+    ]
+  },
+  {
+    "name": "Devastation",
+    "description": "[Size] boost to [element] allies' triple attack rate",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "0.4%",
+            "10": "1.75%",
+            "15": "2.5%",
+            "modifier": "Small",
+            "stat": "TA Rate"
+          }
+        ],
+        "modifiers": ["Small"],
+        "stats": ["TA Rate"]
+      }
+    ]
+  },
+  {
+    "name": "Dual-Edge",
+    "description": "[Size] boost to [element] allies' double attack rate",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Normal",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "0.4%",
+            "10": "2.2%",
+            "15": "3.5%",
+            "20": "",
+            "modifier": "Small",
+            "stat": "DA Rate"
+          },
+          {
+            "1": "0.8%",
+            "10": "3.5%",
+            "15": "5.0%",
+            "20": "6.0%",
+            "modifier": "Medium",
+            "stat": "DA Rate"
+          },
+          {
+            "1": "1.2%",
+            "10": "5.0%",
+            "15": "7.0%",
+            "20": "",
+            "modifier": "Big",
+            "stat": "DA Rate"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big"],
+        "stats": ["DA Rate"]
+      }
+    ]
+  },
+  {
+    "name": "Encouragement",
+    "description": "[Size] boost to [element] allies' max HP and triple attack rate",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "17.0%",
+            "modifier": "Medium",
+            "stat": "HP"
+          },
+          {
+            "1": "0.8%",
+            "10": "2.15%",
+            "15": "2.9%",
+            "modifier": "Medium",
+            "stat": "TA Rate"
+          }
+        ],
+        "modifiers": ["Medium"],
+        "stats": ["HP", "TA Rate"]
+      }
+    ]
+  },
+  {
+    "name": "Enforcement",
+    "description": "Boost to [element] allies' ATK and DEF (Activates when either [element] Omega or [element] Optimus weapon skills have a boost of 280% or above)",
+    "notes": [
+      "When either [element] Omega or [element] Optimus weapon skills have a boost of 280% or above, grants the following effects:\n20% ATKMultiplier: EX Up\n15% DEF Up",
+      "20% ATK Multiplier: EX Up",
+      "15% DEF Up",
+      "Boost is not affected by skill lvl or auras."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Enmity",
+    "description": "[Size] boost to [element] allies' ATK based on how low HP is",
+    "notes": [
+      "Boosts ATK in proportion to the percentage of the ally's missing HP."
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icon", "Skill Level", "1", "10", "15", "20", "25"],
+        "rows": [
+          {
+            "1": "0.66%",
+            "10": "0.5%",
+            "15": "6.0%",
+            "20": "7.0%",
+            "25": "7.5%",
+            "modifier": "Small ",
+            "stat": "ATK"
+          },
+          {
+            "1": "0.66%",
+            "10": "8.0%",
+            "15": "10.0%",
+            "modifier": "Medium",
+            "stat": "ATK"
+          },
+          {
+            "1": "0.83%",
+            "10": "10.0%",
+            "15": "12.5%",
+            "20": "13.5%",
+            "25": "14.5%",
+            "modifier": "Big",
+            "stat": "ATK"
+          },
+          {
+            "15": "18.75%",
+            "modifier": "Massive",
+            "stat": "ATK"
+          }
+        ],
+        "modifiers": ["Small ", "Medium", "Big", "Massive"],
+        "stats": []
+      },
+      {
+        "title": "Normal & Omega",
+        "headers": [
+          "HP",
+          "Small SL10",
+          "Small SL15",
+          "Small SL20",
+          "Medium SL10",
+          "Medium SL15",
+          "Big SL10",
+          "Big SL15",
+          "Big SL20",
+          "Big SL25",
+          "Massive SL15"
+        ],
+        "rows": [
+          {
+            "HP": "100%",
+            "Small SL10": "0%",
+            "Small SL15": "0%",
+            "Small SL20": "0%",
+            "Medium SL10": "0%",
+            "Medium SL15": "0%",
+            "Big SL10": "0%",
+            "Big SL15": "0%",
+            "Big SL20": "0%",
+            "Big SL25": "0%",
+            "Massive SL15": "0%"
+          },
+          {
+            "HP": "95%",
+            "Small SL10": "0.33%",
+            "Small SL15": "0.39%",
+            "Small SL20": "0.41%",
+            "Medium SL10": "0.44%",
+            "Medium SL15": "0.55%",
+            "Big SL10": "0.55%",
+            "Big SL15": "0.69%",
+            "Big SL20": "0.74%",
+            "Big SL25": "0.8%",
+            "Massive SL15": "1.03%"
+          },
+          {
+            "HP": "90%",
+            "Small SL10": "0.72%",
+            "Small SL15": "0.84%",
+            "Small SL20": "0.9%",
+            "Medium SL10": "0.96%",
+            "Medium SL15": "1.2%",
+            "Big SL10": "1.2%",
+            "Big SL15": "1.5%",
+            "Big SL20": "1.62%",
+            "Big SL25": "1.74%",
+            "Massive SL15": "2.25%"
+          },
+          {
+            "HP": "85%",
+            "Small SL10": "1.17%",
+            "Small SL15": "1.37%",
+            "Small SL20": "1.46%",
+            "Medium SL10": "1.56%",
+            "Medium SL15": "1.95%",
+            "Big SL10": "1.95%",
+            "Big SL15": "2.44%",
+            "Big SL20": "2.63%",
+            "Big SL25": "2.83%",
+            "Massive SL15": "3.66%"
+          },
+          {
+            "HP": "80%",
+            "Small SL10": "1.68%",
+            "Small SL15": "1.96%",
+            "Small SL20": "2.1%",
+            "Medium SL10": "2.24%",
+            "Medium SL15": "2.8%",
+            "Big SL10": "2.8%",
+            "Big SL15": "3.5%",
+            "Big SL20": "3.78%",
+            "Big SL25": "4.06%",
+            "Massive SL15": "5.25%"
+          },
+          {
+            "HP": "75%",
+            "Small SL10": "2.25%",
+            "Small SL15": "2.63%",
+            "Small SL20": "2.81%",
+            "Medium SL10": "3%",
+            "Medium SL15": "3.75%",
+            "Big SL10": "3.75%",
+            "Big SL15": "4.69%",
+            "Big SL20": "5.06%",
+            "Big SL25": "5.44%",
+            "Massive SL15": "7.03%"
+          },
+          {
+            "HP": "70%",
+            "Small SL10": "2.88%",
+            "Small SL15": "3.36%",
+            "Small SL20": "3.6%",
+            "Medium SL10": "3.84%",
+            "Medium SL15": "4.8%",
+            "Big SL10": "4.8%",
+            "Big SL15": "6%",
+            "Big SL20": "6.48%",
+            "Big SL25": "6.96%",
+            "Massive SL15": "9%"
+          },
+          {
+            "HP": "65%",
+            "Small SL10": "3.57%",
+            "Small SL15": "4.17%",
+            "Small SL20": "4.46%",
+            "Medium SL10": "4.76%",
+            "Medium SL15": "5.95%",
+            "Big SL10": "5.95%",
+            "Big SL15": "7.44%",
+            "Big SL20": "8.03%",
+            "Big SL25": "8.63%",
+            "Massive SL15": "11.16%"
+          },
+          {
+            "HP": "60%",
+            "Small SL10": "4.32%",
+            "Small SL15": "5.04%",
+            "Small SL20": "5.4%",
+            "Medium SL10": "5.76%",
+            "Medium SL15": "7.2%",
+            "Big SL10": "7.2%",
+            "Big SL15": "9%",
+            "Big SL20": "9.72%",
+            "Big SL25": "10.44%",
+            "Massive SL15": "13.5%"
+          },
+          {
+            "HP": "55%",
+            "Small SL10": "5.13%",
+            "Small SL15": "5.99%",
+            "Small SL20": "6.41%",
+            "Medium SL10": "6.84%",
+            "Medium SL15": "8.55%",
+            "Big SL10": "8.55%",
+            "Big SL15": "10.69%",
+            "Big SL20": "11.54%",
+            "Big SL25": "12.4%",
+            "Massive SL15": "16.03%"
+          },
+          {
+            "HP": "50%",
+            "Small SL10": "6%",
+            "Small SL15": "7%",
+            "Small SL20": "7.5%",
+            "Medium SL10": "8%",
+            "Medium SL15": "10%",
+            "Big SL10": "10%",
+            "Big SL15": "12.5%",
+            "Big SL20": "13.5%",
+            "Big SL25": "14.5%",
+            "Massive SL15": "18.75%"
+          },
+          {
+            "HP": "45%",
+            "Small SL10": "6.93%",
+            "Small SL15": "8.09%",
+            "Small SL20": "8.66%",
+            "Medium SL10": "9.24%",
+            "Medium SL15": "11.55%",
+            "Big SL10": "11.55%",
+            "Big SL15": "14.44%",
+            "Big SL20": "15.59%",
+            "Big SL25": "16.75%",
+            "Massive SL15": "21.66%"
+          },
+          {
+            "HP": "40%",
+            "Small SL10": "7.92%",
+            "Small SL15": "9.24%",
+            "Small SL20": "9.9%",
+            "Medium SL10": "10.56%",
+            "Medium SL15": "13.2%",
+            "Big SL10": "13.2%",
+            "Big SL15": "16.5%",
+            "Big SL20": "17.82%",
+            "Big SL25": "19.14%",
+            "Massive SL15": "24.75%"
+          },
+          {
+            "HP": "35%",
+            "Small SL10": "8.97%",
+            "Small SL15": "10.47%",
+            "Small SL20": "11.21%",
+            "Medium SL10": "11.96%",
+            "Medium SL15": "14.95%",
+            "Big SL10": "14.95%",
+            "Big SL15": "18.69%",
+            "Big SL20": "20.18%",
+            "Big SL25": "21.68%",
+            "Massive SL15": "28.03%"
+          },
+          {
+            "HP": "30%",
+            "Small SL10": "10.08%",
+            "Small SL15": "11.76%",
+            "Small SL20": "12.6%",
+            "Medium SL10": "13.44%",
+            "Medium SL15": "16.8%",
+            "Big SL10": "16.8%",
+            "Big SL15": "21%",
+            "Big SL20": "22.68%",
+            "Big SL25": "24.36%",
+            "Massive SL15": "31.5%"
+          },
+          {
+            "HP": "25%",
+            "Small SL10": "11.25%",
+            "Small SL15": "13.13%",
+            "Small SL20": "14.06%",
+            "Medium SL10": "15%",
+            "Medium SL15": "18.75%",
+            "Big SL10": "18.75%",
+            "Big SL15": "23.44%",
+            "Big SL20": "25.31%",
+            "Big SL25": "27.19%",
+            "Massive SL15": "35.16%"
+          },
+          {
+            "HP": "20%",
+            "Small SL10": "12.48%",
+            "Small SL15": "14.56%",
+            "Small SL20": "15.6%",
+            "Medium SL10": "16.64%",
+            "Medium SL15": "20.8%",
+            "Big SL10": "20.8%",
+            "Big SL15": "26%",
+            "Big SL20": "28.08%",
+            "Big SL25": "30.16%",
+            "Massive SL15": "39%"
+          },
+          {
+            "HP": "15%",
+            "Small SL10": "13.77%",
+            "Small SL15": "16.07%",
+            "Small SL20": "17.22%",
+            "Medium SL10": "18.37%",
+            "Medium SL15": "22.96%",
+            "Big SL10": "22.96%",
+            "Big SL15": "28.7%",
+            "Big SL20": "30.99%",
+            "Big SL25": "33.28%",
+            "Massive SL15": "43.05%"
+          },
+          {
+            "HP": "10%",
+            "Small SL10": "15.12%",
+            "Small SL15": "17.64%",
+            "Small SL20": "18.9%",
+            "Medium SL10": "20.16%",
+            "Medium SL15": "25.2%",
+            "Big SL10": "25.2%",
+            "Big SL15": "31.5%",
+            "Big SL20": "34.02%",
+            "Big SL25": "36.54%",
+            "Massive SL15": "47.25%"
+          },
+          {
+            "HP": "5%",
+            "Small SL10": "16.53%",
+            "Small SL15": "19.29%",
+            "Small SL20": "20.67%",
+            "Medium SL10": "22.05%",
+            "Medium SL15": "27.56%",
+            "Big SL10": "27.56%",
+            "Big SL15": "34.45%",
+            "Big SL20": "37.21%",
+            "Big SL25": "39.97%",
+            "Massive SL15": "51.68%"
+          },
+          {
+            "HP": "1HP",
+            "Small SL10": "18%",
+            "Small SL15": "21%",
+            "Small SL20": "22.5%",
+            "Medium SL10": "24%",
+            "Medium SL15": "30%",
+            "Big SL10": "30%",
+            "Big SL15": "37.5%",
+            "Big SL20": "40.5%",
+            "Big SL25": "43.5%",
+            "Massive SL15": "56.25%"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big", "Massive"],
+        "stats": ["ATK"]
+      }
+    ]
+  },
+  {
+    "name": "Essence",
+    "description": "[Size] boost to [element] primal allies' ATK",
+    "notes": [
+      "The Main Character is also affected by Essence weapon skills.",
+      "Does not affect Other race characters other than the Main Character."
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.5%",
+            "modifier": "Medium",
+            "stat": "Primal ATK"
+          }
+        ],
+        "modifiers": ["Medium"],
+        "stats": ["Primal ATK"]
+      }
+    ]
+  },
+  {
+    "name": "Excelsior",
+    "description": "Boost to [element] allies' C.A. DMG cap",
+    "notes": [],
+    "tables": [
+      {
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "5.5%",
+            "10": "10%",
+            "15": "15%",
+            "modifier": "",
+            "stat": "C.A. DMG Cap"
+          }
+        ],
+        "modifiers": [""],
+        "stats": ["C.A. DMG Cap"]
+      }
+    ]
+  },
+  {
+    "name": "Exertion",
+    "description": "Boost to [element] allies' multiattack rate based on how high their HP is",
+    "notes": [
+      "Boost to double attack rate and triple attack rate of [element] allies by 20%-5% based on ally's current HP.\nMultiattack rate formula: 15% × (Current HP / Maximum HP) + 5%",
+      "Multiattack rate formula: 15% × (Current HP / Maximum HP) + 5%"
+    ],
+    "tables": [
+      {
+        "headers": ["HP", "MA Up"],
+        "rows": [
+          {
+            "HP": "100%",
+            "MA Up": "20%"
+          },
+          {
+            "HP": "80%",
+            "MA Up": "17%"
+          },
+          {
+            "HP": "60%",
+            "MA Up": "14%"
+          },
+          {
+            "HP": "40%",
+            "MA Up": "11%"
+          },
+          {
+            "HP": "20%",
+            "MA Up": "8%"
+          },
+          {
+            "HP": "1%",
+            "MA Up": "5%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fandango",
+    "description": "[Size] boost to [element] allies' ATK / [Size] boost to triple attack rate",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "1.0%",
+            "10": "10.0%",
+            "15": "12.0%",
+            "20": "",
+            "modifier": "Small",
+            "stat": "ATK"
+          },
+          {
+            "1": "0.18%",
+            "10": "1.35%",
+            "15": "2.0%",
+            "20": "",
+            "modifier": "Small",
+            "stat": "Triple Attack"
+          },
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.5%",
+            "20": "16.0%",
+            "modifier": "Medium",
+            "stat": "ATK"
+          },
+          {
+            "1": "0.8%",
+            "10": "2.15%",
+            "15": "2.9%",
+            "20": "3.65%",
+            "modifier": "Medium",
+            "stat": "Triple Attack"
+          },
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "18.0%",
+            "20": "",
+            "modifier": "Big",
+            "stat": "ATK"
+          },
+          {
+            "1": "1.2%",
+            "10": "3.45%",
+            "15": "4.2%",
+            "20": "",
+            "modifier": "Big",
+            "stat": "Triple Attack"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big"],
+        "stats": ["ATK", "Triple Attack"]
+      }
+    ]
+  },
+  {
+    "name": "Fortified",
+    "description": "Boost to DEF based on how many [weapon group] are equipped",
+    "notes": [
+      "4% boost to DEF (Max: 20% per copy) for all allies per [weapon group] in the grid.\n[weapon group] weapons of any element contribute to the boost.\nAffects allies of any element.",
+      "[weapon group] weapons of any element contribute to the boost.",
+      "Affects allies of any element."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Fortitude",
+    "description": "Supplement [element] allies' DMG based on how low HP is",
+    "notes": [
+      "Supplemental damage for [element] allies.\nStrength is 1% of a foe's max HP.\nDamage cap varies from 10,000 - 60,000 based on ally's current HP percentage.\nDamage cap stacks up to 100,000 when equipping multiple copies.\nSupplemental Damage Cap Formula: 50,000 × ((Maximum HP - Current HP) / Maximum HP) + 10,000",
+      "Strength is 1% of a foe's max HP.",
+      "Damage cap varies from 10,000 - 60,000 based on ally's current HP percentage.",
+      "Damage cap stacks up to 100,000 when equipping multiple copies.",
+      "Supplemental Damage Cap Formula: 50,000 × ((Maximum HP - Current HP) / Maximum HP) + 10,000"
+    ],
+    "tables": []
+  },
+  {
+    "name": "Frailty",
+    "description": "Supplement DMG to [element] allies against foes with 5 or more debuffs",
+    "notes": [
+      "Supplemental damage for [element] allies against foes with 5 or more debuffs (Damage cap: 20,000).\nDamage cap stacks up to 100,000 when equipping multiple copies.\nDamage and cap is affected by Seraphic boost where applicable.\nShares the same cap with other weapon skills that raise , such as (but not limited to) Fortitude, Pact, Persistence, etc.",
+      "Damage cap stacks up to 100,000 when equipping multiple copies.",
+      "Damage and cap is affected by Seraphic boost where applicable.",
+      "Shares the same cap with other weapon skills that raise , such as (but not limited to) Fortitude, Pact, Persistence, etc."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Garrison",
+    "description": "[Size] boost to [element] allies' DEF based on how low HP is",
+    "notes": [
+      "See Damage Formula for how DEF influences DMG received.",
+      "Total DEF boosts cap at 400%."
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "0.5",
+            "10": "6.0",
+            "15": "7.0",
+            "20": "",
+            "modifier": "Small",
+            "stat": "Garrison Modifier"
+          },
+          {
+            "1": "1.0",
+            "10": "8.0",
+            "15": "10.0",
+            "20": "11.0",
+            "modifier": "Medium",
+            "stat": "Garrison Modifier"
+          },
+          {
+            "1": "3.0",
+            "10": "10.0",
+            "15": "12.5",
+            "20": "13.5",
+            "modifier": "Big",
+            "stat": "Garrison Modifier"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big"],
+        "stats": ["Garrison Modifier"]
+      },
+      {
+        "title": "Garrison DEF Boost based on HP",
+        "headers": [
+          "HP",
+          "Small SL10",
+          "Small SL15",
+          "Medium SL10",
+          "Medium SL15",
+          "Medium SL20",
+          "Big SL10",
+          "Big SL15",
+          "Big SL20"
+        ],
+        "rows": [
+          {
+            "HP": "100%",
+            "Small SL10": "0%",
+            "Small SL15": "0%",
+            "Medium SL10": "0%",
+            "Medium SL15": "0%",
+            "Medium SL20": "0%",
+            "Big SL10": "0%",
+            "Big SL15": "0%",
+            "Big SL20": "0%"
+          },
+          {
+            "HP": "95%",
+            "Small SL10": "1.2%",
+            "Small SL15": "1.4%",
+            "Medium SL10": "1.6%",
+            "Medium SL15": "2%",
+            "Medium SL20": "2.2%",
+            "Big SL10": "2%",
+            "Big SL15": "2.5%",
+            "Big SL20": "2.7%"
+          },
+          {
+            "HP": "90%",
+            "Small SL10": "2.39%",
+            "Small SL15": "2.79%",
+            "Medium SL10": "3.19%",
+            "Medium SL15": "3.99%",
+            "Medium SL20": "4.39%",
+            "Big SL10": "3.99%",
+            "Big SL15": "4.99%",
+            "Big SL20": "5.39%"
+          },
+          {
+            "HP": "85%",
+            "Small SL10": "3.58%",
+            "Small SL15": "4.18%",
+            "Medium SL10": "4.77%",
+            "Medium SL15": "5.97%",
+            "Medium SL20": "6.56%",
+            "Big SL10": "5.97%",
+            "Big SL15": "7.46%",
+            "Big SL20": "8.05%"
+          },
+          {
+            "HP": "80%",
+            "Small SL10": "4.75%",
+            "Small SL15": "5.54%",
+            "Medium SL10": "6.34%",
+            "Medium SL15": "7.92%",
+            "Medium SL20": "8.71%",
+            "Big SL10": "7.92%",
+            "Big SL15": "9.9%",
+            "Big SL20": "10.69%"
+          },
+          {
+            "HP": "75%",
+            "Small SL10": "5.91%",
+            "Small SL15": "6.89%",
+            "Medium SL10": "7.88%",
+            "Medium SL15": "9.84%",
+            "Medium SL20": "10.83%",
+            "Big SL10": "9.84%",
+            "Big SL15": "12.3%",
+            "Big SL20": "13.29%"
+          },
+          {
+            "HP": "70%",
+            "Small SL10": "7.04%",
+            "Small SL15": "8.21%",
+            "Medium SL10": "9.38%",
+            "Medium SL15": "11.73%",
+            "Medium SL20": "12.9%",
+            "Big SL10": "11.73%",
+            "Big SL15": "14.66%",
+            "Big SL20": "15.84%"
+          },
+          {
+            "HP": "65%",
+            "Small SL10": "8.14%",
+            "Small SL15": "9.5%",
+            "Medium SL10": "10.86%",
+            "Medium SL15": "13.57%",
+            "Medium SL20": "14.93%",
+            "Big SL10": "13.57%",
+            "Big SL15": "16.96%",
+            "Big SL20": "18.32%"
+          },
+          {
+            "HP": "60%",
+            "Small SL10": "9.22%",
+            "Small SL15": "10.75%",
+            "Medium SL10": "12.29%",
+            "Medium SL15": "15.36%",
+            "Medium SL20": "16.9%",
+            "Big SL10": "15.36%",
+            "Big SL15": "19.2%",
+            "Big SL20": "20.74%"
+          },
+          {
+            "HP": "55%",
+            "Small SL10": "10.25%",
+            "Small SL15": "11.96%",
+            "Medium SL10": "13.67%",
+            "Medium SL15": "17.09%",
+            "Medium SL20": "18.8%",
+            "Big SL10": "17.09%",
+            "Big SL15": "21.36%",
+            "Big SL20": "23.07%"
+          },
+          {
+            "HP": "50%",
+            "Small SL10": "11.25%",
+            "Small SL15": "13.13%",
+            "Medium SL10": "15%",
+            "Medium SL15": "18.75%",
+            "Medium SL20": "20.63%",
+            "Big SL10": "18.75%",
+            "Big SL15": "23.44%",
+            "Big SL20": "25.31%"
+          },
+          {
+            "HP": "45%",
+            "Small SL10": "12.2%",
+            "Small SL15": "14.24%",
+            "Medium SL10": "16.27%",
+            "Medium SL15": "20.34%",
+            "Medium SL20": "22.37%",
+            "Big SL10": "20.34%",
+            "Big SL15": "25.42%",
+            "Big SL20": "27.45%"
+          },
+          {
+            "HP": "40%",
+            "Small SL10": "13.1%",
+            "Small SL15": "15.29%",
+            "Medium SL10": "17.47%",
+            "Medium SL15": "21.84%",
+            "Medium SL20": "24.02%",
+            "Big SL10": "21.84%",
+            "Big SL15": "27.3%",
+            "Big SL20": "29.48%"
+          },
+          {
+            "HP": "35%",
+            "Small SL10": "13.95%",
+            "Small SL15": "16.28%",
+            "Medium SL10": "18.6%",
+            "Medium SL15": "23.25%",
+            "Medium SL20": "25.58%",
+            "Big SL10": "23.25%",
+            "Big SL15": "29.07%",
+            "Big SL20": "31.39%"
+          },
+          {
+            "HP": "30%",
+            "Small SL10": "14.74%",
+            "Small SL15": "17.2%",
+            "Medium SL10": "19.66%",
+            "Medium SL15": "24.57%",
+            "Medium SL20": "27.03%",
+            "Big SL10": "24.57%",
+            "Big SL15": "30.71%",
+            "Big SL20": "33.17%"
+          },
+          {
+            "HP": "25%",
+            "Small SL10": "15.47%",
+            "Small SL15": "18.05%",
+            "Medium SL10": "20.63%",
+            "Medium SL15": "25.78%",
+            "Medium SL20": "28.36%",
+            "Big SL10": "25.78%",
+            "Big SL15": "32.23%",
+            "Big SL20": "34.8%"
+          },
+          {
+            "HP": "20%",
+            "Small SL10": "16.13%",
+            "Small SL15": "18.82%",
+            "Medium SL10": "21.5%",
+            "Medium SL15": "26.88%",
+            "Medium SL20": "29.57%",
+            "Big SL10": "26.88%",
+            "Big SL15": "33.6%",
+            "Big SL20": "36.29%"
+          },
+          {
+            "HP": "15%",
+            "Small SL10": "16.72%",
+            "Small SL15": "19.5%",
+            "Medium SL10": "22.29%",
+            "Medium SL15": "27.86%",
+            "Medium SL20": "30.64%",
+            "Big SL10": "27.86%",
+            "Big SL15": "34.82%",
+            "Big SL20": "37.61%"
+          },
+          {
+            "HP": "10%",
+            "Small SL10": "17.23%",
+            "Small SL15": "20.1%",
+            "Medium SL10": "22.97%",
+            "Medium SL15": "28.71%",
+            "Medium SL20": "31.58%",
+            "Big SL10": "28.71%",
+            "Big SL15": "35.89%",
+            "Big SL20": "38.76%"
+          },
+          {
+            "HP": "5%",
+            "Small SL10": "17.66%",
+            "Small SL15": "20.6%",
+            "Medium SL10": "23.54%",
+            "Medium SL15": "29.43%",
+            "Medium SL20": "32.37%",
+            "Big SL10": "29.43%",
+            "Big SL15": "36.78%",
+            "Big SL20": "39.73%"
+          },
+          {
+            "HP": "1HP",
+            "Small SL10": "18%",
+            "Small SL15": "21%",
+            "Small SL20": "22.5%",
+            "Medium SL10": "24%",
+            "Medium SL15": "30%",
+            "Big SL10": "30%",
+            "Big SL15": "37.5%",
+            "Big SL20": "40.5%",
+            "Big SL25": "43.5%",
+            "Massive SL15": "56.25%"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big"],
+        "stats": ["DEF"]
+      }
+    ]
+  },
+  {
+    "name": "Glory",
+    "description": "[Size] boost to [element] allies' C.A. specs and chain burst specs",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20", "25"],
+        "rows": [
+          {
+            "1": "2.5%",
+            "10": "7.0%",
+            "15": "9.5%",
+            "20": "",
+            "25": "",
+            "modifier": "Medium",
+            "stat": "C.A. DMG"
+          },
+          {
+            "1": "0.8%",
+            "10": "3.5%",
+            "15": "5.0%",
+            "20": "",
+            "25": "",
+            "modifier": "Medium",
+            "stat": "C.A. DMG Cap"
+          },
+          {
+            "1": "1.8%",
+            "10": "9.0%",
+            "15": "11.0%",
+            "20": "",
+            "25": "",
+            "modifier": "Medium",
+            "stat": "C.B. DMG"
+          },
+          {
+            "1": "0.8%",
+            "10": "3.5%",
+            "15": "5.0%",
+            "20": "",
+            "25": "",
+            "modifier": "Medium",
+            "stat": "C.B. DMG Cap"
+          },
+          {
+            "1": "5.5%",
+            "10": "10.0%",
+            "15": "12.5%",
+            "20": "14.5%",
+            "25": "16.5%",
+            "modifier": "Big",
+            "stat": "C.A. DMG"
+          },
+          {
+            "1": "1.2%",
+            "10": "4.8%",
+            "15": "6.8%",
+            "20": "7.8%",
+            "25": "8.8%",
+            "modifier": "Big",
+            "stat": "C.A. DMG Cap"
+          },
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.5%",
+            "20": "16.5%",
+            "25": "18.5%",
+            "modifier": "Big",
+            "stat": "C.B. DMG"
+          },
+          {
+            "1": "1.2%",
+            "10": "4.8%",
+            "15": "6.8%",
+            "20": "7.8%",
+            "25": "8.8%",
+            "modifier": "Big",
+            "stat": "C.B. DMG Cap"
+          }
+        ],
+        "modifiers": ["Medium", "Big"],
+        "stats": ["C.A. DMG", "C.A. DMG Cap", "C.B. DMG", "C.B. DMG Cap"]
+      }
+    ]
+  },
+  {
+    "name": "Grace",
+    "description": "[Size] boost to [element] allies' max HP and debuff resistance",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "1.2%",
+            "10": "3.0%",
+            "15": "4.0%",
+            "modifier": "Small",
+            "stat": "Debuff Resist"
+          },
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.0%",
+            "modifier": "Small",
+            "stat": "HP"
+          },
+          {
+            "1": "2.3%",
+            "10": "5.0%",
+            "15": "6.5%",
+            "modifier": "Medium",
+            "stat": "Debuff Resist"
+          },
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "17.0%",
+            "modifier": "Medium",
+            "stat": "HP"
+          }
+        ],
+        "modifiers": ["Small", "Medium"],
+        "stats": ["Debuff Resist", "HP"]
+      }
+    ]
+  },
+  {
+    "name": "Grand Epic",
+    "description": "Boost to ATK based on how many Epic weapons are equipped",
+    "notes": [
+      "4% boost to ATK (Max: 80%)Multiplier: EX for all allies per Epic weapon in the grid.\nMultiple copies of this skill stack additively up to a maximum of 80%.\nVoltage, Wrath, and Grand Epic weapon skills all share the same cap.\nEpic weapons of any element contribute to the boost.\nAffects allies of any element.",
+      "Multiple copies of this skill stack additively up to a maximum of 80%.\nVoltage, Wrath, and Grand Epic weapon skills all share the same cap.",
+      "Voltage, Wrath, and Grand Epic weapon skills all share the same cap.",
+      "Epic weapons of any element contribute to the boost.",
+      "Affects allies of any element."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Haunt",
+    "description": "[Size] boost to [element] allies' ATK / 10% hit to double attack rate",
+    "notes": [
+      "The 10% hit to double attack rate is unaffected by skill level and auras."
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.5%",
+            "modifier": "Medium",
+            "stat": "ATK"
+          }
+        ],
+        "modifiers": ["Medium"],
+        "stats": ["ATK"]
+      }
+    ]
+  },
+  {
+    "name": "Healing",
+    "description": "[Size] boost to [element] allies' healing cap",
+    "notes": [
+      "Boosts the maximum amount that is healed by the receiver.",
+      "Heal Cap is additive across all weapon skills and caps at 100%.",
+      "This does not directly boost the amount healed. Therefore, it has no effect on fixed healing effects or effects that don't hit their normal healing cap."
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "1.0%",
+            "10": "5.0%",
+            "15": "7.5%",
+            "20": "",
+            "modifier": "Small",
+            "stat": "ATK"
+          },
+          {
+            "1": "3.0%",
+            "10": "7.5%",
+            "15": "10.0%",
+            "20": "",
+            "modifier": "Medium",
+            "stat": "ATK"
+          },
+          {
+            "1": "5.0%",
+            "10": "10.0%",
+            "15": "15.0%",
+            "20": "17.5%",
+            "modifier": "Big",
+            "stat": "ATK"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big"],
+        "stats": ["ATK"]
+      }
+    ]
+  },
+  {
+    "name": "Heed",
+    "description": "[Size] boost to [element] allies' double attack rate / [SizeSlight] chance to dodge and counter ([Size] DMG)",
+    "notes": [],
+    "tables": []
+  },
+  {
+    "name": "Heroism",
+    "description": "[Size] boost to [element] allies' max HP and double attack rate",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "0.8%",
+            "10": "3.5%",
+            "15": "5.0%",
+            "modifier": "Medium",
+            "stat": "DA Rate"
+          },
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.0%",
+            "modifier": "Medium",
+            "stat": "HP"
+          }
+        ],
+        "modifiers": ["Medium"],
+        "stats": ["DA Rate", "HP"]
+      }
+    ]
+  },
+  {
+    "name": "Impalement",
+    "description": "[Element] allies ignore a [Size] percentage of foes' DEF / Small boost to ATK",
+    "notes": [
+      "DEF Ignore does not contribute to the 50% DEF Down cap. For example, against a foe with 10 DEF and 2% DEF Ignore:\nNo DEF debuff: 10 * 0.98 = 9.8\n25% DEF Down: 10 * 0.98 * 0.75 = 7.35\n50% DEF Down: 10 * 0.98 * 0.50 = 4.9",
+      "No DEF debuff: 10 * 0.98 = 9.8",
+      "25% DEF Down: 10 * 0.98 * 0.75 = 7.35",
+      "50% DEF Down: 10 * 0.98 * 0.50 = 4.9"
+    ],
+    "tables": [
+      {
+        "title": "Normal",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "0.4%",
+            "10": "1.75%",
+            "15": "2.0%",
+            "modifier": "Big",
+            "stat": "DEF Ignore"
+          },
+          {
+            "1": "1.0%",
+            "10": "10.0%",
+            "15": "12.0%",
+            "modifier": "Big",
+            "stat": "ATK"
+          }
+        ],
+        "modifiers": ["Big"],
+        "stats": ["DEF Ignore", "ATK"]
+      }
+    ]
+  },
+  {
+    "name": "Initiation",
+    "description": "Supplement [element] allies' C.A. DMG based on how low their HP is",
+    "notes": [
+      "Supplemental damage for [element] allies' charge attacks.\nStrength is 5% of a foe's max HP.\nDamage cap varies from 100,000 - 600,000 based on ally's current HP percentage.\nSupplemental Damage Cap Formula: 500,000 × ((Maximum HP - Current HP) / Maximum HP) + 100,000\nDamage cap stacks up to 1,000,000 when equipping multiple copies.\nDamage and cap is affected by Seraphic boost where applicable.",
+      "Strength is 5% of a foe's max HP.",
+      "Damage cap varies from 100,000 - 600,000 based on ally's current HP percentage.",
+      "Supplemental Damage Cap Formula: 500,000 × ((Maximum HP - Current HP) / Maximum HP) + 100,000\nDamage cap stacks up to 1,000,000 when equipping multiple copies.\nDamage and cap is affected by Seraphic boost where applicable.",
+      "Damage cap stacks up to 1,000,000 when equipping multiple copies.",
+      "Damage and cap is affected by Seraphic boost where applicable."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Insignia",
+    "description": "[Size] boost to [element] allies' ATK / Take DMG every turn",
+    "notes": [
+      "Turn-based damage from multiple Insignia skills stack additively and is not affected by auras.",
+      "Turn-based damage dealt by Insignia skills:\nConsumes one stack of Mirror ImageNext one-to-one attack received will be ineffective(Effect removed on next all-foe all-ally attack) instead of dealing damage\nWill only consume one stack regardless of the amount of Insignia skills used\nGets absorbed by ShieldNext ATK received will be ineffective for a fixed amount\nDoes not consume UnchallengedNext DMG received will be ineffective\nWakes up any ally with SleepCan't attack and takes big DMG (Ends upon taking DMG)Takes 25% more damage\nIs unaffected by Death's GraceConverts turn-based debuff DMG to HP recovery (Poison, Burn, Putrefy, etc.)",
+      "Consumes one stack of Mirror ImageNext one-to-one attack received will be ineffective(Effect removed on next all-foe all-ally attack) instead of dealing damage\nWill only consume one stack regardless of the amount of Insignia skills used",
+      "Will only consume one stack regardless of the amount of Insignia skills used",
+      "Gets absorbed by ShieldNext ATK received will be ineffective for a fixed amount",
+      "Does not consume UnchallengedNext DMG received will be ineffective",
+      "Wakes up any ally with SleepCan't attack and takes big DMG (Ends upon taking DMG)Takes 25% more damage",
+      "Is unaffected by Death's GraceConverts turn-based debuff DMG to HP recovery (Poison, Burn, Putrefy, etc.)"
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "18.0%",
+            "modifier": "Big",
+            "stat": "ATK"
+          }
+        ],
+        "modifiers": ["Big"],
+        "stats": ["ATK"]
+      }
+    ]
+  },
+  {
+    "name": "Majesty",
+    "description": "[Size] boost to [element] allies' ATK and max HP",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20", "25"],
+        "rows": [
+          {
+            "1": "1.0%",
+            "10": "10.0%",
+            "15": "12.0%",
+            "20": "12.5%",
+            "25": "",
+            "modifier": "Small",
+            "stat": "ATK and HP"
+          },
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.5%",
+            "20": "15.5%",
+            "25": "16.5%",
+            "modifier": "Medium",
+            "stat": "ATK and HP"
+          },
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "18.0%",
+            "20": "20.0%",
+            "25": "",
+            "modifier": "Big",
+            "stat": "ATK and HP"
+          },
+          {
+            "1": "",
+            "10": "",
+            "15": "",
+            "20": "22.0%",
+            "25": "",
+            "modifier": "Big II",
+            "stat": "ATK and HP"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big", "Big II"],
+        "stats": ["ATK and HP"]
+      }
+    ]
+  },
+  {
+    "name": "Marvel",
+    "description": "Supplement [element] allies' skill DMG based on how low their HP is",
+    "notes": [
+      "Supplemental damage for [element] allies' skill damage.\nDamage cap varies between 50,000-150,000 based on ally's current HP percentage.\nDamage cap stacks up to 200,000 when equipping multiple copies.\nSupplemental damage cap formula: 100,000 × ((Maximum HP - Current HP) / Maximum HP) + 50,000",
+      "Damage cap varies between 50,000-150,000 based on ally's current HP percentage.",
+      "Damage cap stacks up to 200,000 when equipping multiple copies.",
+      "Supplemental damage cap formula: 100,000 × ((Maximum HP - Current HP) / Maximum HP) + 50,000"
+    ],
+    "tables": []
+  },
+  {
+    "name": "Might",
+    "description": "[Size] boost to [element] allies' ATK",
+    "notes": [
+      "Different skill types (Normal, Omega, EX) are additive within their type, but multiplicative between types.See Damage Formula for details.",
+      "EX weapon skills from event rewards are unboostable, but their skill values are listed under the EX table."
+    ],
+    "tables": [
+      {
+        "title": "Normal",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "1.0%",
+            "10": "10.0%",
+            "15": "12.0%",
+            "20": "13.0%",
+            "modifier": "Small",
+            "stat": "ATK"
+          },
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.5%",
+            "20": "16.0%",
+            "modifier": "Medium",
+            "stat": "ATK"
+          },
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "18.0%",
+            "20": "20.0%",
+            "modifier": "Big",
+            "stat": "ATK"
+          },
+          {
+            "1": "7.0%",
+            "10": "16.0%",
+            "15": "20.0%",
+            "20": "22.0%",
+            "modifier": "Big II",
+            "stat": "ATK"
+          },
+          {
+            "1": "8.0%",
+            "10": "17.0%",
+            "15": "22.0%",
+            "20": "25.5%",
+            "modifier": "Massive",
+            "stat": "ATK"
+          },
+          {
+            "1": "16.0%",
+            "10": "25.0%",
+            "15": "33.0%",
+            "20": "",
+            "modifier": "Ancestral",
+            "stat": "ATK"
+          }
+        ],
+        "modifiers": [
+          "Small",
+          "Medium",
+          "Big",
+          "Big II",
+          "Massive",
+          "Ancestral"
+        ],
+        "stats": ["ATK"]
+      },
+      {
+        "title": "Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "1.0%",
+            "10": "10.0%",
+            "15": "12.5%",
+            "modifier": "Small",
+            "stat": "ATK"
+          },
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.5%",
+            "modifier": "Medium",
+            "stat": "ATK"
+          },
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "18.0%",
+            "modifier": "Big",
+            "stat": "ATK"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big"],
+        "stats": ["ATK"]
+      },
+      {
+        "title": "EX",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "1.0%",
+            "10": "10.0%",
+            "15": "12.0%",
+            "20": "",
+            "modifier": "Small",
+            "stat": "ATK"
+          },
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.5%",
+            "20": "",
+            "modifier": "Medium",
+            "stat": "ATK"
+          },
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "18.0%",
+            "20": "21.0%",
+            "modifier": "Big",
+            "stat": "ATK"
+          },
+          {
+            "1": "9.0%",
+            "10": "18.0%",
+            "15": "23.0%",
+            "20": "25.5%",
+            "modifier": "Massive",
+            "stat": "ATK"
+          },
+          {
+            "1": "16.0%",
+            "10": "25.0%",
+            "15": "33.0%",
+            "20": "37.0%",
+            "modifier": "Unworldly",
+            "stat": "ATK"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big", "Massive", "Unworldly"],
+        "stats": ["ATK"]
+      }
+    ]
+  },
+  {
+    "name": "Mystery",
+    "description": "[Size] boost to [element] allies' C.A. DMG",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Normal",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "0.5%",
+            "10": "5.0%",
+            "15": "7.5%",
+            "20": "",
+            "modifier": "Small",
+            "stat": "C.A. DMG"
+          },
+          {
+            "1": "2.5%",
+            "10": "7.0%",
+            "15": "9.5%",
+            "20": "",
+            "modifier": "Medium",
+            "stat": "C.A. DMG"
+          },
+          {
+            "1": "5.5%",
+            "10": "10.0%",
+            "15": "12.5%",
+            "20": "",
+            "modifier": "Big",
+            "stat": "C.A. DMG"
+          },
+          {
+            "1": "11.0%",
+            "10": "20.0%",
+            "15": "25.0%",
+            "20": "",
+            "modifier": "Massive",
+            "stat": "C.A. DMG"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big", "Massive"],
+        "stats": ["C.A. DMG"]
+      }
+    ]
+  },
+  {
+    "name": "Omega Exalto",
+    "description": "20% boost to [OmegaAura] weapon skills",
+    "notes": ["Caps at 100%."],
+    "tables": []
+  },
+  {
+    "name": "Optimus Exalto",
+    "description": "30% boost to [OptimusAura], [OptimusAura], and [OptimusAura] weapon skills",
+    "notes": ["Caps at 90%."],
+    "tables": []
+  },
+  {
+    "name": "Pact",
+    "description": "Supplement [element] allies' DMG",
+    "notes": [
+      "Supplemental damage for [element] allies' damage is equal to 1% of a foe's max HP (Damage cap: 50,000).\nSupplemental damage stacks up to 100,000 when equipping multiple copies.\nShares the same 100,000 supplemental damage cap as Hollowsky Weapons.\nAffected by damage amplification where applicable.",
+      "Supplemental damage stacks up to 100,000 when equipping multiple copies.",
+      "Shares the same 100,000 supplemental damage cap as Hollowsky Weapons.",
+      "Affected by damage amplification where applicable."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Persistence",
+    "description": "Supplement [element] allies' DMG based on how high their HP is",
+    "notes": [
+      "Supplemental damage for [element] allies.\nStrength is 1% of a foe's max HP.\nDamage cap varies from 10,000 - 30,000 based on ally's current HP percentage.\nDamage cap stacks up to 100,000 when equipping multiple copies.\nSupplemental Damage Cap Formula: 20,000 × (Current HP / Maximum HP) + 10,000",
+      "Strength is 1% of a foe's max HP.",
+      "Damage cap varies from 10,000 - 30,000 based on ally's current HP percentage.",
+      "Damage cap stacks up to 100,000 when equipping multiple copies.",
+      "Supplemental Damage Cap Formula: 20,000 × (Current HP / Maximum HP) + 10,000"
+    ],
+    "tables": []
+  },
+  {
+    "name": "Precocity",
+    "description": "[Size] boost to [element] allies' critical hit rate and healing cap",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "3.2%",
+            "10": "5.0%",
+            "15": "6.5%",
+            "modifier": "Medium",
+            "stat": "Critical"
+          },
+          {
+            "1": "3.0%",
+            "10": "7.5%",
+            "15": "10.0%",
+            "modifier": "Medium",
+            "stat": "Heal Cap"
+          },
+          {
+            "1": "4.4%",
+            "10": "8.0%",
+            "15": "10.0%",
+            "modifier": "Big",
+            "stat": "Critical"
+          },
+          {
+            "1": "5.0%",
+            "10": "10.0%",
+            "15": "15.0%",
+            "modifier": "Big",
+            "stat": "Heal Cap"
+          }
+        ],
+        "modifiers": ["Medium", "Big"],
+        "stats": ["Critical", "Heal Cap"]
+      }
+    ]
+  },
+  {
+    "name": "Preemptive Barrier",
+    "description": "All [element] allies gain Shield at start of battle",
+    "notes": [
+      "[Element] allies gain ShieldNext ATK received will be ineffective for a fixed amountStrength: 300 + 75 * (SL - 1)Duration: Indefinite at the start of battle equal to 300 + 75 * (Skill Level - 1).",
+      "Cannot be boosted by auras.",
+      "Multiple Barrier weapon skills do not stack. Only the highest value takes effect."
+    ],
+    "tables": [
+      {
+        "headers": ["Skill Level", "Shield"],
+        "rows": [
+          {
+            "Skill Level": "1",
+            "Shield": "300"
+          },
+          {
+            "Skill Level": "10",
+            "Shield": "900"
+          },
+          {
+            "Skill Level": "15",
+            "Shield": "1350"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Preemptive Blade",
+    "description": "Boost to [element] allies' ATK for first 8 turns of battle",
+    "notes": [
+      "[Element] allies gain ATK UpATK is boostedDuration: 8 turns for 8 turns at the start of battle.",
+      "Cannot be boosted by auras.",
+      "Multiple \"ATK Up for 8 turns\" weapon skills of the same multiplier do not stack; the highest value takes effect."
+    ],
+    "tables": [
+      {
+        "headers": ["Skill Level", "ATK Up"],
+        "rows": [
+          {
+            "Skill Level": "1",
+            "ATK Up": "5%"
+          },
+          {
+            "Skill Level": "10",
+            "ATK Up": "15%"
+          },
+          {
+            "Skill Level": "15",
+            "ATK Up": "20%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Preemptive Wall",
+    "description": "Boost to [element] allies' DEF for first 8 turns of battle",
+    "notes": [
+      "[Element] allies gain DEF UpDEF is boostedDuration: 8 turns for 8 turns at the start of battle.",
+      "Cannot be boosted by auras.",
+      "Multiple \"DEF Up for 8 turns\" weapon skills of the same multiplier do not stack. Only the highest value takes effect."
+    ],
+    "tables": [
+      {
+        "headers": ["Skill Level", "DEF Up"],
+        "rows": [
+          {
+            "Skill Level": "1",
+            "DEF Up": "10.0%"
+          },
+          {
+            "Skill Level": "10",
+            "DEF Up": "28.0%"
+          },
+          {
+            "Skill Level": "15",
+            "DEF Up": "33.0%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Primacy",
+    "description": "[Size]  boost to [element] allies' ATK / [Size]  boost to double attack rate for [element] allies",
+    "notes": [
+      "Primacy has identical skill level modifiers as Might and Trium."
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.5%",
+            "20": "16.0%",
+            "modifier": "Medium",
+            "stat": "ATK"
+          },
+          {
+            "1": "0.8%",
+            "10": "3.5%",
+            "15": "5.0%",
+            "20": "6.0%",
+            "modifier": "Medium",
+            "stat": "Double Attack"
+          },
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "18.0%",
+            "20": "",
+            "modifier": "Big",
+            "stat": "ATK"
+          },
+          {
+            "1": "1.2%",
+            "10": "5.0%",
+            "15": "7.0%",
+            "20": "",
+            "modifier": "Big",
+            "stat": "Double Attack"
+          },
+          {
+            "1": "7.0%",
+            "10": "16.0%",
+            "15": "20.0%",
+            "20": "",
+            "modifier": "Big II",
+            "stat": "ATK"
+          },
+          {
+            "1": "",
+            "10": "7.0%",
+            "15": "9.0%",
+            "20": "",
+            "modifier": "Big II",
+            "stat": "Double Attack"
+          }
+        ],
+        "modifiers": ["Medium", "Big", "Big II"],
+        "stats": ["ATK", "Double Attack"]
+      }
+    ]
+  },
+  {
+    "name": "Progression",
+    "description": "[Size] boost to [element] allies' [element] ATK based on number of turns passed",
+    "notes": [
+      "Boost to Elemental ATK by a given amount per turn. Each skill instance comes with its individual maximum amount.",
+      "Both Elemental ATK per turn and individual maximum are boosted by its respective element's Optimus/Omega aura.",
+      "Elemental ATK from Progression skills caps at 75% total.",
+      "When using multiple Progression skills, the 75% cap can be reached before each skill reaches its individual maximum.",
+      "Despite the similarities,  Draconic WeaponsDraconic Weapons: Draconic Harp Draconic Buster Draconic Bow Draconic Rod Draconic Blade Draconic Fire boost EX ATK and do not count towards the Progression skill cap.",
+      "Draconic Harp",
+      "Draconic Buster",
+      "Draconic Bow",
+      "Draconic Rod",
+      "Draconic Blade",
+      "Draconic Fire"
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": [
+          "Icons",
+          "Skill Level",
+          "1",
+          "10",
+          "15",
+          "20",
+          "25",
+          "Indiv. Maximum"
+        ],
+        "rows": [
+          {
+            "1": "0.43%",
+            "10": "0.70%",
+            "15": "0.80%",
+            "20": "1.00%",
+            "25": "",
+            "modifier": "Medium",
+            "Indiv. Maximum": "10%",
+            "stat": "Elemental ATK"
+          },
+          {
+            "1": "0.55%",
+            "10": "1.00%",
+            "15": "1.20%",
+            "20": "1.50%",
+            "25": "1.80%",
+            "modifier": "Big",
+            "Indiv. Maximum": "15%",
+            "stat": "Elemental ATK"
+          }
+        ],
+        "modifiers": ["Medium", "Big"],
+        "stats": ["Elemental ATK"]
+      }
+    ]
+  },
+  {
+    "name": "Prowess",
+    "description": "Supplement [element] allies' normal attack DMG",
+    "notes": [
+      "Supplemental damage for Elemental allies' normal attacks is equal to 1% of a foe's max HP (Damage cap: 50,000).\nN.A. Supp. stacks up to 100,000 when equipping multiple copies.\nN.A. Supp. is unaffected by damage amplification.",
+      "N.A. Supp. stacks up to 100,000 when equipping multiple copies.",
+      "N.A. Supp. is unaffected by damage amplification."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Quenching",
+    "description": "Supplement [element] allies' C.A. DMG based on how high their HP is",
+    "notes": [
+      "Supplemental damage for [element] allies' charge attacks.\nStrength is 5% of a foe's max HP.\nDamage cap varies from 100,000 - 600,000 based on ally's current HP percentage.\nSupplemental Damage Cap Formula: 500,000 × (Current HP / Maximum HP) + 100,000\nDamage cap stacks up to 1,000,000 when equipping multiple copies.\nDamage and cap is affected by Seraphic boost where applicable.",
+      "Strength is 5% of a foe's max HP.",
+      "Damage cap varies from 100,000 - 600,000 based on ally's current HP percentage.",
+      "Supplemental Damage Cap Formula: 500,000 × (Current HP / Maximum HP) + 100,000\nDamage cap stacks up to 1,000,000 when equipping multiple copies.\nDamage and cap is affected by Seraphic boost where applicable.",
+      "Damage cap stacks up to 1,000,000 when equipping multiple copies.",
+      "Damage and cap is affected by Seraphic boost where applicable."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Quintessence",
+    "description": "Boost to [element] allies' DMG cap",
+    "notes": [
+      "Boost to damage cap stacks additively with other sources up to a maximum of 20%."
+    ],
+    "tables": [
+      {
+        "headers": ["Skill Level", "DMG Cap"],
+        "rows": [
+          {
+            "Skill Level": "1",
+            "DMG Cap": "3.0%"
+          },
+          {
+            "Skill Level": "10",
+            "DMG Cap": "5.5%"
+          },
+          {
+            "Skill Level": "15",
+            "DMG Cap": "7.0%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Resolve",
+    "description": "[Size] boost to [element] allies' critical hit rate / Slight chance to dodge and counter ([Size] DMG)",
+    "notes": [
+      "Critical\nChance to deal an additional 50% damage to weak element foes and non-elemental foes.\nTotal critical chance percentage is additive across all weapon skills.\nAuras only boost critical chance. The critical damage modifier remains at 50% regardless of the aura.\nCritical chances from different sources (e.g. weapon skill, status buffs, and character support skill) activate independently.\nSee Critical hit rate for details.",
+      "Chance to deal an additional 50% damage to weak element foes and non-elemental foes.",
+      "Total critical chance percentage is additive across all weapon skills.",
+      "Auras only boost critical chance. The critical damage modifier remains at 50% regardless of the aura.",
+      "Critical chances from different sources (e.g. weapon skill, status buffs, and character support skill) activate independently.",
+      "See Critical hit rate for details.",
+      "Counters\nMultiple weapons stack additively for both dodge and damage.\n3% chance to dodge and counter whether it is small, medium, or big.\nSkill level does not raise the chance to dodge.\nChance to dodge caps at 20% total.",
+      "Auras do not boost the chance to dodge, but does boost the counterattack damage.\nThe following table only shows counterattack damage.",
+      "Multiple weapons stack additively for both dodge and damage.",
+      "3% chance to dodge and counter whether it is small, medium, or big.\nSkill level does not raise the chance to dodge.\nChance to dodge caps at 20% total.",
+      "Skill level does not raise the chance to dodge.",
+      "Chance to dodge caps at 20% total.",
+      "Auras do not boost the chance to dodge, but does boost the counterattack damage.\nThe following table only shows counterattack damage.",
+      "The following table only shows counterattack damage."
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icon", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "3.2%",
+            "10": "5.0%",
+            "15": "6.5%",
+            "modifier": "Medium",
+            "stat": "Critical"
+          },
+          {
+            "1": "3.2%",
+            "10": "16%",
+            "15": "23.5%",
+            "modifier": "Medium",
+            "stat": "Counter DMG"
+          }
+        ],
+        "modifiers": ["Medium"],
+        "stats": ["Critical", "Counter DMG"]
+      }
+    ]
+  },
+  {
+    "name": "Resonator",
+    "description": "When 3 or more of the same weapon are equipped: Boost to [element] allies' ATK, DEF, and DMG cap.",
+    "notes": [
+      "When 3 or more of the same weapon are equipped, grants Elemental allies the following effects.\n40% ATKMultiplier: EX Up\n25% DEF Up\n7% Special DMG Cap Up",
+      "40% ATKMultiplier: EX Up",
+      "25% DEF Up",
+      "7% Special DMG Cap Up",
+      "Special damage cap stacks up to 20% when equipping multiple copies.",
+      "To meet the requirement, 3 or more equipped weapons must have the same ID number."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Restraint",
+    "description": "[Size] boost to [element] allies' double attack rate and critical hit rate",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "0.4%",
+            "10": "2.2%",
+            "15": "3.5%",
+            "modifier": "Small",
+            "stat": "Double Attack"
+          },
+          {
+            "1": "1.1%",
+            "10": "2.0%",
+            "15": "3.0%",
+            "modifier": "Small",
+            "stat": "Critical"
+          },
+          {
+            "1": "0.8%",
+            "10": "3.5%",
+            "15": "5.0%",
+            "modifier": "Medium",
+            "stat": "Double Attack"
+          },
+          {
+            "1": "3.2%",
+            "10": "5.0%",
+            "15": "6.5%",
+            "modifier": "Medium",
+            "stat": "Critical"
+          }
+        ],
+        "modifiers": ["Small", "Medium"],
+        "stats": ["Double Attack", "Critical"]
+      }
+    ]
+  },
+  {
+    "name": "Sapience",
+    "description": "[Size] boost to [element] allies' triple attack rate and healing cap",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "0.8%",
+            "10": "2.15%",
+            "15": "2.9%",
+            "modifier": "Medium",
+            "stat": "Triple Attack"
+          },
+          {
+            "1": "3.0%",
+            "10": "7.5%",
+            "15": "10.0%",
+            "modifier": "Medium",
+            "stat": "Heal Cap"
+          }
+        ],
+        "modifiers": ["Medium"],
+        "stats": ["Triple Attack", "Heal Cap"]
+      }
+    ]
+  },
+  {
+    "name": "Sentence",
+    "description": "[Size] boost to [element] allies' C.A. DMG and C.A. DMG cap",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Normal",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "0.5%",
+            "10": "5.0%",
+            "15": "7.5%",
+            "20": "",
+            "modifier": "Small",
+            "stat": "C.A. DMG"
+          },
+          {
+            "1": "0.2%",
+            "10": "2.0%",
+            "15": "3.0%",
+            "20": "",
+            "modifier": "Small",
+            "stat": "C.A. DMG Cap"
+          },
+          {
+            "1": "2.5%",
+            "10": "7.0%",
+            "15": "9.5%",
+            "20": "",
+            "modifier": "Medium",
+            "stat": "C.A. DMG"
+          },
+          {
+            "1": "0.8%",
+            "10": "3.5%",
+            "15": "5.0%",
+            "20": "",
+            "modifier": "Medium",
+            "stat": "C.A. DMG Cap"
+          },
+          {
+            "1": "5.5%",
+            "10": "10.0%",
+            "15": "12.5%",
+            "20": "",
+            "modifier": "Big",
+            "stat": "C.A. DMG"
+          },
+          {
+            "1": "1.2%",
+            "10": "4.8%",
+            "15": "6.8%",
+            "20": "",
+            "modifier": "Big",
+            "stat": "C.A. DMG Cap"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big"],
+        "stats": ["C.A. DMG", "C.A. DMG Cap"]
+      },
+      {
+        "title": "Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "2.5%",
+            "10": "7.0%",
+            "15": "9.5%",
+            "20": "",
+            "modifier": "Medium",
+            "stat": "C.A. DMG"
+          },
+          {
+            "1": "2.5%",
+            "10": "7.0%",
+            "15": "9.5%",
+            "20": "",
+            "modifier": "Medium",
+            "stat": "C.A. DMG Cap"
+          }
+        ],
+        "modifiers": ["Medium"],
+        "stats": ["C.A. DMG", "C.A. DMG Cap"]
+      }
+    ]
+  },
+  {
+    "name": "Sephira Maxi",
+    "description": "Boost to [element] allies' DMG cap (DMG cap further boosted in Arcarum)",
+    "notes": [
+      "20% boost to damage cap to [element] allies when in Arcarum: The World Beyond and Replicard Sandbox.\nThis is a separate boost from  and .\nMultiple Sephira Maxi skills of the same element do not stack.",
+      "This is a separate boost from  and .",
+      "Multiple Sephira Maxi skills of the same element do not stack.",
+      "At level 200, [element] allies gain 5% damage cap up.\nThis boost to damage cap stacks additively with general damage cap weapon skill sources, such as  All-Might Battle-Axe,  Scales of Dominion,  Pain and Suffering, and  Cosmos Weapons Cosmic Sword Cosmic Dagger Cosmic Lance Cosmic Scythe Cosmic Rod Cosmic Rifle Cosmic Gauntlet Cosmic Bow Cosmic Harp Cosmic Blade, up to a maximum of 20%.\nStacks additively with damage cap boosts such as DMG Cap UpMaximum amount of DMG that can be dealt per hit is boosted, Extended Mastery Perks, character Support Skills, and most Archangel Series Summons's Sub Auras.",
+      "This boost to damage cap stacks additively with general damage cap weapon skill sources, such as  All-Might Battle-Axe,  Scales of Dominion,  Pain and Suffering, and  Cosmos Weapons Cosmic Sword Cosmic Dagger Cosmic Lance Cosmic Scythe Cosmic Rod Cosmic Rifle Cosmic Gauntlet Cosmic Bow Cosmic Harp Cosmic Blade, up to a maximum of 20%.",
+      "Cosmic Sword",
+      "Cosmic Dagger",
+      "Cosmic Lance",
+      "Cosmic Scythe",
+      "Cosmic Rod",
+      "Cosmic Rifle",
+      "Cosmic Gauntlet",
+      "Cosmic Bow",
+      "Cosmic Harp",
+      "Cosmic Blade",
+      "Stacks additively with damage cap boosts such as DMG Cap UpMaximum amount of DMG that can be dealt per hit is boosted, Extended Mastery Perks, character Support Skills, and most Archangel Series Summons's Sub Auras."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Sephira Soul",
+    "description": "Big boost to [element] allies' max HP in Arcarum",
+    "notes": [
+      "Only active when in Arcarum: The World Beyond and Replicard Sandbox."
+    ],
+    "tables": [
+      {
+        "title": "Sephira",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "",
+            "10": "15.0%",
+            "15": "18.0%",
+            "modifier": "Big",
+            "stat": "HP"
+          }
+        ],
+        "modifiers": ["Big"],
+        "stats": ["HP"]
+      }
+    ]
+  },
+  {
+    "name": "Sephira Tek",
+    "description": "Massive boost to [element] allies' critical hit rate in Arcarum",
+    "notes": [
+      "Only active when in Arcarum: The World Beyond and Replicard Sandbox."
+    ],
+    "tables": [
+      {
+        "title": "Sephira",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "Damage Modifier"],
+        "rows": [
+          {
+            "1": "2.0%",
+            "10": "20.0%",
+            "15": "30.0%",
+            "modifier": "Massive",
+            "stat": "Critical",
+            "Damage Modifier": "50%"
+          }
+        ],
+        "modifiers": ["Massive"],
+        "stats": ["Critical"]
+      }
+    ]
+  },
+  {
+    "name": "Spearhead",
+    "description": "[Size] boost to [element] allies' triple attack rate and critical hit rate",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "0.18%",
+            "10": "1.35%",
+            "15": "2.0%",
+            "modifier": "Small",
+            "stat": "Triple Attack"
+          },
+          {
+            "1": "1.1%",
+            "10": "2.0%",
+            "15": "3.0%",
+            "modifier": "Small",
+            "stat": "Critical"
+          }
+        ],
+        "modifiers": ["Small"],
+        "stats": ["Triple Attack", "Critical"]
+      }
+    ]
+  },
+  {
+    "name": "Sovereign",
+    "description": "[Size] boost to [element] allies' ATK",
+    "notes": [],
+    "tables": [
+      {
+        "title": "EX",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "16.0%",
+            "10": "25.0%",
+            "15": "33.0%",
+            "20": "37.0%",
+            "modifier": "Unworldly",
+            "stat": "ATK"
+          }
+        ],
+        "modifiers": ["Unworldly"],
+        "stats": ["ATK"]
+      }
+    ]
+  },
+  {
+    "name": "Spectacle",
+    "description": "Supplement [element] allies' skill DMG",
+    "notes": [
+      "Supplemental damage for [element] allies' skill damage is equal to 1% of a foe's max HP (Damage cap: 100,000).\nSupplemental damage stacks up to 200,000 when equipping multiple copies.\nAffected by damage amplification where applicable.",
+      "Supplemental damage stacks up to 200,000 when equipping multiple copies.",
+      "Affected by damage amplification where applicable."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Stamina",
+    "description": "[Size] boost to [element] allies' ATK based on how high HP is",
+    "notes": [
+      "Stamina does not confer an ATK boost when HP is below 25%.",
+      "Formula for calculating Stamina:",
+      "For the SL15 Medium graph, refer to the image at the bottom of this link by Great Sundome.",
+      "For the SL15 Big graph, refer to the image at the bottom of this link by Hecate_Mk2."
+    ],
+    "tables": [
+      {
+        "title": "Normal",
+        "headers": ["Skill", "Coefficient"],
+        "rows": [
+          {
+            "modifier": "Small",
+            "Coefficient": "85.0"
+          },
+          {
+            "modifier": "Medium",
+            "Coefficient": "65.0"
+          },
+          {
+            "modifier": "Big",
+            "Coefficient": "56.4"
+          },
+          {
+            "modifier": "Big II",
+            "Coefficient": "53.7"
+          },
+          {
+            "modifier": "Ancestral",
+            "Coefficient": "50.4"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big", "Big II", "Ancestral"],
+        "stats": []
+      },
+      {
+        "title": "Omega",
+        "headers": ["Skill", "Coefficient"],
+        "rows": [
+          {
+            "modifier": "Medium",
+            "Coefficient": "60.4"
+          },
+          {
+            "modifier": "Big",
+            "Coefficient": "56.4"
+          }
+        ],
+        "modifiers": ["Medium", "Big"],
+        "stats": []
+      },
+      {
+        "title": "Stamina ATK Boost based on HP",
+        "headers": [
+          "HP",
+          "Normal Small SL10",
+          "Normal Small SL15",
+          "Normal Medium SL10",
+          "Normal Medium SL15",
+          "Normal Medium SL20",
+          "Normal Big SL10",
+          "Normal Big SL15",
+          "Normal Big SL20",
+          "Normal Big SL25",
+          "Normal Big II SL10",
+          "Normal Big II SL15",
+          "Omega Ancestral SL15",
+          "Omega Medium SL10",
+          "Omega Medium SL15",
+          "Omega Big SL15",
+          "Omega Big SL20"
+        ],
+        "rows": [
+          {
+            "HP": "100%",
+            "Normal Small SL10": "4.4%",
+            "Normal Small SL15": "5.59%",
+            "Normal Medium SL10": "7.76%",
+            "Normal Medium SL15": "9.56%",
+            "Normal Medium SL20": "10.5%",
+            "Normal Big SL10": "11.37%",
+            "Normal Big SL15": "15%",
+            "Normal Big SL20": "17%",
+            "Normal Big SL25": "19.03%",
+            "Normal Big II SL10": "13.13%",
+            "Normal Big II SL15": "17.79%",
+            "Omega Ancestral SL15": "22.42%",
+            "Omega Medium SL10": "9.39%",
+            "Omega Medium SL15": "11.98%",
+            "Omega Big SL15": "15%",
+            "Omega Big SL20": "17%"
+          },
+          {
+            "HP": "95%",
+            "Normal Small SL10": "4.18%",
+            "Normal Small SL15": "5.31%",
+            "Normal Medium SL10": "7.37%",
+            "Normal Medium SL15": "9.08%",
+            "Normal Medium SL20": "9.98%",
+            "Normal Big SL10": "10.8%",
+            "Normal Big SL15": "14.25%",
+            "Normal Big SL20": "16.15%",
+            "Normal Big SL25": "18.08%",
+            "Normal Big II SL10": "12.47%",
+            "Normal Big II SL15": "16.9%",
+            "Omega Ancestral SL15": "21.3%",
+            "Omega Medium SL10": "8.92%",
+            "Omega Medium SL15": "11.38%",
+            "Omega Big SL15": "14.25%",
+            "Omega Big SL20": "16.15%"
+          },
+          {
+            "HP": "90%",
+            "Normal Small SL10": "3.96%",
+            "Normal Small SL15": "5.03%",
+            "Normal Medium SL10": "6.98%",
+            "Normal Medium SL15": "8.6%",
+            "Normal Medium SL20": "9.46%",
+            "Normal Big SL10": "10.23%",
+            "Normal Big SL15": "13.5%",
+            "Normal Big SL20": "15.3%",
+            "Normal Big SL25": "17.13%",
+            "Normal Big II SL10": "11.81%",
+            "Normal Big II SL15": "16.01%",
+            "Omega Ancestral SL15": "20.18%",
+            "Omega Medium SL10": "8.45%",
+            "Omega Medium SL15": "10.78%",
+            "Omega Big SL15": "13.5%",
+            "Omega Big SL20": "15.3%"
+          },
+          {
+            "HP": "85%",
+            "Normal Small SL10": "3.74%",
+            "Normal Small SL15": "4.75%",
+            "Normal Medium SL10": "6.59%",
+            "Normal Medium SL15": "8.12%",
+            "Normal Medium SL20": "8.94%",
+            "Normal Big SL10": "9.66%",
+            "Normal Big SL15": "12.75%",
+            "Normal Big SL20": "14.45%",
+            "Normal Big SL25": "16.18%",
+            "Normal Big II SL10": "11.15%",
+            "Normal Big II SL15": "15.12%",
+            "Omega Ancestral SL15": "19.06%",
+            "Omega Medium SL10": "7.98%",
+            "Omega Medium SL15": "10.18%",
+            "Omega Big SL15": "12.75%",
+            "Omega Big SL20": "14.45%"
+          },
+          {
+            "HP": "80%",
+            "Normal Small SL10": "3.52%",
+            "Normal Small SL15": "4.47%",
+            "Normal Medium SL10": "6.2%",
+            "Normal Medium SL15": "7.64%",
+            "Normal Medium SL20": "8.42%",
+            "Normal Big SL10": "9.09%",
+            "Normal Big SL15": "12%",
+            "Normal Big SL20": "13.6%",
+            "Normal Big SL25": "15.23%",
+            "Normal Big II SL10": "10.49%",
+            "Normal Big II SL15": "14.23%",
+            "Omega Ancestral SL15": "17.94%",
+            "Omega Medium SL10": "7.51%",
+            "Omega Medium SL15": "9.58%",
+            "Omega Big SL15": "12%",
+            "Omega Big SL20": "13.6%"
+          },
+          {
+            "HP": "75%",
+            "Normal Small SL10": "3.3%",
+            "Normal Small SL15": "4.19%",
+            "Normal Medium SL10": "5.81%",
+            "Normal Medium SL15": "7.16%",
+            "Normal Medium SL20": "7.9%",
+            "Normal Big SL10": "8.52%",
+            "Normal Big SL15": "11.25%",
+            "Normal Big SL20": "12.75%",
+            "Normal Big SL25": "14.28%",
+            "Normal Big II SL10": "9.83%",
+            "Normal Big II SL15": "13.34%",
+            "Omega Ancestral SL15": "16.82%",
+            "Omega Medium SL10": "7.04%",
+            "Omega Medium SL15": "8.98%",
+            "Omega Big SL15": "11.25%",
+            "Omega Big SL20": "12.75%"
+          },
+          {
+            "HP": "70%",
+            "Normal Small SL10": "3.08%",
+            "Normal Small SL15": "3.91%",
+            "Normal Medium SL10": "5.42%",
+            "Normal Medium SL15": "6.68%",
+            "Normal Medium SL20": "7.38%",
+            "Normal Big SL10": "7.95%",
+            "Normal Big SL15": "10.5%",
+            "Normal Big SL20": "11.9%",
+            "Normal Big SL25": "13.33%",
+            "Normal Big II SL10": "9.17%",
+            "Normal Big II SL15": "12.45%",
+            "Omega Ancestral SL15": "15.7%",
+            "Omega Medium SL10": "6.57%",
+            "Omega Medium SL15": "8.38%",
+            "Omega Big SL15": "10.5%",
+            "Omega Big SL20": "11.9%"
+          },
+          {
+            "HP": "65%",
+            "Normal Small SL10": "2.86%",
+            "Normal Small SL15": "3.63%",
+            "Normal Medium SL10": "5.03%",
+            "Normal Medium SL15": "6.2%",
+            "Normal Medium SL20": "6.86%",
+            "Normal Big SL10": "7.38%",
+            "Normal Big SL15": "9.75%",
+            "Normal Big SL20": "11.05%",
+            "Normal Big SL25": "12.38%",
+            "Normal Big II SL10": "8.51%",
+            "Normal Big II SL15": "11.56%",
+            "Omega Ancestral SL15": "14.58%",
+            "Omega Medium SL10": "6.1%",
+            "Omega Medium SL15": "7.78%",
+            "Omega Big SL15": "9.75%",
+            "Omega Big SL20": "11.05%"
+          },
+          {
+            "HP": "60%",
+            "Normal Small SL10": "2.64%",
+            "Normal Small SL15": "3.35%",
+            "Normal Medium SL10": "4.64%",
+            "Normal Medium SL15": "5.72%",
+            "Normal Medium SL20": "6.34%",
+            "Normal Big SL10": "6.81%",
+            "Normal Big SL15": "9%",
+            "Normal Big SL20": "10.2%",
+            "Normal Big SL25": "11.43%",
+            "Normal Big II SL10": "7.85%",
+            "Normal Big II SL15": "10.67%",
+            "Omega Ancestral SL15": "13.46%",
+            "Omega Medium SL10": "5.63%",
+            "Omega Medium SL15": "7.18%",
+            "Omega Big SL15": "9%",
+            "Omega Big SL20": "10.2%"
+          },
+          {
+            "HP": "55%",
+            "Normal Small SL10": "2.42%",
+            "Normal Small SL15": "3.07%",
+            "Normal Medium SL10": "4.25%",
+            "Normal Medium SL15": "5.24%",
+            "Normal Medium SL20": "5.82%",
+            "Normal Big SL10": "6.24%",
+            "Normal Big SL15": "8.25%",
+            "Normal Big SL20": "9.35%",
+            "Normal Big SL25": "10.48%",
+            "Normal Big II SL10": "7.19%",
+            "Normal Big II SL15": "9.78%",
+            "Omega Ancestral SL15": "12.34%",
+            "Omega Medium SL10": "5.16%",
+            "Omega Medium SL15": "6.58%",
+            "Omega Big SL15": "8.25%",
+            "Omega Big SL20": "9.35%"
+          },
+          {
+            "HP": "50%",
+            "Normal Small SL10": "2.2%",
+            "Normal Small SL15": "2.79%",
+            "Normal Medium SL10": "3.86%",
+            "Normal Medium SL15": "4.76%",
+            "Normal Medium SL20": "5.3%",
+            "Normal Big SL10": "5.67%",
+            "Normal Big SL15": "7.5%",
+            "Normal Big SL20": "8.5%",
+            "Normal Big SL25": "9.53%",
+            "Normal Big II SL10": "6.53%",
+            "Normal Big II SL15": "8.89%",
+            "Omega Ancestral SL15": "11.22%",
+            "Omega Medium SL10": "4.69%",
+            "Omega Medium SL15": "5.98%",
+            "Omega Big SL15": "7.5%",
+            "Omega Big SL20": "8.5%"
+          },
+          {
+            "HP": "45%",
+            "Normal Small SL10": "1.98%",
+            "Normal Small SL15": "2.51%",
+            "Normal Medium SL10": "3.47%",
+            "Normal Medium SL15": "4.28%",
+            "Normal Medium SL20": "4.78%",
+            "Normal Big SL10": "5.1%",
+            "Normal Big SL15": "6.75%",
+            "Normal Big SL20": "7.65%",
+            "Normal Big SL25": "8.58%",
+            "Normal Big II SL10": "5.87%",
+            "Normal Big II SL15": "8%",
+            "Omega Ancestral SL15": "10.1%",
+            "Omega Medium SL10": "4.22%",
+            "Omega Medium SL15": "5.38%",
+            "Omega Big SL15": "6.75%",
+            "Omega Big SL20": "7.65%"
+          },
+          {
+            "HP": "40%",
+            "Normal Small SL10": "1.76%",
+            "Normal Small SL15": "2.23%",
+            "Normal Medium SL10": "3.08%",
+            "Normal Medium SL15": "3.8%",
+            "Normal Medium SL20": "4.26%",
+            "Normal Big SL10": "4.53%",
+            "Normal Big SL15": "6%",
+            "Normal Big SL20": "6.8%",
+            "Normal Big SL25": "7.63%",
+            "Normal Big II SL10": "5.21%",
+            "Normal Big II SL15": "7.11%",
+            "Omega Ancestral SL15": "8.98%",
+            "Omega Medium SL10": "3.75%",
+            "Omega Medium SL15": "4.78%",
+            "Omega Big SL15": "6%",
+            "Omega Big SL20": "6.8%"
+          },
+          {
+            "HP": "35%",
+            "Normal Small SL10": "1.54%",
+            "Normal Small SL15": "1.95%",
+            "Normal Medium SL10": "2.69%",
+            "Normal Medium SL15": "3.32%",
+            "Normal Medium SL20": "3.74%",
+            "Normal Big SL10": "3.96%",
+            "Normal Big SL15": "5.25%",
+            "Normal Big SL20": "5.95%",
+            "Normal Big SL25": "6.68%",
+            "Normal Big II SL10": "4.55%",
+            "Normal Big II SL15": "6.22%",
+            "Omega Ancestral SL15": "7.86%",
+            "Omega Medium SL10": "3.28%",
+            "Omega Medium SL15": "4.18%",
+            "Omega Big SL15": "5.25%",
+            "Omega Big SL20": "5.95%"
+          },
+          {
+            "HP": "30%",
+            "Normal Small SL10": "1.32%",
+            "Normal Small SL15": "1.67%",
+            "Normal Medium SL10": "2.3%",
+            "Normal Medium SL15": "2.84%",
+            "Normal Medium SL20": "3.22%",
+            "Normal Big SL10": "3.39%",
+            "Normal Big SL15": "4.5%",
+            "Normal Big SL20": "5.1%",
+            "Normal Big SL25": "5.73%",
+            "Normal Big II SL10": "3.89%",
+            "Normal Big II SL15": "5.34%",
+            "Omega Ancestral SL15": "6.74%",
+            "Omega Medium SL10": "2.81%",
+            "Omega Medium SL15": "3.58%",
+            "Omega Big SL15": "4.5%",
+            "Omega Big SL20": "5.1%"
+          },
+          {
+            "HP": "25%",
+            "Normal Small SL10": "1.1%",
+            "Normal Small SL15": "1.39%",
+            "Normal Medium SL10": "1.91%",
+            "Normal Medium SL15": "2.36%",
+            "Normal Medium SL20": "2.7%",
+            "Normal Big SL10": "2.82%",
+            "Normal Big SL15": "3.75%",
+            "Normal Big SL20": "4.25%",
+            "Normal Big SL25": "4.78%",
+            "Normal Big II SL10": "3.23%",
+            "Normal Big II SL15": "4.46%",
+            "Omega Ancestral SL15": "5.62%",
+            "Omega Medium SL10": "2.34%",
+            "Omega Medium SL15": "2.98%",
+            "Omega Big SL15": "3.75%",
+            "Omega Big SL20": "4.25%"
+          },
+          {
+            "HP": "<25%",
+            "Normal Small SL10": "0.00%",
+            "Normal Small SL15": "0.00%",
+            "Normal Medium SL10": "0.00%",
+            "Normal Medium SL15": "0.00%",
+            "Normal Medium SL20": "0.00%",
+            "Normal Big SL10": "0.00%",
+            "Normal Big SL15": "0.00%",
+            "Normal Big SL20": "0.00%",
+            "Normal Big SL25": "0.00%",
+            "Normal Big II SL10": "0.00%",
+            "Normal Big II SL15": "0.00%",
+            "Omega Ancestral SL15": "0.00%",
+            "Omega Medium SL10": "0.00%",
+            "Omega Medium SL15": "0.00%",
+            "Omega Big SL15": "0.00%",
+            "Omega Big SL20": "0.00%"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big", "Big II", "Ancestral"],
+        "stats": ["ATK"]
+      }
+    ]
+  },
+  {
+    "name": "Stratagem",
+    "description": "[Size] amplifying boost to [element] allies' critical hit DMG",
+    "notes": ["Boost stacks up to 20% when equipping multiple copies."],
+    "tables": [
+      {
+        "title": "Normal",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "modifier": "Medium"
+          },
+          {
+            "10": "0.5%",
+            "15": "1.4%",
+            "modifier": "Big",
+            "stat": "HP"
+          }
+        ],
+        "modifiers": ["Medium", "Big"],
+        "stats": []
+      },
+      {
+        "headers": ["Skill Level", "Critical Amplify"],
+        "rows": [
+          {
+            "Skill Level": "1",
+            "Critical Amplify": "0.5%"
+          },
+          {
+            "Skill Level": "10",
+            "Critical Amplify": "1.4%"
+          },
+          {
+            "Skill Level": "15",
+            "Critical Amplify": "1.8%"
+          }
+        ]
+      },
+      {
+        "title": "Normal",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "",
+            "10": "",
+            "15": "1.4%",
+            "modifier": "Medium",
+            "stat": "Critical Amplify"
+          },
+          {
+            "1": "0.5%",
+            "10": "1.4%",
+            "15": "1.8%",
+            "modifier": "Big",
+            "stat": "Critical Amplify"
+          }
+        ],
+        "modifiers": ["Medium", "Big"],
+        "stats": ["Critical Amplify"]
+      }
+    ]
+  },
+  {
+    "name": "Strike",
+    "description": "Boost to [element] allies' normal attack DMG cap",
+    "notes": [
+      "Boosts normal attack damage cap of [element] allies.\nCaps at 20%.",
+      "Caps at 20%."
+    ],
+    "tables": [
+      {
+        "headers": ["Skill Level", "N.A.DMG Cap"],
+        "rows": [
+          {
+            "Skill Level": "1",
+            "N.A.DMG Cap": "2.75%"
+          },
+          {
+            "Skill Level": "10",
+            "N.A.DMG Cap": "5.0%"
+          },
+          {
+            "Skill Level": "15",
+            "N.A.DMG Cap": "7.5%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Striking Art",
+    "description": "Boost to [element] allies' skill DMG cap and normal attack DMG cap",
+    "notes": [
+      "10% boost to [element] allies' skill damage cap",
+      "5% boost to [element] allies' normal attack damage cap"
+    ],
+    "tables": []
+  },
+  {
+    "name": "Supremacy",
+    "description": "Massive boost to [element] allies' ATK",
+    "notes": [],
+    "tables": [
+      {
+        "title": "EX",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "9.0%",
+            "10": "18.0%",
+            "15": "23.0%",
+            "20": "25.5%",
+            "modifier": "Massive",
+            "stat": "ATK"
+          }
+        ],
+        "modifiers": ["Massive"],
+        "stats": ["ATK"]
+      }
+    ]
+  },
+  {
+    "name": "Surge",
+    "description": "Boost to [element] allies' multiattack rate based on how low their HP is",
+    "notes": [
+      "Boost to double and triple attack rate of Elemental allies by 5%-35% based on ally's current HP.\nMultiattack rate formula: 30% × ((Maximum HP - Current HP) / Maximum HP) + 5%",
+      "Multiattack rate formula: 30% × ((Maximum HP - Current HP) / Maximum HP) + 5%"
+    ],
+    "tables": [
+      {
+        "headers": ["HP", "DA Rate", "TA Rate"],
+        "rows": [
+          {
+            "HP": "100%",
+            "DA Rate": "5%",
+            "TA Rate": "5%"
+          },
+          {
+            "HP": "80%",
+            "DA Rate": "11%",
+            "TA Rate": "11%"
+          },
+          {
+            "HP": "60%",
+            "DA Rate": "17%",
+            "TA Rate": "17%"
+          },
+          {
+            "HP": "40%",
+            "DA Rate": "23%",
+            "TA Rate": "23%"
+          },
+          {
+            "HP": "20%",
+            "DA Rate": "29%",
+            "TA Rate": "29%"
+          },
+          {
+            "HP": "1%",
+            "DA Rate": "35%",
+            "TA Rate": "35%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Swashbuckler",
+    "description": "Boost to [element] allies' skill DMG cap / Amplify skill DMG (Boost to specs when either [element] Omega or [element] Optimus weapon skills have a boost of 280% or above)",
+    "notes": [
+      "Boost to Swashbuckler's specs when either Elemental Omega or Elemental Optimus weapon skills have a boost of 280% or above.",
+      "Skill Cap (Sp.) caps at 60%.",
+      "Skill Amp. (Sp.) caps at 20%."
+    ],
+    "tables": [
+      {
+        "headers": ["Total Boost", "Skill Cap (Sp.)", "Skill Amp. (Sp.)"],
+        "rows": [
+          {
+            "Total Boost": "< 280% Boost",
+            "Skill Cap (Sp.)": "15%",
+            "Skill Amp. (Sp.)": "5%"
+          },
+          {
+            "Total Boost": "≥ 280% Boost",
+            "Skill Cap (Sp.)": "30%",
+            "Skill Amp. (Sp.)": "10%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sweep",
+    "description": "[Size] boost to staff-specialty [element] allies' ATK",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "18.0%",
+            "modifier": "Big",
+            "stat": "ATK"
+          }
+        ],
+        "modifiers": ["Big"],
+        "stats": ["ATK"]
+      }
+    ]
+  },
+  {
+    "name": "Tempering",
+    "description": "[Size] boost to [element] allies' skill DMG cap / [Size] supplemental boost to skill DMG",
+    "notes": [
+      "Stacks additively with other weapon skills that boost skill damage cap, up to a maximum of 100%.",
+      "The supplemental damage to skill damage deals 1% of foe's maximum HP as damage.\nSupplemental damage can be boosted by auras to a maximum of 200,000.",
+      "Supplemental damage can be boosted by auras to a maximum of 200,000."
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "0.7%",
+            "10": "2.5%",
+            "15": "3.5%",
+            "modifier": "Small",
+            "stat": "Skill DMG Cap"
+          },
+          {
+            "1": "5,500",
+            "10": "10,000",
+            "15": "12,500",
+            "modifier": "Small",
+            "stat": "Skill Supplemental DMG"
+          },
+          {
+            "1": "1.0%",
+            "10": "3.2%",
+            "15": "4.5%",
+            "modifier": "Medium",
+            "stat": "Skill DMG Cap"
+          },
+          {
+            "1": "9,600",
+            "10": "15,000",
+            "15": "18,000",
+            "modifier": "Medium",
+            "stat": "Skill Supplemental DMG"
+          },
+          {
+            "1": "1.3%",
+            "10": "4.0%",
+            "15": "5.5%",
+            "modifier": "Big",
+            "stat": "Skill DMG Cap"
+          },
+          {
+            "1": "11,000",
+            "10": "20,000",
+            "15": "25,000",
+            "modifier": "Big",
+            "stat": "Skill Supplemental DMG"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big"],
+        "stats": ["Skill DMG Cap", "Skill Supplemental DMG"]
+      }
+    ]
+  },
+  {
+    "name": "Trituration",
+    "description": "When main weapon or auxiliary weapon: Boost to [element] allies' ATK based on how many Militis weapons are equipped",
+    "notes": [
+      "23% boost to ATK (Max: 46% per copy)Multiplier: Omega for [element] allies per Militis weapon in the grid.\nThis effect can be boosted by auras.",
+      "This effect can be boosted by auras."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Trium",
+    "description": "[Size] boost to [element] allies' multiattack rate",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20", "25"],
+        "rows": [
+          {
+            "1": "0.25%",
+            "10": "2.5%",
+            "15": "3.5%",
+            "20": "",
+            "25": "",
+            "modifier": "Small",
+            "stat": "Double Attack and Triple Attack"
+          },
+          {
+            "1": "0.8%",
+            "10": "3.5%",
+            "15": "5.0%",
+            "20": "6.0%",
+            "25": "7.0%",
+            "modifier": "Medium",
+            "stat": "Double Attack and Triple Attack"
+          },
+          {
+            "1": "1.2%",
+            "10": "5.0%",
+            "15": "7.0%",
+            "20": "",
+            "25": "",
+            "modifier": "Big",
+            "stat": "Double Attack and Triple Attack"
+          },
+          {
+            "1": "",
+            "10": "7.0%",
+            "15": "9.0%",
+            "20": "",
+            "25": "",
+            "modifier": "Big II",
+            "stat": "Double Attack and Triple Attack"
+          },
+          {
+            "1": "2.8%",
+            "10": "10.0%",
+            "15": "14.0%",
+            "modifier": "Massive",
+            "stat": "ATK"
+          }
+        ],
+        "modifiers": ["Small", "Medium", "Big", "Big II", "Massive"],
+        "stats": []
+      }
+    ]
+  },
+  {
+    "name": "Truce",
+    "description": "[Size] boost to [element] allies' max HP / Slight chance to dodge and counter ([Size] DMG)",
+    "notes": [],
+    "tables": [
+      {
+        "title": "Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.0%",
+            "modifier": "Small",
+            "stat": "HP"
+          }
+        ],
+        "modifiers": ["Small"],
+        "stats": ["HP"]
+      }
+    ]
+  },
+  {
+    "name": "True Supremacy",
+    "description": "Massive boost to [element] allies' ATK / Small boost to max HP",
+    "notes": [],
+    "tables": [
+      {
+        "title": "EX",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "9.0%",
+            "10": "18.0%",
+            "15": "23.0%",
+            "20": "25.5%",
+            "modifier": "Massive",
+            "stat": "ATK"
+          },
+          {
+            "1": "3.0%",
+            "10": "12.0%",
+            "15": "14.5%",
+            "20": "16.0%",
+            "modifier": "Massive",
+            "stat": "HP"
+          }
+        ],
+        "modifiers": ["Massive"],
+        "stats": ["ATK", "HP"]
+      }
+    ]
+  },
+  {
+    "name": "Tyranny",
+    "description": "[Size] boost to [element] allies' ATK / 10% cut to [element] allies' max HP",
+    "notes": [
+      "10% cut to HP for each Tyranny weapon skill equipped.\nHP cut is additive between weapons and caps at 70%.",
+      "HP cut is additive between weapons and caps at 70%.",
+      "HP cut is static and unaffected by weapon skill level or auras."
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": ["Icons", "Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "18.0%",
+            "20": "",
+            "modifier": "Big",
+            "stat": "ATK"
+          },
+          {
+            "1": "9.0%",
+            "10": "18.0%",
+            "15": "23.0%",
+            "20": "25.5%",
+            "modifier": "Massive",
+            "stat": "ATK"
+          }
+        ],
+        "modifiers": ["Big", "Massive"],
+        "stats": ["ATK"]
+      }
+    ]
+  },
+  {
+    "name": "Valuables",
+    "description": "When 15 or more weapon skill types are active: Boost to [element] allies ATK, DEF, and DMG cap",
+    "notes": [
+      "When 15 or more weapon skill types are active, grants the following effects:\n40% ATKMultiplier: EX Up\n25% DEF Up\n7% Special DMG Cap Up",
+      "40% ATKMultiplier: EX Up",
+      "25% DEF Up",
+      "7% Special DMG Cap Up",
+      "Special damage cap stacks up to 20% when equipping multiple copies.",
+      "Boost is calculated for each party member individually.",
+      "The skill itself counts towards the 15 weapon skill type requirement, so only 14 additional weapon skill types are needed.\nOmega and Normal weapon skills count as the same weapon skill type so long as they are the same strength with the exception of Normal Big and Big II (e.g., Omega Big ATK and Normal Big II ATK are the same boost despite having different strength values).\nAX and stats from Weapon Awakening do not count as weapon skill types.",
+      "Omega and Normal weapon skills count as the same weapon skill type so long as they are the same strength with the exception of Normal Big and Big II (e.g., Omega Big ATK and Normal Big II ATK are the same boost despite having different strength values).",
+      "AX and stats from Weapon Awakening do not count as weapon skill types.",
+      "Current weapon skill types can be checked using the in-game \"Boosts\" icon on both MC and party members."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Verity",
+    "description": "[Size] boost to [element] allies' critical hit rate",
+    "notes": [
+      "Chance to deal an additional 50% damage to weak element foes and non-elemental foes.",
+      "Total critical chance percentage is additive across all weapon skills.",
+      "Auras only boost critical chance. The critical damage modifier remains at 50% regardless of auras.",
+      "Omega Verity II corresponds to Big while Normal Verity II corresponds to Big II.",
+      "Critical chances from different sources (e.g. weapon skill, status buffs, and character support skill) activate independently.",
+      "Damage modifiers from different sources of critical hit are additive (e.g., a critical hit each from a weapon skill, a 30% / 30% Critical Hit Rate UpAttacks made with elemental superiority have a chance to deal boosted DMGStrength: 30% chance of dealing 30% more damage. buff, and a 3-star Critical Hit Extended Mastery Perk will result in 50% + 30% + 25% = 105% critical damage.)",
+      "See Critical hit rate for details."
+    ],
+    "tables": [
+      {
+        "title": "Normal & Omega",
+        "headers": [
+          "Icons",
+          "Skill Level",
+          "1",
+          "10",
+          "15",
+          "20",
+          "Damage Modifier"
+        ],
+        "rows": [
+          {
+            "1": "1.1%",
+            "10": "2.0%",
+            "15": "3.0%",
+            "20": "4.0%",
+            "modifier": "Small",
+            "stat": "Critical",
+            "Damage Modifier": "50%"
+          },
+          {
+            "1": "3.2%",
+            "10": "5.0%",
+            "15": "6.5%",
+            "20": "7.5%",
+            "modifier": "Medium",
+            "stat": "Critical",
+            "Damage Modifier": "50%"
+          },
+          {
+            "1": "4.4%",
+            "10": "8.0%",
+            "15": "10.0%",
+            "20": "11.0%",
+            "modifier": "Big",
+            "stat": "Critical",
+            "Damage Modifier": "50%"
+          },
+          {
+            "1": "5.5%",
+            "10": "10.0%",
+            "15": "12.0%",
+            "20": "",
+            "modifier": "Big II",
+            "stat": "Critical",
+            "Damage Modifier": "50%"
+          },
+          {
+            "1": "7.9%",
+            "10": "16.0%",
+            "15": "20.0%",
+            "20": "",
+            "modifier": "Massive",
+            "stat": "Critical",
+            "Damage Modifier": "50%"
+          },
+          {
+            "1": "2.0%",
+            "10": "20.0%",
+            "15": "30.0%",
+            "20": "",
+            "modifier": "Massive (Sephira)",
+            "stat": "Critical",
+            "Damage Modifier": "50%"
+          }
+        ],
+        "modifiers": [
+          "Small",
+          "Medium",
+          "Big",
+          "Big II",
+          "Massive",
+          "Massive (Sephira)"
+        ],
+        "stats": ["Critical"]
+      }
+    ]
+  },
+  {
+    "name": "Verve",
+    "description": "[Size] boost to [element] allies' max HP / [Size] boost to ATK based on how high HP is",
+    "notes": [
+      "Verve does not confer an ATK boost when HP is below 25%.",
+      "Verve's ATK boost values are currently identical to Stamina."
+    ],
+    "tables": [
+      {
+        "title": "Normal",
+        "headers": ["Icons", "Skill Level", "1", "10", "15"],
+        "rows": [
+          {
+            "1": "6.0%",
+            "10": "15.0%",
+            "15": "17.0%",
+            "modifier": "Medium",
+            "stat": "HP"
+          },
+          {
+            "1": "",
+            "10": "",
+            "15": "",
+            "modifier": "Medium",
+            "stat": "Stamina"
+          }
+        ],
+        "modifiers": ["Medium"],
+        "stats": ["HP", "Stamina"]
+      },
+      {
+        "title": "Normal",
+        "headers": ["HP", "SL10", "SL15"],
+        "rows": [
+          {
+            "HP": "100%",
+            "SL10": "7.76%",
+            "SL15": "9.56%"
+          },
+          {
+            "HP": "95%",
+            "SL10": "6.98%",
+            "SL15": "8.53%"
+          },
+          {
+            "HP": "90%",
+            "SL10": "6.27%",
+            "SL15": "7.6%"
+          },
+          {
+            "HP": "85%",
+            "SL10": "5.63%",
+            "SL15": "6.76%"
+          },
+          {
+            "HP": "80%",
+            "SL10": "5.06%",
+            "SL15": "6.01%"
+          },
+          {
+            "HP": "75%",
+            "SL10": "4.56%",
+            "SL15": "5.34%"
+          },
+          {
+            "HP": "70%",
+            "SL10": "4.11%",
+            "SL15": "4.75%"
+          },
+          {
+            "HP": "65%",
+            "SL10": "3.72%",
+            "SL15": "4.24%"
+          },
+          {
+            "HP": "60%",
+            "SL10": "3.39%",
+            "SL15": "3.8%"
+          },
+          {
+            "HP": "55%",
+            "SL10": "3.1%",
+            "SL15": "3.42%"
+          },
+          {
+            "HP": "50%",
+            "SL10": "2.86%",
+            "SL15": "3.1%"
+          },
+          {
+            "HP": "45%",
+            "SL10": "2.66%",
+            "SL15": "2.84%"
+          },
+          {
+            "HP": "40%",
+            "SL10": "2.5%",
+            "SL15": "2.62%"
+          },
+          {
+            "HP": "35%",
+            "SL10": "2.37%",
+            "SL15": "2.46%"
+          },
+          {
+            "HP": "30%",
+            "SL10": "2.27%",
+            "SL15": "2.33%"
+          },
+          {
+            "HP": "25%",
+            "SL10": "2.2%",
+            "SL15": "2.23%"
+          },
+          {
+            "HP": "<25%",
+            "SL10": "0.00%",
+            "SL15": "0.00%"
+          }
+        ],
+        "modifiers": ["Medium"],
+        "stats": ["ATK"]
+      }
+    ]
+  },
+  {
+    "name": "Vitality",
+    "description": "Boost to [element] allies' ATK, DEF, and DMG cap based on their max HP",
+    "notes": [
+      "Boost to [element] allies' ATKMultiplier: EX, DEF, and special damage capStacking: Special DMG Cap based on their max HP at the start of battle.\nBoost is individually calculated based on each allies' max HP value.\nATKMultiplier: EX boost formula: Max HP x 0.045%\nATK boost caps at 40% per copy. Required max HP to cap: ~89,000.\nDEF boost formula: Max HP x 0.025%\nDEF boost caps at 25% per copy. Required max HP to cap: 100,000.\nDamage CapStacking: Special DMG Cap formula: Max HP x 0.01%\nSpecial damage cap boost caps at 7% per copy. Required max HP to cap: 70,000.\nSpecial damage cap stacks up to 20% when equipping multiple copies.",
+      "Boost is individually calculated based on each allies' max HP value.",
+      "ATKMultiplier: EX boost formula: Max HP x 0.045%\nATK boost caps at 40% per copy. Required max HP to cap: ~89,000.",
+      "ATK boost caps at 40% per copy. Required max HP to cap: ~89,000.",
+      "DEF boost formula: Max HP x 0.025%\nDEF boost caps at 25% per copy. Required max HP to cap: 100,000.",
+      "DEF boost caps at 25% per copy. Required max HP to cap: 100,000.",
+      "Damage CapStacking: Special DMG Cap formula: Max HP x 0.01%\nSpecial damage cap boost caps at 7% per copy. Required max HP to cap: 70,000.\nSpecial damage cap stacks up to 20% when equipping multiple copies.",
+      "Special damage cap boost caps at 7% per copy. Required max HP to cap: 70,000.",
+      "Special damage cap stacks up to 20% when equipping multiple copies.",
+      "Boosts are calculated for each party member individually.",
+      "Max HP Lowered (Stackable)Max HP is lowered (Stackable)At 100%, leaves 1 max HP does not affect this weapon skill. Only the character's max HP value at the start of battle is used to calculate boosts."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Vivification",
+    "description": "Boost to ATK and DMG cap based on how many weapons with [OmegaAura] weapon skills are equipped",
+    "notes": [
+      "2% boost to ATKMultiplier: EX, 1% boost to damage cap (Max: 20%) for all allies for each weapon with an [OmegaAura] weapon skill in the grid.\nAffects allies of any element.",
+      "Affects allies of any element."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Voltage",
+    "description": "Boost to ATK based on how many [weapon group] are equipped.",
+    "notes": [
+      "Boost to ATK (Max: 80%)Multiplier: EX for all allies per [weapon group] in the grid.\nMultiple copies of this skill stack additively up to a maximum of 80%.\nVoltage, Voltage II, Wrath, and Grand Epic weapon skills all share the same cap.\nweapons of any element contribute to the boost.\nAffects allies of any element.",
+      "Multiple copies of this skill stack additively up to a maximum of 80%.\nVoltage, Voltage II, Wrath, and Grand Epic weapon skills all share the same cap.",
+      "Voltage, Voltage II, Wrath, and Grand Epic weapon skills all share the same cap.",
+      "weapons of any element contribute to the boost.",
+      "Affects allies of any element."
+    ],
+    "tables": [
+      {
+        "headers": ["Skill", "ATK Up per Weapon", "Max ATK"],
+        "rows": [
+          {
+            "Skill": "Voltage",
+            "ATK Up per Weapon": "4%",
+            "Max ATK": "80%"
+          },
+          {
+            "Skill": "Voltage II",
+            "ATK Up per Weapon": "8%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Wrath",
+    "description": "Boost to ATK, max HP, and multiattack rate based on how many [weapon group] are equipped",
+    "notes": [
+      "2% boost to ATKMultiplier: EX, 1% boost to HP, and 1% boost to multiattack rate for all allies per [weapon group] in the grid.\nOnly up to 10 [weapon group] weapons are counted for this skill. Additional [weapon group] weapons will not increase the boost provided.\nMultiple copies of this skill stack additively up to a maximum of 80% boost to ATK.\nVoltage, Wrath, and Grand Epic weapon skills all share the same cap.\n[weapon group] weapons of any element contribute to the boost.\nAffects allies of any element.",
+      "Only up to 10 [weapon group] weapons are counted for this skill. Additional [weapon group] weapons will not increase the boost provided.",
+      "Multiple copies of this skill stack additively up to a maximum of 80% boost to ATK.\nVoltage, Wrath, and Grand Epic weapon skills all share the same cap.",
+      "Voltage, Wrath, and Grand Epic weapon skills all share the same cap.",
+      "[weapon group] weapons of any element contribute to the boost.",
+      "Affects allies of any element."
+    ],
+    "tables": []
+  },
+  {
+    "name": "Zenith Art",
+    "description": "Boost to [element] allies' skill DMG cap and C.A. DMG cap",
+    "notes": [
+      "10% boost to [element] allies' skill damage cap",
+      "10% boost to [element] allies' charge attack damage cap"
+    ],
+    "tables": []
+  },
+  {
+    "name": "Zenith Strike",
+    "description": "Boost to [element] allies' C.A. DMG cap and normal attack DMG cap",
+    "notes": [
+      "10% boost to [element] allies' charge attack damage cap",
+      "5% boost to [element] allies' normal attack damage cap."
+    ],
+    "tables": [
+      {
+        "headers": ["Skill Level", "1", "10", "15", "20"],
+        "rows": [
+          {
+            "Skill Level": "DMG Cap Up",
+            "1": "3.0%",
+            "10": "5.5%",
+            "15": "7%",
+            "20": "10%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "DMG Cap Up",
+    "description": "",
+    "notes": [],
+    "tables": []
+  },
+  {
+    "name": "C.A. DMG Up and C.A. DMG Cap Up",
+    "description": "",
+    "notes": [],
+    "tables": []
+  },
+  {
+    "name": "Lessen Elemental DMG",
+    "description": "",
+    "notes": [],
+    "tables": []
+  },
+  {
+    "name": "Lessen Weakness DMG",
+    "description": "",
+    "notes": [],
+    "tables": []
+  },
+  {
+    "name": "Honor Up",
+    "description": "",
+    "notes": [],
+    "tables": []
+  },
+  {
+    "name": "EXP Up",
+    "description": "",
+    "notes": [],
+    "tables": []
+  },
+  {
+    "name": "Item Drop Rate Up",
+    "description": "",
+    "notes": [],
+    "tables": []
+  },
+  {
+    "name": "Boosted Cut to Overdrive",
+    "description": "",
+    "notes": [],
+    "tables": []
+  },
+  {
+    "name": "Skill DMG Cap",
+    "description": "",
+    "notes": [],
+    "tables": []
+  },
+  {
+    "name": "Supplemental DMG",
+    "description": "",
+    "notes": [],
+    "tables": []
+  },
+  {
+    "name": "Supplemental C.A. DMG",
+    "description": "",
+    "notes": [],
+    "tables": []
+  },
+  {
+    "name": "Cosmic [Weapon Type]",
+    "description": "",
+    "notes": [],
+    "tables": []
+  },
+  {
+    "name": "Azure [Weapon Type]'s Discipline",
+    "description": "",
+    "notes": [],
+    "tables": []
+  }
+]
