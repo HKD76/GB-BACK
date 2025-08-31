@@ -259,12 +259,19 @@ router.get("/search", async (req, res) => {
 });
 
 /**
- * GET /api/weapons-enriched/:id - Récupérer une arme enrichie par ID
+ * GET /api/weapons-enriched/:id - Récupérer une arme individuelle avec skills enrichis
  */
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const enrichSkills = req.query.enrich !== "false";
+
+    if (!id) {
+      return res.status(400).json({
+        error: "ID manquant",
+        message: "L'ID de l'arme est obligatoire",
+      });
+    }
 
     const client = new MongoClient(mongoUrl);
     await client.connect();
@@ -272,35 +279,44 @@ router.get("/:id", async (req, res) => {
     const db = client.db(dbName);
     const collection = db.collection("weapons");
 
-    let weapon = await collection.findOne({ _id: id });
-
-    if (!weapon) {
-      weapon = await collection.findOne({ id: parseInt(id) });
-    }
-
-    if (!weapon) {
-      weapon = await collection.findOne({ id: id.toString() });
-    }
+    // Rechercher l'arme par ID (string ou number)
+    const weapon = await collection.findOne({
+      $or: [{ id: parseInt(id) }, { id: id.toString() }, { _id: id }],
+    });
 
     await client.close();
 
     if (!weapon) {
       return res.status(404).json({
         error: "Arme non trouvée",
-        message: "L'arme demandée n'existe pas",
+        message: `Aucune arme trouvée avec l'ID: ${id}`,
       });
     }
 
-    const enrichedWeapon = enrichSkills
-      ? await skillEnrichmentService.enrichWeaponFast(weapon, true)
-      : weapon;
+    let enrichedWeapon = weapon;
+
+    if (enrichSkills) {
+      try {
+        // Enrichir les skills de l'arme
+        const enrichedWeapons =
+          await skillEnrichmentService.enrichWeaponsListFast([weapon], true);
+        enrichedWeapon = enrichedWeapons[0] || weapon;
+      } catch (enrichmentError) {
+        console.error(
+          "Erreur lors de l'enrichissement des skills:",
+          enrichmentError
+        );
+        // Continuer avec l'arme non enrichie en cas d'erreur
+        enrichedWeapon = weapon;
+      }
+    }
 
     res.json({
       weapon: enrichedWeapon,
       enrichment: {
         enabled: enrichSkills,
         note: enrichSkills
-          ? "Skills enrichis avec calculs"
+          ? "Skills enrichis avec calculs détaillés"
           : "Skills non enrichis pour performance",
       },
     });
@@ -308,7 +324,8 @@ router.get("/:id", async (req, res) => {
     console.error("Erreur lors de la récupération de l'arme enrichie:", error);
     res.status(500).json({
       error: "Erreur serveur",
-      message: "Une erreur est survenue lors de la récupération de l'arme",
+      message:
+        "Une erreur est survenue lors de la récupération de l'arme enrichie",
     });
   }
 });
