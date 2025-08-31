@@ -259,61 +259,6 @@ router.get("/search", async (req, res) => {
 });
 
 /**
- * GET /api/weapons-enriched/:id - Récupérer une arme enrichie par ID
- */
-router.get("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const enrichSkills = req.query.enrich !== "false";
-
-    const client = new MongoClient(mongoUrl);
-    await client.connect();
-
-    const db = client.db(dbName);
-    const collection = db.collection("weapons");
-
-    let weapon = await collection.findOne({ _id: id });
-
-    if (!weapon) {
-      weapon = await collection.findOne({ id: parseInt(id) });
-    }
-
-    if (!weapon) {
-      weapon = await collection.findOne({ id: id.toString() });
-    }
-
-    await client.close();
-
-    if (!weapon) {
-      return res.status(404).json({
-        error: "Arme non trouvée",
-        message: "L'arme demandée n'existe pas",
-      });
-    }
-
-    const enrichedWeapon = enrichSkills
-      ? await skillEnrichmentService.enrichWeaponFast(weapon, true)
-      : weapon;
-
-    res.json({
-      weapon: enrichedWeapon,
-      enrichment: {
-        enabled: enrichSkills,
-        note: enrichSkills
-          ? "Skills enrichis avec calculs"
-          : "Skills non enrichis pour performance",
-      },
-    });
-  } catch (error) {
-    console.error("Erreur lors de la récupération de l'arme enrichie:", error);
-    res.status(500).json({
-      error: "Erreur serveur",
-      message: "Une erreur est survenue lors de la récupération de l'arme",
-    });
-  }
-});
-
-/**
  * GET /api/weapons-enriched/fast - Version rapide sans enrichissement
  */
 router.get("/fast", async (req, res) => {
@@ -470,6 +415,61 @@ router.get("/filter/fast", async (req, res) => {
     res.status(500).json({
       error: "Erreur serveur",
       message: "Une erreur est survenue lors du filtrage",
+    });
+  }
+});
+
+/**
+ * GET /api/weapons-enriched/:id - Récupérer une arme enrichie par ID
+ */
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const enrichSkills = req.query.enrich !== "false";
+
+    const client = new MongoClient(mongoUrl);
+    await client.connect();
+
+    const db = client.db(dbName);
+    const collection = db.collection("weapons");
+
+    let weapon = await collection.findOne({ _id: id });
+
+    if (!weapon) {
+      weapon = await collection.findOne({ id: parseInt(id) });
+    }
+
+    if (!weapon) {
+      weapon = await collection.findOne({ id: id.toString() });
+    }
+
+    await client.close();
+
+    if (!weapon) {
+      return res.status(404).json({
+        error: "Arme non trouvée",
+        message: "L'arme demandée n'existe pas",
+      });
+    }
+
+    const enrichedWeapon = enrichSkills
+      ? await skillEnrichmentService.enrichWeaponFast(weapon, true)
+      : weapon;
+
+    res.json({
+      weapon: enrichedWeapon,
+      enrichment: {
+        enabled: enrichSkills,
+        note: enrichSkills
+          ? "Skills enrichis avec calculs"
+          : "Skills non enrichis pour performance",
+      },
+    });
+  } catch (error) {
+    console.error("Erreur lors de la récupération de l'arme enrichie:", error);
+    res.status(500).json({
+      error: "Erreur serveur",
+      message: "Une erreur est survenue lors de la récupération de l'arme",
     });
   }
 });
