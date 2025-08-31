@@ -1,0 +1,40 @@
+name: Tests Unitaires
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Configuration Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: "npm"
+
+      - name: Installation des dépendances
+        run: npm ci
+
+      - name: Exécution des tests unitaires
+        run: npm run test:unit
+
+      - name: Exécution des tests d'intégration
+        run: npm run test:integration
+
+      - name: Exécution de tous les tests
+        run: npm test
+
+      - name: Notification de succès
+        if: success()
+        run: |
+          echo "🎉 Tous les tests ont réussi !"
+          echo "✅ Tests unitaires: PASS"
+          echo "✅ Tests d'intégration: PASS"

@@ -1,10 +1,10 @@
-# Dependencies
+# Dépendances
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Environment variables
+# Variables d'environnement
 .env
 .env.local
 .env.development.local
@@ -23,16 +23,40 @@ pids
 
 # Coverage directory used by tools like istanbul
 coverage/
+*.lcov
 
 # nyc test coverage
 .nyc_output
 
+# Grunt intermediate storage
+.grunt
+
+# Bower dependency directory
+bower_components
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons
+build/Release
+
 # Dependency directories
-node_modules/
 jspm_packages/
+
+# TypeScript v1 declaration files
+typings/
 
 # Optional npm cache directory
 .npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
 
 # Optional REPL history
 .node_repl_history
@@ -44,15 +68,50 @@ jspm_packages/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+.env.test
 
-# Vercel
-.vercel
+# parcel-bundler cache
+.cache
+.parcel-cache
 
-# IDE
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+public
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# Editor directories and files
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 
-# OS
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+
+# MongoDB data
+data/
+
+# Test files
+test-results/
+playwright-report/

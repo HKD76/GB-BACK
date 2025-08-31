@@ -1,168 +1,137 @@
-# GB Project API
+# GB Project - API de Gestion de Jeu
 
-API REST pour la gestion d'armes, compétences et invocations dans un jeu.
+API REST pour gérer des armes, compétences et invocations dans un jeu. Développée avec Node.js, Express et MongoDB.
 
-## 🚀 Déploiement sur Vercel
+## 🚀 Installation Rapide
 
 ### Prérequis
 
-- Compte GitHub
-- Compte Vercel
-- Base de données MongoDB (MongoDB Atlas recommandé)
+- Node.js 18+
+- MongoDB (local ou Atlas)
 
-### Étapes de déploiement
-
-1. **Préparer la base de données**
-
-   - Créer un cluster MongoDB Atlas
-   - Obtenir l'URI de connexion
-   - Configurer les variables d'environnement
-
-2. **Déployer sur Vercel**
-
-   ```bash
-   # Installer Vercel CLI
-   npm i -g vercel
-
-   # Se connecter à Vercel
-   vercel login
-
-   # Déployer
-   vercel
-   ```
-
-3. **Configurer les variables d'environnement**
-   - Aller sur le dashboard Vercel
-   - Projet → Settings → Environment Variables
-   - Ajouter :
-     - `MONGODB_URI` : URI de votre base MongoDB
-     - `DB_NAME` : Nom de votre base de données
-     - `JWT_SECRET` : Clé secrète pour JWT
-     - `NODE_ENV` : production
-
-## 📁 Architecture
-
-```
-├── config/
-│   └── database.js          # Configuration MongoDB
-├── middleware/
-│   └── auth.js              # Authentification JWT
-├── models/
-│   ├── User.js              # Modèle utilisateur
-│   ├── Weapon.js            # Modèle arme
-│   ├── Summon.js            # Modèle invocation
-│   └── WeaponGrid.js        # Modèle grille d'armes
-├── routes/
-│   ├── users.js             # Routes utilisateurs
-│   ├── weapons.js           # Routes armes
-│   ├── weapons-enriched.js  # Routes armes enrichies
-│   ├── summons.js           # Routes invocations
-│   ├── skills.js            # Routes compétences
-│   ├── skills-stats.js      # Routes statistiques
-│   └── weapon-grids.js      # Routes grilles d'armes
-├── services/
-│   ├── userService.js       # Logique utilisateurs
-│   ├── weaponService.js     # Logique armes
-│   ├── summonService.js     # Logique invocations
-│   ├── weaponGridService.js # Logique grilles
-│   └── skillEnrichmentService.js # Enrichissement skills
-├── scripts/
-│   ├── import-mongo.js      # Import données MongoDB
-│   ├── test-mongo.js        # Test connexion
-│   └── test-api.js          # Tests API
-├── json/
-│   ├── weapons.json         # Données d'armes
-│   ├── summons.json         # Données d'invocations
-│   ├── skills_stats.json    # Statistiques compétences
-│   └── weapon_skills.json   # Compétences d'armes
-├── server.js                # Point d'entrée
-├── vercel.json              # Configuration Vercel
-└── package.json             # Dépendances
-```
-
-## 🔧 Configuration
-
-### Variables d'environnement requises
-
-```env
-MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/database
-DB_NAME=gb_project
-JWT_SECRET=votre_secret_jwt_super_securise
-NODE_ENV=production
-FRONTEND_URL=https://votre-frontend.vercel.app
-```
-
-### Scripts disponibles
+### Installation
 
 ```bash
-npm start          # Démarre le serveur
-npm run dev        # Mode développement avec nodemon
-npm run build      # Build pour production
-npm run test-api   # Test de l'API
+# Cloner et installer
+git clone https://github.com/HKD76/GB-BACK.git
+cd GB_PROJECT
+npm install
+
+# Configuration
+cp env.example .env
+# Éditer .env avec vos paramètres
+
+# Démarrer
+npm run dev
 ```
 
-## 📚 API Endpoints
+L'API sera disponible sur `http://localhost:3000`
 
-### Santé
+## 📋 Fonctionnalités
 
-- `GET /api/health` - Statut de l'API
+- **Gestion d'armes** : CRUD, recherche, filtres
+- **Système d'invocations** : Créatures invocables
+- **Compétences** : Enrichissement des armes
+- **Grilles d'armes** : Organisation des équipements
+- **Authentification JWT** : Sécurisation des routes
+- **Tests automatisés** : 59 tests unitaires et d'intégration
 
-### Utilisateurs
-
-- `POST /api/users/register` - Inscription
-- `POST /api/users/login` - Connexion
-- `GET /api/users/profile` - Profil utilisateur
+## 🔗 API Endpoints
 
 ### Armes
 
-- `GET /api/weapons` - Liste des armes
+- `GET /api/weapons` - Liste avec pagination
 - `GET /api/weapons/:id` - Détail d'une arme
-- `GET /api/weapons/search` - Recherche d'armes
-- `GET /api/weapons-enriched` - Armes avec skills enrichis
+- `GET /api/weapons/search?q=sword` - Recherche
+- `GET /api/weapons-enriched` - Avec compétences
 
 ### Invocations
 
 - `GET /api/summons` - Liste des invocations
 - `GET /api/summons/:id` - Détail d'une invocation
 
-### Compétences
+### Utilisateurs
 
-- `GET /api/skills` - Liste des compétences
-- `GET /api/skills-stats` - Statistiques des compétences
+- `POST /api/users/register` - Inscription
+- `POST /api/users/login` - Connexion
+- `GET /api/users/profile` - Profil (auth requise)
 
-### Grilles d'armes
+### Autres
 
-- `GET /api/weapon-grids` - Liste des grilles
-- `POST /api/weapon-grids` - Créer une grille
-- `GET /api/weapon-grids/:id` - Détail d'une grille
+- `GET /api/health` - Statut de l'API
+- `GET /api/skills` - Compétences
+- `GET /api/weapon-grids` - Grilles d'armes
+
+## 🛠️ Scripts Utiles
+
+```bash
+npm start              # Production
+npm run dev            # Développement
+npm test               # Tous les tests
+npm run test:unit      # Tests unitaires
+npm run import-mongo   # Import données
+```
+
+## 🏗️ Architecture
+
+```
+├── config/          # Configuration DB
+├── middleware/      # Auth JWT
+├── models/          # Modèles MongoDB
+├── routes/          # Routes API
+├── services/        # Logique métier
+├── scripts/         # Utilitaires
+├── tests/           # Tests (59 tests)
+└── json/            # Données de base
+```
 
 ## 🔒 Sécurité
 
-- **Helmet** : Headers de sécurité
-- **CORS** : Configuration cross-origin
-- **Rate Limiting** : Limitation des requêtes
-- **JWT** : Authentification sécurisée
-- **Validation** : Validation des données
+- Authentification JWT
+- Validation des données
+- CORS configuré
+- Rate limiting
 
 ## 🚀 Déploiement
 
-L'API est configurée pour être déployée sur Vercel avec :
+### Vercel (Recommandé)
 
-- Configuration automatique des routes
-- Variables d'environnement sécurisées
-- Build optimisé pour Node.js
-- Monitoring et logs automatiques
+```bash
+npm i -g vercel
+vercel login
+vercel
+```
+
+### Variables d'environnement
+
+```env
+MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/db
+DB_NAME=gb_project
+JWT_SECRET=votre_secret_jwt
+NODE_ENV=production
+```
+
+## 🧪 Tests
+
+Suite de tests complète avec MongoDB Memory Server :
+
+- **59 tests** couvrant les fonctionnalités principales
+- Tests unitaires (services, middleware)
+- Tests d'intégration (API, base de données)
+- CI/CD automatique sur GitHub Actions
 
 ## 📊 Monitoring
 
-- **Vercel Analytics** : Métriques de performance
-- **Logs** : Logs d'erreurs et d'accès
-- **Health Check** : Endpoint `/api/health`
+- Health check : `/api/health`
+- Logs automatiques
+- Tests CI/CD
 
 ## 🤝 Contribution
 
 1. Fork le projet
-2. Créer une branche feature
-3. Commit les changements
-4. Push vers la branche
+2. Créer une branche : `git checkout -b feature/nouvelle-fonctionnalite`
+3. Commit : `git commit -m 'Ajout nouvelle fonctionnalité'`
+4. Push : `git push origin feature/nouvelle-fonctionnalite`
 5. Ouvrir une Pull Request
+
+---
