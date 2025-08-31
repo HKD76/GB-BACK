@@ -76,24 +76,24 @@ class Summon {
     this.aura3 = data.aura3;
     this.aura4 = data.aura4;
     this.aura5 = data.aura5;
-    this.aura_t0 = data.aura_t0 || data["aura t0"];
-    this.aura_t1 = data.aura_t1 || data["aura t1"];
-    this.aura_t2 = data.aura_t2 || data["aura t2"];
-    this.aura_t3 = data.aura_t3 || data["aura t3"];
-    this.aura_t4 = data.aura_t4 || data["aura t4"];
-    this.aura_t5 = data.aura_t5 || data["aura t5"];
+    this.aura_t0 = data.aura_t0;
+    this.aura_t1 = data.aura_t1;
+    this.aura_t2 = data.aura_t2;
+    this.aura_t3 = data.aura_t3;
+    this.aura_t4 = data.aura_t4;
+    this.aura_t5 = data.aura_t5;
 
     this.subaura1 = data.subaura1;
     this.subaura2 = data.subaura2;
     this.subaura3 = data.subaura3;
     this.subaura4 = data.subaura4;
     this.subaura5 = data.subaura5;
-    this.subaura_t0 = data.subaura_t0 || data["subaura t0"];
-    this.subaura_t1 = data.subaura_t1 || data["subaura t1"];
-    this.subaura_t2 = data.subaura_t2 || data["subaura t2"];
-    this.subaura_t3 = data.subaura_t3 || data["subaura t3"];
-    this.subaura_t4 = data.subaura_t4 || data["subaura t4"];
-    this.subaura_t5 = data.subaura_t5 || data["subaura t5"];
+    this.subaura_t0 = data.subaura_t0;
+    this.subaura_t1 = data.subaura_t1;
+    this.subaura_t2 = data.subaura_t2;
+    this.subaura_t3 = data.subaura_t3;
+    this.subaura_t4 = data.subaura_t4;
+    this.subaura_t5 = data.subaura_t5;
 
     this.createdAt = data.createdAt || new Date();
     this.updatedAt = data.updatedAt || new Date();
@@ -235,12 +235,12 @@ class Summon {
       call3: this.call3,
       call4: this.call4,
       call5: this.call5,
-      "call t0": this.call_t0,
-      "call t1": this.call_t1,
-      "call t2": this.call_t2,
-      "call t3": this.call_t3,
-      "call t4": this.call_t4,
-      "call t5": this.call_t5,
+      call_t0: this.call_t0,
+      call_t1: this.call_t1,
+      call_t2: this.call_t2,
+      call_t3: this.call_t3,
+      call_t4: this.call_t4,
+      call_t5: this.call_t5,
       call_reuse: this.call_reuse,
       comboable: this.comboable,
       call_cd_first1: this.call_cd_first1,
@@ -260,23 +260,23 @@ class Summon {
       aura3: this.aura3,
       aura4: this.aura4,
       aura5: this.aura5,
-      "aura t0": this.aura_t0,
-      "aura t1": this.aura_t1,
-      "aura t2": this.aura_t2,
-      "aura t3": this.aura_t3,
-      "aura t4": this.aura_t4,
-      "aura t5": this.aura_t5,
+      aura_t0: this.aura_t0,
+      aura_t1: this.aura_t1,
+      aura_t2: this.aura_t2,
+      aura_t3: this.aura_t3,
+      aura_t4: this.aura_t4,
+      aura_t5: this.aura_t5,
       subaura1: this.subaura1,
       subaura2: this.subaura2,
       subaura3: this.subaura3,
       subaura4: this.subaura4,
       subaura5: this.subaura5,
-      "subaura t0": this.subaura_t0,
-      "subaura t1": this.subaura_t1,
-      "subaura t2": this.subaura_t2,
-      "subaura t3": this.subaura_t3,
-      "subaura t4": this.subaura_t4,
-      "subaura t5": this.subaura_t5,
+      subaura_t0: this.subaura_t0,
+      subaura_t1: this.subaura_t1,
+      subaura_t2: this.subaura_t2,
+      subaura_t3: this.subaura_t3,
+      subaura_t4: this.subaura_t4,
+      subaura_t5: this.subaura_t5,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
     };
@@ -330,12 +330,12 @@ class Summon {
       call3: doc.call3,
       call4: doc.call4,
       call5: doc.call5,
-      "call t0": doc["call t0"],
-      "call t1": doc["call t1"],
-      "call t2": doc["call t2"],
-      "call t3": doc["call t3"],
-      "call t4": doc["call t4"],
-      "call t5": doc["call t5"],
+      call_t0: doc.call_t0,
+      call_t1: doc.call_t1,
+      call_t2: doc.call_t2,
+      call_t3: doc.call_t3,
+      call_t4: doc.call_t4,
+      call_t5: doc.call_t5,
       call_reuse: doc.call_reuse,
       comboable: doc.comboable,
       call_cd_first1: doc.call_cd_first1,
@@ -355,23 +355,23 @@ class Summon {
       aura3: doc.aura3,
       aura4: doc.aura4,
       aura5: doc.aura5,
-      "aura t0": doc["aura t0"],
-      "aura t1": doc["aura t1"],
-      "aura t2": doc["aura t2"],
-      "aura t3": doc["aura t3"],
-      "aura t4": doc["aura t4"],
-      "aura t5": doc["aura t5"],
+      aura_t0: doc.aura_t0,
+      aura_t1: doc.aura_t1,
+      aura_t2: doc.aura_t2,
+      aura_t3: doc.aura_t3,
+      aura_t4: doc.aura_t4,
+      aura_t5: doc.aura_t5,
       subaura1: doc.subaura1,
       subaura2: doc.subaura2,
       subaura3: doc.subaura3,
       subaura4: doc.subaura4,
       subaura5: doc.subaura5,
-      "subaura t0": doc["subaura t0"],
-      "subaura t1": doc["subaura t1"],
-      "subaura t2": doc["subaura t2"],
-      "subaura t3": doc["subaura t3"],
-      "subaura t4": doc["subaura t4"],
-      "subaura t5": doc["subaura t5"],
+      subaura_t0: doc.subaura_t0,
+      subaura_t1: doc.subaura_t1,
+      subaura_t2: doc.subaura_t2,
+      subaura_t3: doc.subaura_t3,
+      subaura_t4: doc.subaura_t4,
+      subaura_t5: doc.subaura_t5,
       createdAt: doc.createdAt,
       updatedAt: doc.updatedAt,
     };

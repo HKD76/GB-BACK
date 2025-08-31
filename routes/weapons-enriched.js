@@ -279,7 +279,6 @@ router.get("/:id", async (req, res) => {
     const db = client.db(dbName);
     const collection = db.collection("weapons");
 
-    // Rechercher l'arme par ID (string ou number)
     const weapon = await collection.findOne({
       $or: [{ id: parseInt(id) }, { id: id.toString() }, { _id: id }],
     });
@@ -297,7 +296,6 @@ router.get("/:id", async (req, res) => {
 
     if (enrichSkills) {
       try {
-        // Enrichir les skills de l'arme
         const enrichedWeapons =
           await skillEnrichmentService.enrichWeaponsListFast([weapon], true);
         enrichedWeapon = enrichedWeapons[0] || weapon;
@@ -306,7 +304,6 @@ router.get("/:id", async (req, res) => {
           "Erreur lors de l'enrichissement des skills:",
           enrichmentError
         );
-        // Continuer avec l'arme non enrichie en cas d'erreur
         enrichedWeapon = weapon;
       }
     }
