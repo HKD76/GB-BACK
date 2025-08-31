@@ -43,7 +43,10 @@ L'API sera disponible sur `http://localhost:3000`
 - `GET /api/weapons` - Liste avec pagination
 - `GET /api/weapons/:id` - Détail d'une arme
 - `GET /api/weapons/search?q=sword` - Recherche
-- `GET /api/weapons-enriched` - Avec compétences
+- `GET /api/weapons-enriched` - Liste avec compétences enrichies
+- `GET /api/weapons-enriched/:id` - Détail d'une arme avec compétences enrichies
+- `GET /api/weapons-enriched/filter` - Filtrage avec compétences enrichies
+- `GET /api/weapons-enriched/filter/fast` - Filtrage rapide sans enrichissement
 
 ### Invocations
 

@@ -367,6 +367,186 @@ Importer des armes depuis JSON.
 
 Les endpoints pour les compétences suivent le même pattern que les armes.
 
+## ⚡ Routes des Armes Enrichies (Weapons Enriched)
+
+### GET /api/weapons-enriched
+
+Récupère toutes les armes avec skills enrichis et calculs détaillés.
+
+**Paramètres de requête :**
+
+- `page` (optionnel) : Numéro de page (défaut: 1)
+- `limit` (optionnel) : Nombre d'armes par page (défaut: 10)
+- `enrich` (optionnel) : Activer l'enrichissement des skills (défaut: true)
+- `type` (optionnel) : Type d'arme
+- `rarity` (optionnel) : Rareté
+- `element` (optionnel) : Élément
+- `name` (optionnel) : Recherche par nom
+- `title` (optionnel) : Recherche par titre
+- `series` (optionnel) : Série d'arme
+- `grp` (optionnel) : Groupe d'arme
+- `minAtk` (optionnel) : Attaque minimum
+- `maxAtk` (optionnel) : Attaque maximum
+- `minHp` (optionnel) : HP minimum
+- `maxHp` (optionnel) : HP maximum
+- `evoMax` (optionnel) : Évolution maximum
+- `evoBase` (optionnel) : Évolution de base
+
+**Exemple de réponse :**
+
+```json
+{
+  "weapons": [
+    {
+      "_id": "689f2af62046a0d2c79300da",
+      "name": "Dainsleif",
+      "title": "Wind Sword",
+      "type": "sabre",
+      "element": "wind",
+      "rarity": "SSR",
+      "atk1": 75,
+      "atk2": 510,
+      "hp1": 6,
+      "hp2": 42,
+      "s1_name": "Inferno's Might",
+      "s1_text": "Big boost to fire allies' ATK",
+      "s1_enriched": {
+        "originalName": "Inferno's Might",
+        "originalText": "Big boost to fire allies' ATK",
+        "skillType": "Might",
+        "modifier": "Big",
+        "calculatedValues": {
+          "Normal": {
+            "modifier": "Big",
+            "stats": [
+              {
+                "modifier": "Big",
+                "stat": "ATK",
+                "values": {
+                  "1": "6.0%",
+                  "10": "15.0%",
+                  "15": "18.0%",
+                  "20": "20.0%"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "s2_enriched": {
+        "originalName": "Strategist's Temperament",
+        "originalText": "7% boost to MC's charge bar gain.",
+        "error": "Stats du skill non trouvées"
+      },
+      "s3_enriched": null
+    }
+  ],
+  "pagination": {
+    "currentPage": 1,
+    "totalPages": 295,
+    "totalWeapons": 2950,
+    "limit": 10,
+    "hasNextPage": true,
+    "hasPrevPage": false
+  },
+  "enrichment": {
+    "enabled": true,
+    "note": "Skills enrichis avec calculs"
+  }
+}
+```
+
+### GET /api/weapons-enriched/:id
+
+Récupère une arme individuelle avec skills enrichis.
+
+**Paramètres :**
+
+- `id` : ID de l'arme (requis)
+
+**Paramètres de requête :**
+
+- `enrich` (optionnel) : Activer l'enrichissement des skills (défaut: true)
+
+**Exemple de réponse :**
+
+```json
+{
+  "weapon": {
+    "_id": "689f2af62046a0d2c79300da",
+    "name": "Dainsleif",
+    "title": "Wind Sword",
+    "type": "sabre",
+    "element": "wind",
+    "rarity": "SSR",
+    "atk1": 75,
+    "atk2": 510,
+    "hp1": 6,
+    "hp2": 42,
+    "s1_enriched": {
+      "originalName": "Inferno's Might",
+      "originalText": "Big boost to fire allies' ATK",
+      "skillType": "Might",
+      "modifier": "Big",
+      "calculatedValues": {
+        "Normal": {
+          "modifier": "Big",
+          "stats": [
+            {
+              "modifier": "Big",
+              "stat": "ATK",
+              "values": {
+                "1": "6.0%",
+                "10": "15.0%",
+                "15": "18.0%",
+                "20": "20.0%"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "s2_enriched": {
+      "originalName": "Strategist's Temperament",
+      "originalText": "7% boost to MC's charge bar gain.",
+      "error": "Stats du skill non trouvées"
+    },
+    "s3_enriched": null
+  },
+  "enrichment": {
+    "enabled": true,
+    "note": "Skills enrichis avec calculs détaillés"
+  }
+}
+```
+
+### GET /api/weapons-enriched/filter
+
+Filtrage strict avec élément et rareté obligatoires.
+
+**Paramètres de requête :**
+
+- `element` (requis) : Élément de l'arme
+- `rarity` (requis) : Rareté de l'arme
+- `page` (optionnel) : Numéro de page (défaut: 1)
+- `limit` (optionnel) : Nombre d'armes par page (défaut: 10)
+- `enrich` (optionnel) : Activer l'enrichissement (défaut: true)
+- Autres filtres optionnels identiques à `/api/weapons-enriched`
+
+### GET /api/weapons-enriched/filter/fast
+
+Version rapide du filtrage sans enrichissement des skills.
+
+**Paramètres de requête :**
+
+- `element` (requis) : Élément de l'arme
+- `rarity` (requis) : Rareté de l'arme
+- `page` (optionnel) : Numéro de page (défaut: 1)
+- `limit` (optionnel) : Nombre d'armes par page (défaut: 10)
+- Autres filtres optionnels identiques à `/api/weapons-enriched`
+
+**Note :** Cette version est optimisée pour les performances et ne retourne pas les skills enrichis.
+
 ### 🏥 Santé de l'API
 
 #### GET /api/health
