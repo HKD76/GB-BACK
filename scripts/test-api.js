@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const API_BASE_URL = "http://localhost:3000/api";
+const API_BASE_URL = "http://192.168.1.14:3000";
 
 // Configuration axios
 const api = axios.create({

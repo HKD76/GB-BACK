@@ -4,20 +4,12 @@ require("dotenv").config();
 const mongoUrl = process.env.MONGODB_URI || "mongodb://localhost:27017";
 const dbName = process.env.DB_NAME || "gb_project";
 
-// const imageUrls = require("../arm_image_urls_wiki.json");
+const imageUrls = require("../json/arm_image_urls_wiki.json");
 
 /**
  * Met à jour les images des armes dans la base de données
  */
 async function updateWeaponImages() {
-  console.log(
-    "❌ Ce script ne peut plus fonctionner car le fichier arm_image_urls_wiki.json a été supprimé"
-  );
-  console.log(
-    "💡 Pour utiliser ce script, vous devez recréer le fichier JSON avec les URLs d'images"
-  );
-  return;
-
   let client;
 
   try {
@@ -32,7 +24,9 @@ async function updateWeaponImages() {
     const weapons = await weaponsCollection.find({}).toArray();
 
     console.log(`📋 ${weapons.length} armes trouvées dans la base de données`);
-    console.log(`🖼️  URLs d'images non disponibles (fichier supprimé)`);
+    console.log(
+      `🖼️  URLs d'images disponibles: ${Object.keys(imageUrls).length}`
+    );
 
     let updatedCount = 0;
     let notFoundCount = 0;
@@ -98,27 +92,29 @@ async function updateWeaponImages() {
 function showImageUrlExamples() {
   console.log("🖼️  Exemples d'URLs d'images disponibles:");
   const examples = Object.entries(imageUrls).slice(0, 5);
+
   examples.forEach(([id, url]) => {
-    console.log(`  ID: ${id} -> ${url}`);
+    console.log(`  ID ${id}: ${url}`);
   });
-  console.log(`  ... et ${Object.keys(imageUrls).length - 5} autres URLs\n`);
+
+  console.log(`\n📊 Total: ${Object.keys(imageUrls).length} URLs d'images`);
 }
 
 /**
- * Fonction principale du script
+ * Fonction principale
  */
 async function main() {
-  console.log("🚀 Démarrage de la mise à jour des images d'armes...\n");
+  console.log("🚀 Démarrage de la mise à jour des images d'armes...");
 
   showImageUrlExamples();
+  console.log("\n" + "=".repeat(50) + "\n");
 
   await updateWeaponImages();
-
-  console.log("\n✨ Script terminé!");
 }
 
+// Exécuter le script
 if (require.main === module) {
   main().catch(console.error);
 }
 
-module.exports = { updateWeaponImages };
+module.exports = { updateWeaponImages, showImageUrlExamples };
