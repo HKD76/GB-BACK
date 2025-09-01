@@ -26,7 +26,7 @@ class WeaponGridService {
       }
 
       const weaponGrid = new WeaponGrid(gridData);
-      weaponGrid.calculateStats(); // Calculer les statistiques initiales
+      weaponGrid.metadata = WeaponGrid.calculateStats(weaponGrid); // Calculer les statistiques initiales
 
       const result = await collection.insertOne(weaponGrid.toMongo());
       return result.insertedId.toString();

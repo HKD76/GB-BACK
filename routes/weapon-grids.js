@@ -196,8 +196,6 @@ router.get("/:id", async (req, res) => {
       });
     }
 
-    await weaponGridService.incrementViews(id);
-
     res.json({
       success: true,
       weaponGrid: grid,
